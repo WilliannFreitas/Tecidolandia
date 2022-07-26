@@ -1,0 +1,9 @@
+﻿################################################################################
+# Este arquivo .gitignore foi criado automaticamente pelo Microsoft(R) Visual Studio.
+################################################################################
+
+/.vs
+/Tecidolandia/.vs/Tecidolandia
+/Tecidolandia/bin
+/Tecidolandia/obj/Debug/DesignTimeResolveAssemblyReferencesInput.cache
+/Tecidolandia/obj/Debug/Tecidolandia.csproj.AssemblyReference.cache
