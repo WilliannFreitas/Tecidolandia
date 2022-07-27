@@ -11,112 +11,107 @@ using Tecidolandia.Models.Entities;
 
 namespace Tecidolandia
 {
-    public class ProdutosController : Controller
+    public class VendedoresController : Controller
     {
         private TecidolandiaContext db = new TecidolandiaContext();
 
-        // GET: Produtos
+        // GET: Vendedores
         public ActionResult Index()
         {
-            var produtos = db.Produtos.Include(p => p.TipoEstampas);
-            return View(produtos.ToList());
+            return View(db.Vendedores.ToList());
         }
 
-        // GET: Produtos/Details/5
+        // GET: Vendedores/Details/5
         public ActionResult Details(long? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Produto produto = db.Produtos.Find(id);
-            if (produto == null)
+            Vendedor vendedor = db.Vendedores.Find(id);
+            if (vendedor == null)
             {
                 return HttpNotFound();
             }
-            return View(produto);
+            return View(vendedor);
         }
 
-        // GET: Produtos/Create
+        // GET: Vendedores/Create
         public ActionResult Create()
         {
-            ViewBag.IdTipoEstampa = new SelectList(db.TipoEstampas, "IdTipoEstampa", "Nome");
             return View();
         }
 
-        // POST: Produtos/Create
+        // POST: Vendedores/Create
         // Para proteger-se contra ataques de excesso de postagem, ative as propriedades específicas às quais deseja se associar. 
         // Para obter mais detalhes, confira https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "IdProduto,Nome,Descricao,Largura,Altura,IdTipoEstampa,DtRegistro")] Produto produto)
+        public ActionResult Create([Bind(Include = "IdVendedor,Nome,DtNasc")] Vendedor vendedor)
         {
             if (ModelState.IsValid)
             {
-                db.Produtos.Add(produto);
+                db.Vendedores.Add(vendedor);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.IdTipoEstampa = new SelectList(db.TipoEstampas, "IdTipoEstampa", "Nome", produto.IdTipoEstampa);
-            return View(produto);
+            return View(vendedor);
         }
 
-        // GET: Produtos/Edit/5
+        // GET: Vendedores/Edit/5
         public ActionResult Edit(long? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Produto produto = db.Produtos.Find(id);
-            if (produto == null)
+            Vendedor vendedor = db.Vendedores.Find(id);
+            if (vendedor == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.IdTipoEstampa = new SelectList(db.TipoEstampas, "IdTipoEstampa", "Nome", produto.IdTipoEstampa);
-            return View(produto);
+            return View(vendedor);
         }
 
-        // POST: Produtos/Edit/5
+        // POST: Vendedores/Edit/5
         // Para proteger-se contra ataques de excesso de postagem, ative as propriedades específicas às quais deseja se associar. 
         // Para obter mais detalhes, confira https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "IdProduto,Nome,Descricao,Largura,Altura,IdTipoEstampa,DtRegistro")] Produto produto)
+        public ActionResult Edit([Bind(Include = "IdVendedor,Nome,DtNasc")] Vendedor vendedor)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(produto).State = EntityState.Modified;
+                db.Entry(vendedor).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.IdTipoEstampa = new SelectList(db.TipoEstampas, "IdTipoEstampa", "Nome", produto.IdTipoEstampa);
-            return View(produto);
+            return View(vendedor);
         }
 
-        // GET: Produtos/Delete/5
+        // GET: Vendedores/Delete/5
         public ActionResult Delete(long? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Produto produto = db.Produtos.Find(id);
-            if (produto == null)
+            Vendedor vendedor = db.Vendedores.Find(id);
+            if (vendedor == null)
             {
                 return HttpNotFound();
             }
-            return View(produto);
+            return View(vendedor);
         }
 
-        // POST: Produtos/Delete/5
+        // POST: Vendedores/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(long id)
         {
-            Produto produto = db.Produtos.Find(id);
-            db.Produtos.Remove(produto);
+            Vendedor vendedor = db.Vendedores.Find(id);
+            db.Vendedores.Remove(vendedor);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

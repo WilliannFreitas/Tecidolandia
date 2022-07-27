@@ -14,13 +14,13 @@ namespace Tecidolandia.Models.Entities
         [Column("ID_VENDA_ITEM")]
         public int IdVendaItem { get; set; }
 
-        [ForeignKey("Produto")]
+        [ForeignKey("Produtos")]
         [Column("ID_PRODUTO")]
-        public int IdProduto { get; set; }
+        public Int64 IdProduto { get; set; }
 
-        [ForeignKey("Venda")]
+        [ForeignKey("Vendas")]
         [Column("ID_VENDA")]
-        public int IdVenda { get; set; }
+        public Int64 IdVenda { get; set; }
 
         [Column("QUANTIDADE")]
         public int Quantidade { get; set; }
@@ -29,7 +29,7 @@ namespace Tecidolandia.Models.Entities
         public int VlTotal { get; set; }
 
         //propriedades de navegação
-        public virtual Produto Produto { get; set; }
-        public virtual Venda Venda { get; set; }
+        public virtual Produto Produtos { get; set; }
+        public virtual Venda Vendas { get; set; }
     }
 }

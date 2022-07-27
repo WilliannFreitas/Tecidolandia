@@ -12,13 +12,16 @@ namespace Tecidolandia.Models.Entities
     {
         [Key]
         [Column("ID_VENDEDOR")]
-        public int IdVendedor { get; set; }
+        public Int64 IdVendedor { get; set; }
 
         [Required(ErrorMessage = "O campo nome é obrigatório")]
         [Column("NOME")]
         public String Nome { get; set; }
 
+        
         [Column("DT_NASC")]
+        [DataType(DataType.Date)]
+        [Display(Name = "Data de Nascimento")]
         public DateTime DtNasc { get; set; }
     }
 }

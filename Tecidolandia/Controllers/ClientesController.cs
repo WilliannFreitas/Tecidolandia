@@ -11,112 +11,107 @@ using Tecidolandia.Models.Entities;
 
 namespace Tecidolandia
 {
-    public class ProdutosController : Controller
+    public class ClientesController : Controller
     {
         private TecidolandiaContext db = new TecidolandiaContext();
 
-        // GET: Produtos
+        // GET: Clientes
         public ActionResult Index()
         {
-            var produtos = db.Produtos.Include(p => p.TipoEstampas);
-            return View(produtos.ToList());
+            return View(db.Clientes.ToList());
         }
 
-        // GET: Produtos/Details/5
+        // GET: Clientes/Details/5
         public ActionResult Details(long? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Produto produto = db.Produtos.Find(id);
-            if (produto == null)
+            Cliente cliente = db.Clientes.Find(id);
+            if (cliente == null)
             {
                 return HttpNotFound();
             }
-            return View(produto);
+            return View(cliente);
         }
 
-        // GET: Produtos/Create
+        // GET: Clientes/Create
         public ActionResult Create()
         {
-            ViewBag.IdTipoEstampa = new SelectList(db.TipoEstampas, "IdTipoEstampa", "Nome");
             return View();
         }
 
-        // POST: Produtos/Create
+        // POST: Clientes/Create
         // Para proteger-se contra ataques de excesso de postagem, ative as propriedades específicas às quais deseja se associar. 
         // Para obter mais detalhes, confira https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "IdProduto,Nome,Descricao,Largura,Altura,IdTipoEstampa,DtRegistro")] Produto produto)
+        public ActionResult Create([Bind(Include = "IdCliente,NmCompleto,Facebook,DtRegistro")] Cliente cliente)
         {
             if (ModelState.IsValid)
             {
-                db.Produtos.Add(produto);
+                db.Clientes.Add(cliente);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.IdTipoEstampa = new SelectList(db.TipoEstampas, "IdTipoEstampa", "Nome", produto.IdTipoEstampa);
-            return View(produto);
+            return View(cliente);
         }
 
-        // GET: Produtos/Edit/5
+        // GET: Clientes/Edit/5
         public ActionResult Edit(long? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Produto produto = db.Produtos.Find(id);
-            if (produto == null)
+            Cliente cliente = db.Clientes.Find(id);
+            if (cliente == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.IdTipoEstampa = new SelectList(db.TipoEstampas, "IdTipoEstampa", "Nome", produto.IdTipoEstampa);
-            return View(produto);
+            return View(cliente);
         }
 
-        // POST: Produtos/Edit/5
+        // POST: Clientes/Edit/5
         // Para proteger-se contra ataques de excesso de postagem, ative as propriedades específicas às quais deseja se associar. 
         // Para obter mais detalhes, confira https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "IdProduto,Nome,Descricao,Largura,Altura,IdTipoEstampa,DtRegistro")] Produto produto)
+        public ActionResult Edit([Bind(Include = "IdCliente,NmCompleto,Facebook,DtRegistro")] Cliente cliente)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(produto).State = EntityState.Modified;
+                db.Entry(cliente).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.IdTipoEstampa = new SelectList(db.TipoEstampas, "IdTipoEstampa", "Nome", produto.IdTipoEstampa);
-            return View(produto);
+            return View(cliente);
         }
 
-        // GET: Produtos/Delete/5
+        // GET: Clientes/Delete/5
         public ActionResult Delete(long? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Produto produto = db.Produtos.Find(id);
-            if (produto == null)
+            Cliente cliente = db.Clientes.Find(id);
+            if (cliente == null)
             {
                 return HttpNotFound();
             }
-            return View(produto);
+            return View(cliente);
         }
 
-        // POST: Produtos/Delete/5
+        // POST: Clientes/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(long id)
         {
-            Produto produto = db.Produtos.Find(id);
-            db.Produtos.Remove(produto);
+            Cliente cliente = db.Clientes.Find(id);
+            db.Clientes.Remove(cliente);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

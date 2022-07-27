@@ -22,7 +22,7 @@ namespace Tecidolandia
         }
 
         // GET: Status/Details/5
-        public ActionResult Details(int? id)
+        public ActionResult Details(long? id)
         {
             if (id == null)
             {
@@ -60,7 +60,7 @@ namespace Tecidolandia
         }
 
         // GET: Status/Edit/5
-        public ActionResult Edit(int? id)
+        public ActionResult Edit(long? id)
         {
             if (id == null)
             {
@@ -91,7 +91,7 @@ namespace Tecidolandia
         }
 
         // GET: Status/Delete/5
-        public ActionResult Delete(int? id)
+        public ActionResult Delete(long? id)
         {
             if (id == null)
             {
@@ -108,7 +108,7 @@ namespace Tecidolandia
         // POST: Status/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        public ActionResult DeleteConfirmed(long id)
         {
             Status status = db.Status.Find(id);
             db.Status.Remove(status);

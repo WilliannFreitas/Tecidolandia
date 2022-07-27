@@ -1,0 +1,50 @@
+﻿@model Tecidolandia.Models.Entities.VendaItem
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>VendaItem</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Produtos.Nome)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Produtos.Nome)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Vendas.IdVenda)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Vendas.IdVenda)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Quantidade)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Quantidade)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.VlTotal)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.VlTotal)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.IdVendaItem }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

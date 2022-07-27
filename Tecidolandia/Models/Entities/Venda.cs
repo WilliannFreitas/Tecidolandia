@@ -12,29 +12,29 @@ namespace Tecidolandia.Models.Entities
     {
         [Key]
         [Column("ID_VENDA")]
-        public int IdVenda { get; set; }
+        public Int64 IdVenda { get; set; }
 
         [Column("DT_REGISTRO")]
         public DateTime DtRegistro { get; set; }
 
-        [ForeignKey("Cliente")]
+        [ForeignKey("Clientes")]
         [Column("ID_CLIENTE")]
-        public int IdCliente { get; set; }
+        public Int64 IdCliente { get; set; }
 
-        [ForeignKey("Vendedor")]
+        [ForeignKey("Vendedores")]
         [Column("ID_VENDEDOR")]
-        public int IdVendedor { get; set; }
+        public Int64 IdVendedor { get; set; }
 
         [ForeignKey("Status")]
         [Column("ID_STATUS")]
-        public int IdStatus { get; set; }
+        public Int64 IdStatus { get; set; }
 
         [Column("VL_TOTAL")]
         public decimal VlTotal { get; set; }
 
         //propriedades de navegação
-        public virtual Cliente Cliente { get; set; }
-        public virtual Vendedor Vendedor { get; set; }
+        public virtual Cliente Clientes { get; set; }
+        public virtual Vendedor Vendedores { get; set; }
         public virtual Status Status { get; set; }
     }
 }

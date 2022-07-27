@@ -15,23 +15,23 @@ namespace Tecidolandia.Models.Entities
         public int IdTelefone { get; set; }
 
         [Required(ErrorMessage = "O campo DDD é obrigatório")]
-        [MaxLength(3)]
+        //[MaxLength(3)]
         [Column("DDD")]
         public int Ddd { get; set; }
 
         [Required(ErrorMessage = "O campo telefone é obrigatório")]
-        [MaxLength(9)]
+        //[MaxLength(9)]
         [Column("TELEFONE")]
         [Display(Name = "Telefone")]
         public int NuTelefone { get; set; }
 
         [ForeignKey("Cliente")]
         [Column("ID_CLIENTE")]
-        public int IdCliente { get; set; }
+        public Int64 IdCliente { get; set; }
 
         [ForeignKey("Vendedor")]
         [Column("ID_VENDEDOR")]
-        public int IdVendedor { get; set; }
+        public Int64 IdVendedor { get; set; }
 
         [Column("ATIVO")]
         public int Ativo { get; set; }

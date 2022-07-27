@@ -11,112 +11,116 @@ using Tecidolandia.Models.Entities;
 
 namespace Tecidolandia
 {
-    public class ProdutosController : Controller
+    public class VendaItemsController : Controller
     {
         private TecidolandiaContext db = new TecidolandiaContext();
 
-        // GET: Produtos
+        // GET: VendaItems
         public ActionResult Index()
         {
-            var produtos = db.Produtos.Include(p => p.TipoEstampas);
-            return View(produtos.ToList());
+            var vendaItems = db.VendaItems.Include(v => v.Produtos).Include(v => v.Vendas);
+            return View(vendaItems.ToList());
         }
 
-        // GET: Produtos/Details/5
-        public ActionResult Details(long? id)
+        // GET: VendaItems/Details/5
+        public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Produto produto = db.Produtos.Find(id);
-            if (produto == null)
+            VendaItem vendaItem = db.VendaItems.Find(id);
+            if (vendaItem == null)
             {
                 return HttpNotFound();
             }
-            return View(produto);
+            return View(vendaItem);
         }
 
-        // GET: Produtos/Create
+        // GET: VendaItems/Create
         public ActionResult Create()
         {
-            ViewBag.IdTipoEstampa = new SelectList(db.TipoEstampas, "IdTipoEstampa", "Nome");
+            ViewBag.IdProduto = new SelectList(db.Produtos, "IdProduto", "Nome");
+            ViewBag.IdVenda = new SelectList(db.Vendas, "IdVenda", "IdVenda");
             return View();
         }
 
-        // POST: Produtos/Create
+        // POST: VendaItems/Create
         // Para proteger-se contra ataques de excesso de postagem, ative as propriedades específicas às quais deseja se associar. 
         // Para obter mais detalhes, confira https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "IdProduto,Nome,Descricao,Largura,Altura,IdTipoEstampa,DtRegistro")] Produto produto)
+        public ActionResult Create([Bind(Include = "IdVendaItem,IdProduto,IdVenda,Quantidade,VlTotal")] VendaItem vendaItem)
         {
             if (ModelState.IsValid)
             {
-                db.Produtos.Add(produto);
+                db.VendaItems.Add(vendaItem);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.IdTipoEstampa = new SelectList(db.TipoEstampas, "IdTipoEstampa", "Nome", produto.IdTipoEstampa);
-            return View(produto);
+            ViewBag.IdProduto = new SelectList(db.Produtos, "IdProduto", "Nome", vendaItem.IdProduto);
+            ViewBag.IdVenda = new SelectList(db.Vendas, "IdVenda", "IdVenda", vendaItem.IdVenda);
+            return View(vendaItem);
         }
 
-        // GET: Produtos/Edit/5
-        public ActionResult Edit(long? id)
+        // GET: VendaItems/Edit/5
+        public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Produto produto = db.Produtos.Find(id);
-            if (produto == null)
+            VendaItem vendaItem = db.VendaItems.Find(id);
+            if (vendaItem == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.IdTipoEstampa = new SelectList(db.TipoEstampas, "IdTipoEstampa", "Nome", produto.IdTipoEstampa);
-            return View(produto);
+            ViewBag.IdProduto = new SelectList(db.Produtos, "IdProduto", "Nome", vendaItem.IdProduto);
+            ViewBag.IdVenda = new SelectList(db.Vendas, "IdVenda", "IdVenda", vendaItem.IdVenda);
+            return View(vendaItem);
         }
 
-        // POST: Produtos/Edit/5
+        // POST: VendaItems/Edit/5
         // Para proteger-se contra ataques de excesso de postagem, ative as propriedades específicas às quais deseja se associar. 
         // Para obter mais detalhes, confira https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "IdProduto,Nome,Descricao,Largura,Altura,IdTipoEstampa,DtRegistro")] Produto produto)
+        public ActionResult Edit([Bind(Include = "IdVendaItem,IdProduto,IdVenda,Quantidade,VlTotal")] VendaItem vendaItem)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(produto).State = EntityState.Modified;
+                db.Entry(vendaItem).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.IdTipoEstampa = new SelectList(db.TipoEstampas, "IdTipoEstampa", "Nome", produto.IdTipoEstampa);
-            return View(produto);
+            ViewBag.IdProduto = new SelectList(db.Produtos, "IdProduto", "Nome", vendaItem.IdProduto);
+            ViewBag.IdVenda = new SelectList(db.Vendas, "IdVenda", "IdVenda", vendaItem.IdVenda);
+            return View(vendaItem);
         }
 
-        // GET: Produtos/Delete/5
-        public ActionResult Delete(long? id)
+        // GET: VendaItems/Delete/5
+        public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Produto produto = db.Produtos.Find(id);
-            if (produto == null)
+            VendaItem vendaItem = db.VendaItems.Find(id);
+            if (vendaItem == null)
             {
                 return HttpNotFound();
             }
-            return View(produto);
+            return View(vendaItem);
         }
 
-        // POST: Produtos/Delete/5
+        // POST: VendaItems/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(long id)
+        public ActionResult DeleteConfirmed(int id)
         {
-            Produto produto = db.Produtos.Find(id);
-            db.Produtos.Remove(produto);
+            VendaItem vendaItem = db.VendaItems.Find(id);
+            db.VendaItems.Remove(vendaItem);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
