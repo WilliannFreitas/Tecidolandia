@@ -25,7 +25,10 @@
                         ID_PRODUTO = c.Long(nullable: false, identity: true),
                         NOME = c.String(),
                         DESCRICAO = c.String(),
+                        LARGURA = c.Decimal(nullable: false, precision: 18, scale: 2),
+                        ALTURA = c.Decimal(nullable: false, precision: 18, scale: 2),
                         ID_TIPO_ESTAMPA = c.Long(nullable: false),
+                        DT_REGISTRO = c.DateTime(),
                     })
                 .PrimaryKey(t => t.ID_PRODUTO)
                 .ForeignKey("dbo.TIPO_ESTAMPA", t => t.ID_TIPO_ESTAMPA)

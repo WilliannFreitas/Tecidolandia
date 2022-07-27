@@ -188,9 +188,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202207270025098_Inicial.cs" />
-    <Compile Include="Migrations\202207270025098_Inicial.designer.cs">
-      <DependentUpon>202207270025098_Inicial.cs</DependentUpon>
+    <Compile Include="Migrations\202207271610241_Inicial.cs" />
+    <Compile Include="Migrations\202207271610241_Inicial.designer.cs">
+      <DependentUpon>202207271610241_Inicial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -204,9 +204,11 @@
     <Compile Include="Models\Entities\Cliente.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Controllers\ProdutosController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
-    <Compile Include="StatusController.cs" />
+    <Compile Include="Controllers\StatusController.cs" />
+    <Compile Include="Controllers\TipoEstampasController.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />
@@ -269,6 +271,16 @@
     <Content Include="Views\Status\Details.cshtml" />
     <Content Include="Views\Status\Edit.cshtml" />
     <Content Include="Views\Status\Index.cshtml" />
+    <Content Include="Views\Produtos\Create.cshtml" />
+    <Content Include="Views\Produtos\Delete.cshtml" />
+    <Content Include="Views\Produtos\Details.cshtml" />
+    <Content Include="Views\Produtos\Edit.cshtml" />
+    <Content Include="Views\Produtos\Index.cshtml" />
+    <Content Include="Views\TipoEstampas\Create.cshtml" />
+    <Content Include="Views\TipoEstampas\Delete.cshtml" />
+    <Content Include="Views\TipoEstampas\Details.cshtml" />
+    <Content Include="Views\TipoEstampas\Edit.cshtml" />
+    <Content Include="Views\TipoEstampas\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -287,8 +299,8 @@
     <Content Include="Scripts\jquery-3.4.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202207270025098_Inicial.resx">
-      <DependentUpon>202207270025098_Inicial.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202207271610241_Inicial.resx">
+      <DependentUpon>202207271610241_Inicial.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
