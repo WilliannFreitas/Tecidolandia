@@ -1,0 +1,34 @@
+﻿@model Tecidolandia.Models.Entities.Status
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Status</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.NmStatus)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NmStatus)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.StatusVenda)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.StatusVenda)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.IdStatus }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

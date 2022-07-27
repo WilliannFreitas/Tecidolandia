@@ -1,0 +1,39 @@
+﻿@model IEnumerable<Tecidolandia.Models.Entities.Status>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.NmStatus)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.StatusVenda)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.NmStatus)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.StatusVenda)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.IdStatus }) |
+            @Html.ActionLink("Details", "Details", new { id=item.IdStatus }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.IdStatus })
+        </td>
+    </tr>
+}
+
+</table>
