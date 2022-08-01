@@ -12,7 +12,7 @@ namespace Tecidolandia.Models.Entities
     {
         [Key]
         [Column("ID_STATUS")]
-        public Int64 IdStatus { get; set; }
+        public int IdStatus { get; set; }
 
         [Column("NM_STATUS")]
         [Display(Name = "Williann")]

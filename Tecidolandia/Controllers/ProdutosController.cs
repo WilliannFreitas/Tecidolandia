@@ -18,8 +18,8 @@ namespace Tecidolandia
         // GET: Produtos
         public ActionResult Index()
         {
-            var produtos = db.Produtos.Include(p => p.TipoEstampas);
-            return View(produtos.ToList());
+            var produto = db.Produto.Include(p => p.TipoEstampas);
+            return View(produto.ToList());
         }
 
         // GET: Produtos/Details/5
@@ -29,7 +29,7 @@ namespace Tecidolandia
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Produto produto = db.Produtos.Find(id);
+            Produto produto = db.Produto.Find(id);
             if (produto == null)
             {
                 return HttpNotFound();
@@ -40,7 +40,7 @@ namespace Tecidolandia
         // GET: Produtos/Create
         public ActionResult Create()
         {
-            ViewBag.IdTipoEstampa = new SelectList(db.TipoEstampas, "IdTipoEstampa", "Nome");
+            ViewBag.IdTipoEstampa = new SelectList(db.TipoEstampa, "IdTipoEstampa", "Nome");
             return View();
         }
 
@@ -53,12 +53,12 @@ namespace Tecidolandia
         {
             if (ModelState.IsValid)
             {
-                db.Produtos.Add(produto);
+                db.Produto.Add(produto);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.IdTipoEstampa = new SelectList(db.TipoEstampas, "IdTipoEstampa", "Nome", produto.IdTipoEstampa);
+            ViewBag.IdTipoEstampa = new SelectList(db.TipoEstampa, "IdTipoEstampa", "Nome", produto.IdTipoEstampa);
             return View(produto);
         }
 
@@ -69,12 +69,12 @@ namespace Tecidolandia
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Produto produto = db.Produtos.Find(id);
+            Produto produto = db.Produto.Find(id);
             if (produto == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.IdTipoEstampa = new SelectList(db.TipoEstampas, "IdTipoEstampa", "Nome", produto.IdTipoEstampa);
+            ViewBag.IdTipoEstampa = new SelectList(db.TipoEstampa, "IdTipoEstampa", "Nome", produto.IdTipoEstampa);
             return View(produto);
         }
 
@@ -91,7 +91,7 @@ namespace Tecidolandia
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.IdTipoEstampa = new SelectList(db.TipoEstampas, "IdTipoEstampa", "Nome", produto.IdTipoEstampa);
+            ViewBag.IdTipoEstampa = new SelectList(db.TipoEstampa, "IdTipoEstampa", "Nome", produto.IdTipoEstampa);
             return View(produto);
         }
 
@@ -102,7 +102,7 @@ namespace Tecidolandia
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Produto produto = db.Produtos.Find(id);
+            Produto produto = db.Produto.Find(id);
             if (produto == null)
             {
                 return HttpNotFound();
@@ -115,8 +115,8 @@ namespace Tecidolandia
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(long id)
         {
-            Produto produto = db.Produtos.Find(id);
-            db.Produtos.Remove(produto);
+            Produto produto = db.Produto.Find(id);
+            db.Produto.Remove(produto);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

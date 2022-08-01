@@ -13,7 +13,7 @@ namespace Tecidolandia.Models.Entities
         [Key]
         [Required(ErrorMessage = "O campo nome é obrigatório")]
         [Column("ID_CLIENTE")]
-        public Int64 IdCliente { get; set; }
+        public int IdCliente { get; set; }
 
         [Column("NM_COMPLETO")]
         [Display(Name = "Nome Completo")]

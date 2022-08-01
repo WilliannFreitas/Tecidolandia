@@ -18,7 +18,7 @@ namespace Tecidolandia
         // GET: TipoEstampas
         public ActionResult Index()
         {
-            return View(db.TipoEstampas.ToList());
+            return View(db.TipoEstampa.ToList());
         }
 
         // GET: TipoEstampas/Details/5
@@ -28,7 +28,7 @@ namespace Tecidolandia
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            TipoEstampa tipoEstampa = db.TipoEstampas.Find(id);
+            TipoEstampa tipoEstampa = db.TipoEstampa.Find(id);
             if (tipoEstampa == null)
             {
                 return HttpNotFound();
@@ -51,7 +51,7 @@ namespace Tecidolandia
         {
             if (ModelState.IsValid)
             {
-                db.TipoEstampas.Add(tipoEstampa);
+                db.TipoEstampa.Add(tipoEstampa);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -66,7 +66,7 @@ namespace Tecidolandia
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            TipoEstampa tipoEstampa = db.TipoEstampas.Find(id);
+            TipoEstampa tipoEstampa = db.TipoEstampa.Find(id);
             if (tipoEstampa == null)
             {
                 return HttpNotFound();
@@ -97,7 +97,7 @@ namespace Tecidolandia
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            TipoEstampa tipoEstampa = db.TipoEstampas.Find(id);
+            TipoEstampa tipoEstampa = db.TipoEstampa.Find(id);
             if (tipoEstampa == null)
             {
                 return HttpNotFound();
@@ -110,8 +110,8 @@ namespace Tecidolandia
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(long id)
         {
-            TipoEstampa tipoEstampa = db.TipoEstampas.Find(id);
-            db.TipoEstampas.Remove(tipoEstampa);
+            TipoEstampa tipoEstampa = db.TipoEstampa.Find(id);
+            db.TipoEstampa.Remove(tipoEstampa);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
