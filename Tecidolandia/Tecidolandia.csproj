@@ -181,6 +181,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Context\Conventions\DecimalModelBinder.cs" />
     <Compile Include="Context\Conventions\DecimalPrecisionAttribute.cs" />
     <Compile Include="Context\Conventions\DecimalPrecisionAttributeConvention.cs" />
     <Compile Include="Controllers\ClientesController.cs" />
@@ -235,6 +236,7 @@
     <Content Include="Scripts\jquery-3.4.1.slim.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery.validate.custom.pt-br.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />

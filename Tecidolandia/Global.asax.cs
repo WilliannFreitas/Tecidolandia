@@ -8,6 +8,7 @@ using System.Web.Optimization;
 using System.Web.Routing;
 using System.Web.Security;
 using System.Web.SessionState;
+using TesteMVC;
 
 namespace Tecidolandia
 {
@@ -20,6 +21,10 @@ namespace Tecidolandia
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+            ModelBinders.Binders.Add(
+                typeof(decimal), new DecimalModelBinder());
+            ModelBinders.Binders.Add(
+                typeof(decimal?), new DecimalModelBinder());
         }
     }
 }

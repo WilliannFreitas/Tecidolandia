@@ -20,18 +20,20 @@ namespace Tecidolandia.Models.Entities
         public string Descricao { get; set; }
 
         //[Required(ErrorMessage = "O campo valor do metro é obrigatório")]       
-        //[DataType(DataType.Currency)]
         //[DisplayFormat(DataFormatString = "{0:n2}",
         //    ApplyFormatInEditMode = true,
         //    NullDisplayText = "Sem preço")]
         //[Range(1.00, 300.00, ErrorMessage = "O preço deverá ser entre 1 e 300.")]
         //[Column("VL_METRO", Order = 1, TypeName = "decimal(18,2)")]
-        [Column("VL_METRO", TypeName = "money")]
-        [RegularExpression(@"^\$?\d+(\.(\d{2}))?$")]
+        //[RegularExpression(@"^\$?\d+(\.(\d{2}))?$")]
         //[Column(TypeName = "money")]
         //[Column(Order = 3)]
         //[Display(Name = "Price", ResourceType = typeof(Resources.Language))]
-        public decimal VlMetro { get; set; }
+        //[Column("VL_METRO", TypeName = "money")]
+        [DataType(DataType.Currency)]
+        [Column("VL_METRO")]
+        [Display(Name = "Valor do metro")]
+        public double VlMetro { get; set; }
     }
 }
         //[DecimalPrecision(10, 3)] 
