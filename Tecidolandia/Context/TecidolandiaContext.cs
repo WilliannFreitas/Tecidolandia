@@ -21,6 +21,8 @@ namespace Tecidolandia.Context
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
+            //modelBuilder.Conventions.Add(new DecimalPrecisionAttributeConvention());
+
             modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
         }

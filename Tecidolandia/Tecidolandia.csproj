@@ -181,6 +181,8 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Context\Conventions\DecimalPrecisionAttribute.cs" />
+    <Compile Include="Context\Conventions\DecimalPrecisionAttributeConvention.cs" />
     <Compile Include="Controllers\ClientesController.cs" />
     <Compile Include="Context\TecidolandiaContext.cs" />
     <Compile Include="Controllers\AccountController.cs" />
@@ -189,9 +191,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202207272240024_Inicial.cs" />
-    <Compile Include="Migrations\202207272240024_Inicial.designer.cs">
-      <DependentUpon>202207272240024_Inicial.cs</DependentUpon>
+    <Compile Include="Migrations\202208031452258_Inicial.cs" />
+    <Compile Include="Migrations\202208031452258_Inicial.designer.cs">
+      <DependentUpon>202208031452258_Inicial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -210,10 +212,10 @@
     <Compile Include="Startup.cs" />
     <Compile Include="Controllers\StatusController.cs" />
     <Compile Include="Controllers\TelefonesController.cs" />
-    <Compile Include="Controllers\TipoEstampasController.cs" />
     <Compile Include="Controllers\VendaItemsController.cs" />
     <Compile Include="Controllers\VendasController.cs" />
     <Compile Include="Controllers\VendedoresController.cs" />
+    <Compile Include="Controllers\TipoEstampasController.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />
@@ -271,11 +273,6 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Views\TipoEstampas\Create.cshtml" />
-    <Content Include="Views\TipoEstampas\Delete.cshtml" />
-    <Content Include="Views\TipoEstampas\Details.cshtml" />
-    <Content Include="Views\TipoEstampas\Edit.cshtml" />
-    <Content Include="Views\TipoEstampas\Index.cshtml" />
     <Content Include="Views\Status\Create.cshtml" />
     <Content Include="Views\Status\Delete.cshtml" />
     <Content Include="Views\Status\Details.cshtml" />
@@ -311,6 +308,11 @@
     <Content Include="Views\Produtos\Details.cshtml" />
     <Content Include="Views\Produtos\Edit.cshtml" />
     <Content Include="Views\Produtos\Index.cshtml" />
+    <Content Include="Views\TipoEstampas\Create.cshtml" />
+    <Content Include="Views\TipoEstampas\Delete.cshtml" />
+    <Content Include="Views\TipoEstampas\Details.cshtml" />
+    <Content Include="Views\TipoEstampas\Edit.cshtml" />
+    <Content Include="Views\TipoEstampas\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -329,8 +331,8 @@
     <Content Include="Scripts\jquery-3.4.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202207272240024_Inicial.resx">
-      <DependentUpon>202207272240024_Inicial.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202208031452258_Inicial.resx">
+      <DependentUpon>202208031452258_Inicial.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

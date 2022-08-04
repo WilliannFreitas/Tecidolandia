@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
+using Tecidolandia.Context;
 
 namespace Tecidolandia.Models.Entities
 {
@@ -22,13 +23,25 @@ namespace Tecidolandia.Models.Entities
         public string Descricao { get; set; }
 
         //[Required(ErrorMessage = "O campo largura é obrigatório")]
-        //[Column("LARGURA", TypeName = "decimal(4, 2)")]
+        //[Column("LARGURA", TypeName = "decimal(18, 2)")]
+        //[DataType(DataType.Currency)]
+        //[DisplayFormat(DataFormatString = "{0:n2}",
+        //    ApplyFormatInEditMode = true,
+        //    NullDisplayText = "Sem preço")]
+        //[Range(1.00, 300.00, ErrorMessage = "O preço deverá ser entre 1 e 300.")]
         [Column("LARGURA")]
+        [DecimalPrecision(10, 3)]
         public decimal Largura { get; set; }
 
         //[Required(ErrorMessage = "O campo altura é obrigatório")]
-        //[Column("ALTURA", TypeName = "decimal(4, 2)")]
+        //[Column("ALTURA", TypeName = "decimal(18, 2)")]
+        //[DataType(DataType.Currency)]
+        //[DisplayFormat(DataFormatString = "{0:n2}",
+        //    ApplyFormatInEditMode = true,
+        //    NullDisplayText = "Sem preço")]
+        //[Range(1.00, 300.00, ErrorMessage = "O preço deverá ser entre 1 e 300.")]
         [Column("ALTURA")]
+        [DecimalPrecision(10, 3)]
         public decimal Altura { get; set; }
 
         [ForeignKey("TipoEstampas")]

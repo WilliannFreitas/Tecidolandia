@@ -25,8 +25,8 @@
                         ID_PRODUTO = c.Long(nullable: false, identity: true),
                         NOME = c.String(),
                         DESCRICAO = c.String(),
-                        LARGURA = c.Decimal(nullable: false, precision: 18, scale: 2),
-                        ALTURA = c.Decimal(nullable: false, precision: 18, scale: 2),
+                        LARGURA = c.Decimal(nullable: false, precision: 10, scale: 3),
+                        ALTURA = c.Decimal(nullable: false, precision: 10, scale: 3),
                         ID_TIPO_ESTAMPA = c.Long(nullable: false),
                         DT_REGISTRO = c.DateTime(),
                     })
@@ -41,7 +41,7 @@
                         ID_TIPO_ESTAMPA = c.Long(nullable: false, identity: true),
                         NOME = c.String(),
                         DESCRICAO = c.String(maxLength: 255),
-                        VL_METRO = c.Double(nullable: false),
+                        VL_METRO = c.Decimal(nullable: false, precision: 10, scale: 3),
                     })
                 .PrimaryKey(t => t.ID_TIPO_ESTAMPA);
             
