@@ -20,12 +20,14 @@ namespace Tecidolandia.Models.Entities
 
         [ForeignKey("Vendas")]
         [Column("ID_VENDA")]
+        [Display(Name = "Id da Venda")]
         public Int64 IdVenda { get; set; }
 
         [Column("QUANTIDADE")]
         public int Quantidade { get; set; }
 
         [Column("VL_TOTAL")]
+        [Display(Name = "Valor Total")]
         public int VlTotal { get; set; }
 
         //propriedades de navegação

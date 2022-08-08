@@ -15,10 +15,11 @@ namespace Tecidolandia.Models.Entities
         public Int64 IdStatus { get; set; }
 
         [Column("NM_STATUS")]
-        [Display(Name = "Williann")]
+        [Display(Name = "Nome do Status")]
         public string NmStatus { get; set; }
 
         [Column("STATUS_VENDA")]
+        [Display(Name = "Status da Venda")]
         public bool StatusVenda { get; set; }
 
     }

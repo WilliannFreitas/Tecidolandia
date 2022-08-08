@@ -15,21 +15,26 @@ namespace Tecidolandia.Models.Entities
         public Int64 IdVenda { get; set; }
 
         [Column("DT_REGISTRO")]
+        [Display(Name = "Data de Registro")]
         public DateTime DtRegistro { get; set; }
 
         [ForeignKey("Clientes")]
         [Column("ID_CLIENTE")]
+        [Display(Name = "Registro do Cliente")]
         public Int64 IdCliente { get; set; }
 
         [ForeignKey("Vendedores")]
         [Column("ID_VENDEDOR")]
+        [Display(Name = "Regsitro do Vendedor")]
         public Int64 IdVendedor { get; set; }
 
         [ForeignKey("Status")]
         [Column("ID_STATUS")]
+        [Display(Name = "Registro do Status")]
         public Int64 IdStatus { get; set; }
 
         [Column("VL_TOTAL")]
+        [Display(Name = "Valor Total")]
         public decimal VlTotal { get; set; }
 
         //propriedades de navegação
