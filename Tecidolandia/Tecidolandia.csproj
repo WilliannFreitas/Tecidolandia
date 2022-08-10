@@ -295,11 +295,6 @@
     <Content Include="Views\Vendedores\Details.cshtml" />
     <Content Include="Views\Vendedores\Edit.cshtml" />
     <Content Include="Views\Vendedores\Index.cshtml" />
-    <Content Include="Views\Vendas\Create.cshtml" />
-    <Content Include="Views\Vendas\Delete.cshtml" />
-    <Content Include="Views\Vendas\Details.cshtml" />
-    <Content Include="Views\Vendas\Edit.cshtml" />
-    <Content Include="Views\Vendas\Index.cshtml" />
     <Content Include="Views\VendaItems\Create.cshtml" />
     <Content Include="Views\VendaItems\Delete.cshtml" />
     <Content Include="Views\VendaItems\Details.cshtml" />
@@ -315,12 +310,11 @@
     <Content Include="Views\TipoEstampas\Details.cshtml" />
     <Content Include="Views\TipoEstampas\Edit.cshtml" />
     <Content Include="Views\TipoEstampas\Index.cshtml" />
-    <Content Include="Views\VendasBCKP\Index.cshtml" />
-    <Content Include="Views\VendasBCKP\Edit.cshtml" />
-    <Content Include="Views\VendasBCKP\Details.cshtml" />
-    <Content Include="Views\VendasBCKP\Delete.cshtml" />
-    <Content Include="Views\VendasBCKP\Create.cshtml" />
-    <Content Include="Views\Vendas\OrdemDeVenda.cshtml" />
+    <Content Include="Views\Vendas\Index.cshtml" />
+    <Content Include="Views\Vendas\Edit.cshtml" />
+    <Content Include="Views\Vendas\Details.cshtml" />
+    <Content Include="Views\Vendas\Delete.cshtml" />
+    <Content Include="Views\Vendas\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
