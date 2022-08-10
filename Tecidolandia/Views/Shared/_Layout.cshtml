@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - Meu Aplicativo ASP.NET</title>
+    <title>@ViewBag.Title - TECIDOLANDIA</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 
@@ -14,7 +14,7 @@
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
+                    <span class="icon-bar">abc</span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
@@ -24,7 +24,7 @@
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Home", "About", "Home")</li>
 
-                    
+
                     <li>@Html.ActionLink("Sobre", "About", "Home")</li>
                     <li>@Html.ActionLink("Contato", "Contact", "Home")</li>
 
@@ -37,7 +37,7 @@
                             <li>@Html.ActionLink("Vendedores", "Index", "Vendedores")</li>
                             <li>@Html.ActionLink("Clientes", "Index", "Clientes")</li>
                             <li>@Html.ActionLink("Itens da Venda", "Index", "VendaItems")</li>
-                            <li>@Html.ActionLink("Vendas", "Index", "Vendas")</li>
+                            <li>@Html.ActionLink("Vender", "OrdemDeVenda", "Vendas")</li>
                         </ul>
                     </li>
                 </ul>
@@ -49,10 +49,9 @@
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year - Meu Aplicativo ASP.NET</p>
+            <p>&copy; @DateTime.Now.Year - Aplicativo desenvolvido por Williann Carlos de Freitas</p>
         </footer>
     </div>
-
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)

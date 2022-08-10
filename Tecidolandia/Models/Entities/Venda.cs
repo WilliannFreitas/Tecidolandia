@@ -15,6 +15,7 @@ namespace Tecidolandia.Models.Entities
         public Int64 IdVenda { get; set; }
 
         [Column("DT_REGISTRO")]
+        [DataType(DataType.Date)]
         [Display(Name = "Data de Registro")]
         public DateTime DtRegistro { get; set; }
 
@@ -35,7 +36,7 @@ namespace Tecidolandia.Models.Entities
 
         [Column("VL_TOTAL")]
         [Display(Name = "Valor Total")]
-        public decimal VlTotal { get; set; }
+        public double VlTotal { get; set; }
 
         //propriedades de navegação
         public virtual Cliente Clientes { get; set; }

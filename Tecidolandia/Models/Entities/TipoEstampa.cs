@@ -17,6 +17,7 @@ namespace Tecidolandia.Models.Entities
 
         [MaxLength(255)]
         [Column("DESCRICAO", Order = 4)]
+        [Display(Name = "Descrição")]
         public string Descricao { get; set; }
 
         //[Required(ErrorMessage = "O campo valor do metro é obrigatório")]       

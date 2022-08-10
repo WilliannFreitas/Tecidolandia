@@ -27,8 +27,9 @@ namespace Tecidolandia.Models.Entities
         public int Quantidade { get; set; }
 
         [Column("VL_TOTAL")]
+        [DataType(DataType.Currency)]
         [Display(Name = "Valor Total")]
-        public int VlTotal { get; set; }
+        public double VlTotal { get; set; }
 
         //propriedades de navegação
         public virtual Produto Produtos { get; set; }
