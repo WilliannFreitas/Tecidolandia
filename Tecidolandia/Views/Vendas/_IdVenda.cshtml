@@ -1,0 +1,7 @@
+﻿@model Tecidolandia.Models.ViewEntities.OrdemDeVendaViewModel
+
+@Html.ValidationSummary(true, "", new { @class = "text-danger" })
+@Html.HiddenFor(model => model.Venda.DtRegistro)
+
+@Html.ValidationSummary(true, "", new { @class = "text-danger" })
+@Html.HiddenFor(model => model.Venda.IdVenda)

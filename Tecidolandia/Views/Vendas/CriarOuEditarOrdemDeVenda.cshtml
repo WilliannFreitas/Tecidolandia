@@ -1,0 +1,226 @@
+﻿@model Tecidolandia.Models.ViewEntities.OrdemDeVendaViewModel
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create</h2>
+
+
+<div class="panel-body">
+    <div class="col-md-12">
+
+        <div class="row">
+            <div class="col-md-3">
+                <label>* Vendedor:</label>
+                @Html.DropDownListFor(model => model.IdVendedor, Model.VendedorList.OrderBy(o => o.Nome).Select(x => new SelectListItem
+           {
+               Value = x.IdVendedor.ToString(),
+               Text = x.Nome
+           }), "Selecione", new { @class = "form-control", @required = "required" })
+            </div>
+
+
+            <div class="col-md-3">
+                <label>* Cliente:</label>
+                @Html.DropDownListFor(model => model.IdCliente, Model.ClienteList.OrderBy(o => o.NmCompleto).Select(x => new SelectListItem
+           {
+               Value = x.IdCliente.ToString(),
+               Text = x.NmCompleto
+           }), "Selecione", new { @class = "form-control", @required = "required" })
+            </div>
+
+
+            <div class="col-md-3">
+                <label>* Status:</label>
+                @Html.DropDownListFor(model => model.IdStatus, Model.StatusList.OrderBy(o => o.NmStatus).Select(x => new SelectListItem
+           {
+               Value = x.IdStatus.ToString(),
+               Text = x.NmStatus
+           }), "Selecione", new { @class = "form-control", @required = "required" })
+            </div>
+
+            <div class="row">
+                <div id="dividvenda" style="display: none;">
+                    @Html.Partial("_IdVenda")
+                </div>
+            </div>
+
+        </div>
+
+        <div class="row">
+            <div class="col-md-3">
+                @ViewBag.MsgErroVenda
+                <input type="submit" name="submit" id="SalvarVenda" value="Salvar" class="btn btn-danger btn-group-justified" />
+            </div>
+        </div>
+
+        <div class="row">
+
+        </div>
+
+
+        @*<div class="col-md-3">
+                <label>* Project</label>
+                <div id="divGetProjectsByEps">
+                    @Html.Partial("_GetProjectsByEpsDropDownList")
+                </div>
+            </div>*@
+
+        @*<div class="col-md-3">
+                <label>* Solution</label>
+                <div id="divGetSolutionsByProject">
+                    @Html.Partial("_GetSolutionsByProjectDropDownList")
+                </div>
+            </div>*@
+
+
+    </div>
+
+</div>
+
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+
+@section Scripts {
+    <script type="text/javascript">
+
+        $(document).on('click', '#SalvarVenda', function () {
+            //console.log("clicou Savar Pacote");
+            salvarVenda();
+        });
+
+        function salvarVenda() {
+
+            var Venda = {};
+            var mensage = "";
+
+            var Venda_IdVenda = $("#IdVenda").val();
+            var Venda_IdStatus = $("#IdStatus").val();
+            var Venda_IdCliente = $("#IdCliente").val();
+            var Venda_IdVendedor = $("#IdVendedor").val();
+
+            //console.log("Venda_IdStatus: " + Venda_IdStatus);
+
+            if (Venda_IdStatus == "" || Venda_IdStatus == undefined) { mensage += "IdStatus, "; }
+            if (Venda_IdCliente == "" || Venda_IdCliente == undefined) { mensage += "IdCliente, "; }
+            if (Venda_IdVendedor == "" || Venda_IdVendedor == undefined) { mensage += "IdVendedor, "; }
+
+            if (mensage != "") {
+                console.log(mensage);
+                return alert(mensage + ' não pode(m) ser vazio(s)!!');
+
+            } else {
+                Venda = {
+                    IdVenda: parseInt(Venda_IdVenda),
+                    IdStatus: parseInt(Venda_IdStatus),
+                    IdCliente: parseInt(Venda_IdCliente),
+                    IdVendedor: parseInt(Venda_IdVendedor),
+                }
+
+            }
+
+            var venda = JSON.stringify(Venda);
+
+            if (venda.length > 0) {
+                //$.ajax({
+                //    url: "/Vendas/SalvarVenda",
+                //    method: 'POST',
+                //    data: venda,
+                //    dataType: "json",
+                //    cache: false,
+                //    contentType: 'application/json; charset=utf-8',
+                //    processData: false
+                //})
+                //    .done(function (msg) {
+
+                //        if (msg.status.includes("NOK")) {
+                //            let results = "Ocorreram erros ao buscar os registros!";
+                //            if (msg.mesage != undefined && msg.mesage != '') { results = msg.mesage; }
+
+                //            toast("Atenção", results, "error");
+                //            console.log(msg.error);
+                //            alert('Ocorreu um ERRO:' + msg.error);
+
+                //        } else {
+                //            console.log("Venda Sucesso Api", msg );
+
+                //            if (msg.status != undefined && msg.status != '') {
+                //                $("#divIdVenda").html(msg.partialView);
+
+                //                //checkActivateQuerys();
+                //            }
+                //        }
+                //        console.log(msg.description);
+                //        mensage = msg.description;
+                //    })
+
+                //    .fail(function (jqXHR, textStatus, msg) {
+                //        console.log(`${textStatus} - ${msg} - ${jqXHR}`);
+                //        console.log(msg.description);
+                //        mensage = msg.description;
+                //    });
+
+                //alert(mensage);
+                var result = charmarApi("/Vendas/SalvarVenda", 'POST', venda);
+
+                if (result == "OK") {
+                    console.log("Venda Sucesso Api", msg);
+
+                    if (msg.status != undefined && msg.status != '') {
+                        $("#divIdVenda").html(msg.partialView);
+                    }
+                }
+
+            }
+        }
+
+
+        function charmarApi(_url, _method, _data) {
+            var mensage = "";
+
+            var result = "";
+
+            $.ajax({
+                url: _url,
+                method: _method,
+                data: _data,
+                dataType: "json",
+                cache: false,
+                contentType: 'application/json; charset=utf-8',
+                processData: false
+            }).done(function (msg) {
+
+                if (msg.status.includes("NOK")) {
+                    let results = "Ocorreram erros ao buscar os registros!";
+                    if (msg.mesage != undefined && msg.mesage != '') { results = msg.mesage; }
+
+                    toast("Atenção", results, "error");
+                    console.log(msg.error);
+                    alert('Ocorreu um ERRO:' + msg.error);
+
+                    result = "NOK";
+
+                } else {
+                    result = "OK";
+                }
+                console.log(msg.description);
+                mensage = msg.description;
+            }).fail(function (jqXHR, textStatus, msg) {
+                console.log(`${textStatus} - ${msg} - ${jqXHR}`);
+                console.log(msg.description);
+                mensage = msg.description;
+            });
+
+            alert(result);
+
+            return result;
+        }
+
+
+    </script>
+
+}
