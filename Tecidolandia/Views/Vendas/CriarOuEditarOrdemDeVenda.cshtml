@@ -49,6 +49,7 @@
         </div>
 
         <div class="row">
+            <br /> 
             <div class="col-md-3">
                 @ViewBag.MsgErroVenda
                 <input type="submit" name="submit" id="SalvarVenda" value="Salvar" class="btn btn-danger btn-group-justified" />
@@ -126,48 +127,10 @@
             var venda = JSON.stringify(Venda);
 
             if (venda.length > 0) {
-                //$.ajax({
-                //    url: "/Vendas/SalvarVenda",
-                //    method: 'POST',
-                //    data: venda,
-                //    dataType: "json",
-                //    cache: false,
-                //    contentType: 'application/json; charset=utf-8',
-                //    processData: false
-                //})
-                //    .done(function (msg) {
 
-                //        if (msg.status.includes("NOK")) {
-                //            let results = "Ocorreram erros ao buscar os registros!";
-                //            if (msg.mesage != undefined && msg.mesage != '') { results = msg.mesage; }
+                var result = charmarApi("/Vendas/SalvarVenda", 'POST', venda, "Venda Iniciada com Sucesso!");
 
-                //            toast("Atenção", results, "error");
-                //            console.log(msg.error);
-                //            alert('Ocorreu um ERRO:' + msg.error);
-
-                //        } else {
-                //            console.log("Venda Sucesso Api", msg );
-
-                //            if (msg.status != undefined && msg.status != '') {
-                //                $("#divIdVenda").html(msg.partialView);
-
-                //                //checkActivateQuerys();
-                //            }
-                //        }
-                //        console.log(msg.description);
-                //        mensage = msg.description;
-                //    })
-
-                //    .fail(function (jqXHR, textStatus, msg) {
-                //        console.log(`${textStatus} - ${msg} - ${jqXHR}`);
-                //        console.log(msg.description);
-                //        mensage = msg.description;
-                //    });
-
-                //alert(mensage);
-                var result = charmarApi("/Vendas/SalvarVenda", 'POST', venda);
-
-                if (result == "OK") {
+                if (result == "true") {
                     console.log("Venda Sucesso Api", msg);
 
                     if (msg.status != undefined && msg.status != '') {
@@ -179,7 +142,7 @@
         }
 
 
-        function charmarApi(_url, _method, _data) {
+        function charmarApi(_url, _method, _data, _msgSucessoPersonalizada = "Concluido com Sucesso!") {
             var mensage = "";
 
             var result = "";
@@ -195,17 +158,21 @@
             }).done(function (msg) {
 
                 if (msg.status.includes("NOK")) {
-                    let results = "Ocorreram erros ao buscar os registros!";
+                    let results = "----";
                     if (msg.mesage != undefined && msg.mesage != '') { results = msg.mesage; }
 
-                    toast("Atenção", results, "error");
+                    //toast("Atenção", results, "error");
                     console.log(msg.error);
-                    alert('Ocorreu um ERRO:' + msg.error);
+                    alert('Ops! Ocorreu um Erro!! :' + msg.error);
 
-                    result = "NOK";
+                    result = "false";
+                    //console.log("msg", msg);
 
                 } else {
-                    result = "OK";
+                    result = "true";
+                    alert(_msgSucessoPersonalizada);
+  /*                  console.log("msg", msg);*/
+
                 }
                 console.log(msg.description);
                 mensage = msg.description;
@@ -215,7 +182,12 @@
                 mensage = msg.description;
             });
 
-            alert(result);
+            var refreshId = setInterval(function () {
+                if (result != "") {
+                    clearInterval(refreshId);
+                    //sair do looping
+                }
+            }, 100);
 
             return result;
         }
