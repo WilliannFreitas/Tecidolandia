@@ -51,33 +51,23 @@
         <div class="row">
 
             <div class="col-md-3">
-                <label>* Itens da Venda:</label>
-                @Html.DropDownListFor(model => model.IdVendaItem, Model.VendaItemList.OrderBy(o => o.IdVendaItem).Select(x => new SelectListItem
+                <label>* Produto:</label>
+                @Html.DropDownListFor(model => model.IdProduto, Model.ProdutoList.OrderBy(o => o.IdProduto).Select(x => new SelectListItem
            {
-               Value = x.IdVendaItem.ToString(),
-               Text = x.IdVendaItem.ToString()
+               Value = x.IdProduto.ToString(),
+               Text = x.Nome
            }), "Selecione", new { @class = "form-control", @required = "required" })
 
             </div>
 
              <div class="col-md-3">
                 <label>* Quantidade:</label>
-                @Html.DropDownListFor(model => model.IdVendaItem, Model.VendaItemList.OrderBy(o => o.Quantidade).Select(x => new SelectListItem
-           {
-               Value = x.IdVendaItem.ToString(),
-               Text = x.Quantidade.ToString()
-           }), "Selecione", new { @class = "form-control", @required = "required" })
-
+                    @Html.EditorFor(model => model.Quantidade, new { htmlAttributes = new { @class = "form-control" } })
             </div>
 
              <div class="col-md-3">
                  <label>* Valor Total:</label>
-                 @Html.DropDownListFor(model => model.IdVendaItem, Model.VendaItemList.OrderBy(o => o.VlTotal).Select(x => new SelectListItem
-            {
-                Value = x.VlTotal.ToString(),
-                Text = x.VlTotal.ToString()
-            }), "Selecione", new { @class = "form-control", @required = "required" })
-
+                 @Html.EditorFor(model => model.ValorProduto, new { htmlAttributes = new { @class = "form-control" } })
              </div>
 
         </div>

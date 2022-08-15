@@ -59,7 +59,7 @@ namespace Tecidolandia
             vm.VendedorList = db.Vendedores.ToList();
             vm.ClienteList = db.Clientes.ToList();
             vm.StatusList = db.Status.ToList();
-            vm.VendaItemList = db.VendaItems.ToList();
+            vm.ProdutoList = db.Produtos.ToList();
 
 
             ViewBag.HasQuerysTicket = 1;

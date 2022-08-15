@@ -18,7 +18,12 @@ namespace Tecidolandia.Models.ViewEntities
         public List<Status> StatusList { get; set; }
         public Venda Venda { get; set; }
 
-        public long? IdVendaItem { get; set; }
-        public List<VendaItem> VendaItemList { get; set; }
+        public long? IdProduto { get; set; }
+        public List<Produto> ProdutoList { get; set; }
+
+        public long? Quantidade { get; set; }
+        public long? ValorProduto { get; set; }
+
+
     }
 }
