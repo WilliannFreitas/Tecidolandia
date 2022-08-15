@@ -7,13 +7,13 @@ namespace Tecidolandia.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.4.4")]
-    public sealed partial class Inicial : IMigrationMetadata
+    public sealed partial class Inical : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(Inicial));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(Inical));
         
         string IMigrationMetadata.Id
         {
-            get { return "202208092056260_Inicial"; }
+            get { return "202208151922181_Inical"; }
         }
         
         string IMigrationMetadata.Source

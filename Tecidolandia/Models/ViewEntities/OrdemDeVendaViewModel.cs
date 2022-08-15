@@ -16,8 +16,9 @@ namespace Tecidolandia.Models.ViewEntities
         public List<Cliente> ClienteList { get; set; }
         public long? IdStatus { get; set; }
         public List<Status> StatusList { get; set; }
-
         public Venda Venda { get; set; }
 
+        public long? IdVendaItem { get; set; }
+        public List<VendaItem> VendaItemList { get; set; }
     }
 }

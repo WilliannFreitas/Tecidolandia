@@ -25,6 +25,7 @@ namespace Tecidolandia
             return View(vendas.ToList());
         }
 
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)
@@ -58,6 +59,7 @@ namespace Tecidolandia
             vm.VendedorList = db.Vendedores.ToList();
             vm.ClienteList = db.Clientes.ToList();
             vm.StatusList = db.Status.ToList();
+            vm.VendaItemList = db.VendaItems.ToList();
 
 
             ViewBag.HasQuerysTicket = 1;

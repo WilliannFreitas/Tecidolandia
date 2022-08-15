@@ -42,5 +42,7 @@ namespace Tecidolandia.Models.Entities
         public virtual Cliente Clientes { get; set; }
         public virtual Vendedor Vendedores { get; set; }
         public virtual Status Status { get; set; }
+
+        //public virtual Status VendaItem { get; set; }
     }
 }
