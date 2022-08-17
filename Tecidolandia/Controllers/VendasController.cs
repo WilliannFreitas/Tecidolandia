@@ -52,6 +52,21 @@ namespace Tecidolandia
             return View("CriarOuEditarOrdemDeVenda", vm);
         }
 
+        //public ActionResult CriarOuEditarItemDaVenda(long? idVenda)
+        //{
+        //    idVenda = idVenda ?? 1;
+
+        //    var vm = new OrdemDeVendaViewModel();
+
+        //    //if (idVenda > 0)
+        //    //    vm = this.Edit(idVenda);
+        //    //else
+        //        vm = this.Create();
+
+
+        //    return View("CriarOuEditarOrdemDeVenda", vm);
+        //}
+
         // GET: Vendas/Create
         private OrdemDeVendaViewModel Create()
         {
@@ -118,6 +133,46 @@ namespace Tecidolandia
                 var partial = PartialView("_IdVenda", vm).RenderToString();
 
                 //VerifyIfCreateDirectory(ticket.IdTicket.ToString(), "Logs");
+
+                return Json(new { status = "OK", description = "Venda gerada com Sucesso!", partialView = partial }, JsonRequestBehavior.AllowGet);
+
+            }
+            catch (Exception ex)
+            {
+                ViewBag.MsgErroVenda = "Ocorreu um erro! " + ex.Message.ToString();
+
+                //VerifyIfCreateDirectory(ticket.IdTicket.ToString(), "Logs");
+                return Json(new { status = "NOK", description = "Erro ao Salvar - Exception: " + ex.Message.ToString() + " | InnerException" + ex.InnerException.InnerException.ToString() + " | StackTrace" + ex.StackTrace.ToString(), IdTicket = 0 }, JsonRequestBehavior.AllowGet);
+            }
+        }
+        #endregion
+
+
+
+        #region SalvarOrdem
+        [HttpPost]
+        public JsonResult SalvarItemVenda(VendaItem itemVenda)
+        {
+
+            try
+            {
+                if (itemVenda.IdVendaItem == 0 || itemVenda.IdVendaItem == null)
+                {
+                    db.VendaItems.Add(itemVenda);
+                    db.SaveChanges();
+                }
+                else
+                {
+                    db.Entry(itemVenda).State = EntityState.Modified;
+                    db.SaveChanges();
+                }
+
+                var vm = new OrdemDeVendaViewModel();
+                //vm.Venda = venda;
+
+                var partial = PartialView("_IdVenda", vm).RenderToString();
+
+                ////VerifyIfCreateDirectory(ticket.IdTicket.ToString(), "Logs");
 
                 return Json(new { status = "OK", description = "Venda gerada com Sucesso!", partialView = partial }, JsonRequestBehavior.AllowGet);
 

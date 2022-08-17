@@ -60,15 +60,20 @@
 
             </div>
 
-             <div class="col-md-3">
+            <div class="col-md-3">
                 <label>* Quantidade:</label>
-                    @Html.EditorFor(model => model.Quantidade, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.Quantidade, new { htmlAttributes = new { @class = "form-control" } })
             </div>
 
-             <div class="col-md-3">
-                 <label>* Valor Total:</label>
-                 @Html.EditorFor(model => model.ValorProduto, new { htmlAttributes = new { @class = "form-control" } })
-             </div>
+            <div class="col-md-3">
+                <label>* Valor Total:</label>
+                @Html.EditorFor(model => model.ValorProduto, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+
+            <div class="col-md-2">
+                <br />
+                <input type="submit" name="submit" id="SalvarItemVenda" value=" + " class="btn btn-default" />
+            </div>
 
         </div>
 
@@ -114,6 +119,61 @@
             salvarVenda();
         });
 
+        $(document).on('click', '#SalvarItemVenda', function () {
+            //console.log("clicou Savar Pacote");
+            salvarItemVenda();
+        });
+
+
+        function salvarItemVenda() {
+
+            var ItemVenda = {};
+            var mensage = "";
+
+            var ItemVenda_IdVenda = $("#IdVenda").val();
+            var ItemVenda_IdProduto = $("#IdProduto").val();
+            var ItemVenda_Quantidade = $("#Quantidade").val();
+            var ItemVenda_ValorProduto = $("#ValorProduto").val();
+
+            if (ItemVenda_IdProduto == "" || ItemVenda_IdProduto == undefined) { mensage += "Produto, "; }
+            if (ItemVenda_Quantidade == "" || ItemVenda_Quantidade == undefined) { mensage += "Quantidade, "; }
+            if (ItemVenda_ValorProduto == "" || ItemVenda_ValorProduto == undefined) { mensage += "Valor Total, "; }
+
+            if (mensage != "") {
+                console.log(mensage);
+                return alert(mensage + ' não pode(m) ser vazio(s)!!');
+
+            } else {
+                ItemVenda = {
+                    //IdVenda: parseInt(ItemVenda_IdVenda),
+                    IdVenda: 1,
+                    IdProduto: parseInt(ItemVenda_IdProduto),
+                    Quantidade: parseInt(ItemVenda_Quantidade),
+                    VlTotal: parseFloat(ItemVenda_ValorProduto),
+                }
+                console.log("Else", ItemVenda);
+
+            }
+
+            var itemVenda = JSON.stringify(ItemVenda);
+            console.log("Json", itemVenda);
+
+            if (itemVenda.length > 0) {
+
+                var result = chamarApi("/Vendas/SalvarItemVenda", 'POST', itemVenda, "Item adicionado com Sucesso!");
+
+                if (result == "true") {
+                    console.log("Venda Sucesso Api", msg);
+
+                    if (msg.status != undefined && msg.status != '') {
+                        $("#divIdVenda").html(msg.partialView);
+                    }
+                }
+
+            } console.log("chamou", itemVenda);
+
+        } 
+
         function salvarVenda() {
 
             var Venda = {};
@@ -126,9 +186,9 @@
 
             //console.log("Venda_IdStatus: " + Venda_IdStatus);
 
-            if (Venda_IdStatus == "" || Venda_IdStatus == undefined) { mensage += "IdStatus, "; }
-            if (Venda_IdCliente == "" || Venda_IdCliente == undefined) { mensage += "IdCliente, "; }
-            if (Venda_IdVendedor == "" || Venda_IdVendedor == undefined) { mensage += "IdVendedor, "; }
+            if (Venda_IdStatus == "" || Venda_IdStatus == undefined) { mensage += "Status, "; }
+            if (Venda_IdCliente == "" || Venda_IdCliente == undefined) { mensage += "Cliente, "; }
+            if (Venda_IdVendedor == "" || Venda_IdVendedor == undefined) { mensage += "Vendedor, "; }
 
             if (mensage != "") {
                 console.log(mensage);
@@ -148,7 +208,7 @@
 
             if (venda.length > 0) {
 
-                var result = charmarApi("/Vendas/SalvarVenda", 'POST', venda, "Venda Iniciada com Sucesso!");
+                var result = chamarApi("/Vendas/SalvarVenda", 'POST', venda, "Venda Iniciada com Sucesso!");
 
                 if (result == "true") {
                     console.log("Venda Sucesso Api", msg);
@@ -162,7 +222,7 @@
         }
 
 
-        function charmarApi(_url, _method, _data, _msgSucessoPersonalizada = "Concluido com Sucesso!") {
+        function chamarApi(_url, _method, _data, _msgSucessoPersonalizada = "Concluido com Sucesso!") {
             var mensage = "";
 
             var result = "";
