@@ -316,6 +316,7 @@
     <Content Include="Views\Vendas\Index.cshtml" />
     <Content Include="Views\Vendas\CriarOuEditarOrdemDeVenda.cshtml" />
     <Content Include="Views\Vendas\_IdVenda.cshtml" />
+    <Content Include="Views\Vendas\_PartialItemVenda.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

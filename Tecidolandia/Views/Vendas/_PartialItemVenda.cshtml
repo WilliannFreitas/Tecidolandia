@@ -1,0 +1,61 @@
+﻿@model Tecidolandia.Models.ViewEntities.OrdemDeVendaViewModel
+
+<br />
+<hr />
+<br />
+<h3 class="text-center">
+    Lista de Produtos
+</h3>
+
+<br />
+<table class="table">
+    
+    <tr>
+
+        <th>
+            Nome
+        </th>
+        <th>
+            Largura
+        </th>
+        <th>
+            Altura
+        </th>
+        <th>
+            Quantidade
+        </th>
+        <th>
+            Valor Unitário
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model.VendaItem)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Produtos.Nome)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Produtos.Largura)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Produtos.Altura)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Quantidade)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.VlTotal)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.IdVendaItem }) |
+                @Html.ActionLink("Details", "Details", new { id = item.IdVendaItem }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.IdVendaItem })
+            </td>
+        </tr>
+    }
+
+</table>
+
+

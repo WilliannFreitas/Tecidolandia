@@ -75,6 +75,7 @@ namespace Tecidolandia
             vm.ClienteList = db.Clientes.ToList();
             vm.StatusList = db.Status.ToList();
             vm.ProdutoList = db.Produtos.ToList();
+            vm.VendaItem = new List<VendaItem>();
 
 
             ViewBag.HasQuerysTicket = 1;
@@ -108,7 +109,7 @@ namespace Tecidolandia
 
         #endregion
 
-        #region SalvarOrdem
+        #region SalvarVenda
         [HttpPost]
         public JsonResult SalvarVenda(Venda venda)
         {
@@ -149,7 +150,7 @@ namespace Tecidolandia
 
 
 
-        #region SalvarOrdem
+        #region SalvarItemVenda \ ListaVenda
         [HttpPost]
         public JsonResult SalvarItemVenda(VendaItem itemVenda)
         {
@@ -167,11 +168,13 @@ namespace Tecidolandia
                     db.SaveChanges();
                 }
 
+                //Lista de produtos da venda na ordem de venda.
                 var vm = new OrdemDeVendaViewModel();
-                //vm.Venda = venda;
+                vm.VendaItem = new List<VendaItem>();
+                vm.VendaItem = db.VendaItems.Where(b => b.IdVenda == itemVenda.IdVenda).ToList();
 
-                var partial = PartialView("_IdVenda", vm).RenderToString();
-
+                var partial = PartialView("_PartialItemVenda", vm).RenderToString();
+         
                 ////VerifyIfCreateDirectory(ticket.IdTicket.ToString(), "Logs");
 
                 return Json(new { status = "OK", description = "Venda gerada com Sucesso!", partialView = partial }, JsonRequestBehavior.AllowGet);

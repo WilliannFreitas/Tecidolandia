@@ -4,102 +4,107 @@
     ViewBag.Title = "Create";
 }
 
-<h2>Create</h2>
+<br />
+<h3 class="text-center">
+    Cadastrar Venda
+</h3>
+<hr />
+<br />
 
 
 <div class="panel-body">
     <div class="col-md-12">
 
         <div class="row">
-            <div class="col-md-3">
-                <label>* Vendedor:</label>
+
+            <div class="col-md-2">
+                <div id="divIdVenda">
+                    @Html.Partial("_IdVenda")
+                </div>
+            </div>
+
+            <div class="col-md-2">
+                <label><span class="label label-default ">* Vendedor:</span></label>
+                <br />
                 @Html.DropDownListFor(model => model.IdVendedor, Model.VendedorList.OrderBy(o => o.Nome).Select(x => new SelectListItem
            {
                Value = x.IdVendedor.ToString(),
                Text = x.Nome
-           }), "Selecione", new { @class = "form-control", @required = "required" })
+           }), "Selecione", new { @class = "btn btn-default dropdown-toggle", @required = "required" })
             </div>
 
-            <div class="col-md-3">
-                <label>* Cliente:</label>
+            <div class="col-md-2">
+                <label><span class="label label-default ">* Cliente:</span></label>
+                <br />
                 @Html.DropDownListFor(model => model.IdCliente, Model.ClienteList.OrderBy(o => o.NmCompleto).Select(x => new SelectListItem
            {
                Value = x.IdCliente.ToString(),
                Text = x.NmCompleto
-           }), "Selecione", new { @class = "form-control", @required = "required" })
+           }), "Selecione", new { @class = "btn btn-default dropdown-toggle", @required = "required" })
             </div>
 
-            <div class="col-md-3">
-                <label>* Status:</label>
+            <div class="col-md-2">
+                <label><span class="label label-default ">* Status:</span></label>
+                <br />
                 @Html.DropDownListFor(model => model.IdStatus, Model.StatusList.OrderBy(o => o.NmStatus).Select(x => new SelectListItem
            {
                Value = x.IdStatus.ToString(),
                Text = x.NmStatus
-           }), "Selecione", new { @class = "form-control", @required = "required" })
+           }), "Selecione", new { @class = "btn btn-default dropdown-toggle", @required = "required" })
             </div>
-
+            <br />
             <div class="col-md-2">
-                <br />
-                <input type="submit" name="submit" id="SalvarVenda" value="Salvar" class="btn btn-success" />
+                <input type="submit" name="submit" id="SalvarVenda" value="Salvar" class="btn btn-default dropdown-toggle" />
             </div>
             @ViewBag.MsgErroVenda
         </div>
-        <br />
 
+        <br />
         <hr />
+        <br />
 
         <div class="row">
 
-            <div class="col-md-3">
-                <label>* Produto:</label>
+            <div class="col-md-2">
+                <label><span class="label label-default ">* Produto:</span></label>
+                <br />
                 @Html.DropDownListFor(model => model.IdProduto, Model.ProdutoList.OrderBy(o => o.IdProduto).Select(x => new SelectListItem
            {
                Value = x.IdProduto.ToString(),
                Text = x.Nome
-           }), "Selecione", new { @class = "form-control", @required = "required" })
+           }), "Selecione", new { @class = " btn btn-default dropdown-toggle ", @required = "required" })
 
+            </div>
+
+            @*<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                Dropdown
+                <span class="caret"></span>
+            </button>*@
+
+
+            <div class="col-md-3">
+                <label><span class="label label-default ">* Quantidade:</span></label>
+                @Html.EditorFor(model => model.Quantidade, new { htmlAttributes = new { @class = "btn btn-default dropdown-toggle" } })
             </div>
 
             <div class="col-md-3">
-                <label>* Quantidade:</label>
-                @Html.EditorFor(model => model.Quantidade, new { htmlAttributes = new { @class = "form-control" } })
+                <label><span class="label label-default ">* Valor Total:</span></label>
+                @Html.EditorFor(model => model.ValorProduto, new { htmlAttributes = new { @class = "btn btn-default dropdown-toggle" } })
             </div>
 
             <div class="col-md-3">
-                <label>* Valor Total:</label>
-                @Html.EditorFor(model => model.ValorProduto, new { htmlAttributes = new { @class = "form-control" } })
-            </div>
-
-            <div class="col-md-2">
                 <br />
-                <input type="submit" name="submit" id="SalvarItemVenda" value=" + " class="btn btn-default" />
+                <input type="submit" name="submit" id="SalvarItemVenda" value=" + " class="btn btn-default dropdown-toggle" />
             </div>
 
         </div>
 
         <div class="row">
-            <div id="dividvenda" style="display: none;">
-                @Html.Partial("_IdVenda")
+            @*<div id="divItemVenda" style="display: none;">*@
+            <div id="divItemVenda">
+                @Html.Partial("_PartialItemVenda")
             </div>
         </div>
-
-
-
-
-        @*<div class="col-md-3">
-                <label>* Project</label>
-                <div id="divGetProjectsByEps">
-                    @Html.Partial("_GetProjectsByEpsDropDownList")
-                </div>
-            </div>*@
-
-        @*<div class="col-md-3">
-                <label>* Solution</label>
-                <div id="divGetSolutionsByProject">
-                    @Html.Partial("_GetSolutionsByProjectDropDownList")
-                </div>
-            </div>*@
-
 
     </div>
 
@@ -107,7 +112,7 @@
 
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Lista de Produtos", "Index")
 </div>
 
 
@@ -130,7 +135,7 @@
             var ItemVenda = {};
             var mensage = "";
 
-            var ItemVenda_IdVenda = $("#IdVenda").val();
+            var ItemVenda_IdVenda = $("#Venda_IdVenda").val();
             var ItemVenda_IdProduto = $("#IdProduto").val();
             var ItemVenda_Quantidade = $("#Quantidade").val();
             var ItemVenda_ValorProduto = $("#ValorProduto").val();
@@ -145,8 +150,8 @@
 
             } else {
                 ItemVenda = {
-                    //IdVenda: parseInt(ItemVenda_IdVenda),
-                    IdVenda: 1,
+                    IdVenda: parseInt(ItemVenda_IdVenda),
+                    //IdVenda: 1,
                     IdProduto: parseInt(ItemVenda_IdProduto),
                     Quantidade: parseInt(ItemVenda_Quantidade),
                     VlTotal: parseFloat(ItemVenda_ValorProduto),
@@ -160,19 +165,19 @@
 
             if (itemVenda.length > 0) {
 
-                var result = chamarApi("/Vendas/SalvarItemVenda", 'POST', itemVenda, "Item adicionado com Sucesso!");
+                var result = chamarApi("/Vendas/SalvarItemVenda", 'POST', itemVenda, "#divItemVenda", "Item adicionado com Sucesso!");
 
                 if (result == "true") {
-                    console.log("Venda Sucesso Api", msg);
+                    console.log("Venda item Sucesso Api");
 
-                    if (msg.status != undefined && msg.status != '') {
-                        $("#divIdVenda").html(msg.partialView);
-                    }
+                    //if (msg.status != undefined && msg.status != '') {
+                    //    $("#divIdVenda").html(msg.partialView);
+                    //}
                 }
 
             } console.log("chamou", itemVenda);
 
-        } 
+        }
 
         function salvarVenda() {
 
@@ -208,21 +213,21 @@
 
             if (venda.length > 0) {
 
-                var result = chamarApi("/Vendas/SalvarVenda", 'POST', venda, "Venda Iniciada com Sucesso!");
+                var result = chamarApi("/Vendas/SalvarVenda", 'POST', venda, "#divIdVenda", "Venda Iniciada com Sucesso!");
 
                 if (result == "true") {
-                    console.log("Venda Sucesso Api", msg);
+                    console.log("Venda Sucesso Api");
 
-                    if (msg.status != undefined && msg.status != '') {
-                        $("#divIdVenda").html(msg.partialView);
-                    }
+                    //if (msg.status != undefined && msg.status != '') {
+                    //    $("#divIdVenda").html(msg.partialView);
+                    //}
                 }
 
             }
         }
 
 
-        function chamarApi(_url, _method, _data, _msgSucessoPersonalizada = "Concluido com Sucesso!") {
+        function chamarApi(_url, _method, _data, _partialViewName, _msgSucessoPersonalizada = "Concluido com Sucesso!") {
             var mensage = "";
 
             var result = "";
@@ -251,6 +256,14 @@
                 } else {
                     result = "true";
                     alert(_msgSucessoPersonalizada);
+
+                    if (_partialViewName != null || _partialViewName != undefined) {
+                        if (msg.partialView != undefined && msg.partialView != '') {
+                            console.log("Partial atualizada: ", _partialViewName);
+
+                            $(_partialViewName).html(msg.partialView);
+                        }
+                    }
                     /*                  console.log("msg", msg);*/
 
                 }
