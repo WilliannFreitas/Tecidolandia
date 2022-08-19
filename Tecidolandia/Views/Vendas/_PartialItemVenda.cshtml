@@ -1,8 +1,6 @@
 ﻿@model Tecidolandia.Models.ViewEntities.OrdemDeVendaViewModel
 
 <br />
-<hr />
-<br />
 <h3 class="text-center">
     Lista de Produtos
 </h3>
@@ -27,7 +25,6 @@
         <th>
             Valor Unitário
         </th>
-        <th></th>
     </tr>
 
     @foreach (var item in Model.VendaItem)
@@ -48,11 +45,11 @@
             <td>
                 @Html.DisplayFor(modelItem => item.VlTotal)
             </td>
-            <td>
+            @*<td>
                 @Html.ActionLink("Edit", "Edit", new { id = item.IdVendaItem }) |
                 @Html.ActionLink("Details", "Details", new { id = item.IdVendaItem }) |
                 @Html.ActionLink("Delete", "Delete", new { id = item.IdVendaItem })
-            </td>
+            </td>*@
         </tr>
     }
 

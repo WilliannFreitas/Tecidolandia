@@ -4,105 +4,135 @@
     ViewBag.Title = "Create";
 }
 
-<br />
 <h3 class="text-center">
     Cadastrar Venda
 </h3>
-<hr />
-<br />
-
 
 <div class="panel-body">
     <div class="col-md-12">
 
         <div class="row">
 
-            <div class="col-md-2">
+            <div class="col-md-4">
                 <div id="divIdVenda">
                     @Html.Partial("_IdVenda")
                 </div>
             </div>
 
-            <div class="col-md-2">
-                <label><span class="label label-default ">* Vendedor:</span></label>
-                <br />
-                @Html.DropDownListFor(model => model.IdVendedor, Model.VendedorList.OrderBy(o => o.Nome).Select(x => new SelectListItem
-           {
-               Value = x.IdVendedor.ToString(),
-               Text = x.Nome
-           }), "Selecione", new { @class = "btn btn-default dropdown-toggle", @required = "required" })
+            <div class="col-md-4">
+                <table>
+                    <tr>
+                        <td>
+                            <label>Vendedor</label>
+                        </td>
+
+                        <td>
+                            @Html.DropDownListFor(model => model.IdVendedor, Model.VendedorList.OrderBy(o => o.Nome).Select(x => new SelectListItem
+                       {
+                           Value = x.IdVendedor.ToString(),
+                           Text = x.Nome
+                       }), "Selecione", new { @class = "btn btn-xs", @required = "required", @style = " width: 200px;  border-bottom: 1px solid #d9d9d9; border-radius: 5px;" })
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label>Cliente</label>
+                        </td>
+                        <td>
+
+                            @Html.DropDownListFor(model => model.IdCliente, Model.ClienteList.OrderBy(o => o.NmCompleto).Select(x => new SelectListItem
+                       {
+                           Value = x.IdCliente.ToString(),
+                           Text = x.NmCompleto
+                       }), "Selecione", new { @class = "btn btn-xs", @required = "required", @style = " width: 200px;  border-bottom: 1px solid #d9d9d9; border-radius: 5px;" })
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td >
+                            <label>Status</label>
+                        </td>
+                        <td>
+
+                            @Html.DropDownListFor(model => model.IdStatus, Model.StatusList.OrderBy(o => o.NmStatus).Select(x => new SelectListItem
+                       {
+                           Value = x.IdStatus.ToString(),
+                           Text = x.NmStatus
+                       }), "Selecione", new { @class = "btn btn-xs", @required = "required", @style = " width: 200px;  border-bottom: 1px solid #d9d9d9; border-radius: 5px;" })
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <input type="submit" name="submit" id="SalvarVenda" value="Salvar" class="btn btn-default btn-xs" />
+                        </td>
+                    </tr>
+                    @ViewBag.MsgErroVenda
+
+                </table>
+
             </div>
 
-            <div class="col-md-2">
-                <label><span class="label label-default ">* Cliente:</span></label>
-                <br />
-                @Html.DropDownListFor(model => model.IdCliente, Model.ClienteList.OrderBy(o => o.NmCompleto).Select(x => new SelectListItem
-           {
-               Value = x.IdCliente.ToString(),
-               Text = x.NmCompleto
-           }), "Selecione", new { @class = "btn btn-default dropdown-toggle", @required = "required" })
+            <div class="col-md-4">
+
+                <table>
+                    <tr>
+                        <td>
+                            <label>Produto</label>
+                        </td>
+
+                        <td>
+                            @Html.DropDownListFor(model => model.IdProduto, Model.ProdutoList.OrderBy(o => o.IdProduto).Select(x => new SelectListItem
+               {
+                   Value = x.IdProduto.ToString(),
+                   Text = x.Nome
+                    }), "Selecione", new { @class = " btn btn-xs ", @required = "required", @style = " width: 200px;;  border-bottom: 1px solid #d9d9d9; border-radius: 5px;" })
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <label>Quantidade</label>
+                        </td>
+
+                        <td>
+                            @Html.EditorFor(model => model.Quantidade, new { htmlAttributes = new { @class = "btn btn-xs", @style = " width: 200px;;  border-bottom: 1px solid #d9d9d9; border-radius: 5px;" } })
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <label>Valor Total</label>
+                        </td>
+                        <td>
+                            @Html.EditorFor(model => model.ValorProduto, new { htmlAttributes = new { @class = "btn btn-xs", @style = " width: 200px;;  border-bottom: 1px solid #d9d9d9; border-radius: 5px;" } })
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <input type="submit" name="submit" id="SalvarItemVenda" value=" + " class="btn btn-default btn-xs" />
+                        </td>
+                    </tr>
+
+                </table>
+
             </div>
 
-            <div class="col-md-2">
-                <label><span class="label label-default ">* Status:</span></label>
-                <br />
-                @Html.DropDownListFor(model => model.IdStatus, Model.StatusList.OrderBy(o => o.NmStatus).Select(x => new SelectListItem
-           {
-               Value = x.IdStatus.ToString(),
-               Text = x.NmStatus
-           }), "Selecione", new { @class = "btn btn-default dropdown-toggle", @required = "required" })
-            </div>
-            <br />
-            <div class="col-md-2">
-                <input type="submit" name="submit" id="SalvarVenda" value="Salvar" class="btn btn-default dropdown-toggle" />
-            </div>
-            @ViewBag.MsgErroVenda
-        </div>
+            <div class="col-md-12">
+                <div class="row">
+                    @*<div id="divItemVenda" style="display: none;">*@
+                    <div id="divItemVenda">
+                        @Html.Partial("_PartialItemVenda")
+                    </div>
+                </div>
 
-        <br />
-        <hr />
-        <br />
+                @*Botão de voltar na lista de venda*@
+                @*<div>
+                @Html.ActionLink("Lista de Produtos", "Index")
+                  </div>*@
 
-        <div class="row">
-
-            <div class="col-md-2">
-                <label><span class="label label-default ">* Produto:</span></label>
-                <br />
-                @Html.DropDownListFor(model => model.IdProduto, Model.ProdutoList.OrderBy(o => o.IdProduto).Select(x => new SelectListItem
-           {
-               Value = x.IdProduto.ToString(),
-               Text = x.Nome
-           }), "Selecione", new { @class = " btn btn-default dropdown-toggle ", @required = "required" })
-
-            </div>
-
-            @*<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                Dropdown
-                <span class="caret"></span>
-            </button>*@
-
-
-            <div class="col-md-3">
-                <label><span class="label label-default ">* Quantidade:</span></label>
-                @Html.EditorFor(model => model.Quantidade, new { htmlAttributes = new { @class = "btn btn-default dropdown-toggle" } })
-            </div>
-
-            <div class="col-md-3">
-                <label><span class="label label-default ">* Valor Total:</span></label>
-                @Html.EditorFor(model => model.ValorProduto, new { htmlAttributes = new { @class = "btn btn-default dropdown-toggle" } })
-            </div>
-
-            <div class="col-md-3">
-                <br />
-                <input type="submit" name="submit" id="SalvarItemVenda" value=" + " class="btn btn-default dropdown-toggle" />
-            </div>
-
-        </div>
-
-        <div class="row">
-            @*<div id="divItemVenda" style="display: none;">*@
-            <div id="divItemVenda">
-                @Html.Partial("_PartialItemVenda")
             </div>
         </div>
 
@@ -110,10 +140,6 @@
 
 </div>
 
-
-<div>
-    @Html.ActionLink("Lista de Produtos", "Index")
-</div>
 
 
 @section Scripts {
