@@ -4,142 +4,153 @@
     ViewBag.Title = "Create";
 }
 
-<h3 class="text-center">
-    Cadastrar Venda
-</h3>
 
 <div class="panel-body">
     <div class="col-md-12">
 
-        <div class="row">
+        @*<div class="row">
 
-            <div class="col-md-4">
                 <div id="divIdVenda">
                     @Html.Partial("_IdVenda")
                 </div>
-            </div>
 
-            <div class="col-md-4">
-                <table>
-                    <tr>
-                        <td>
-                            <label>Vendedor</label>
-                        </td>
+            </div>*@
 
-                        <td>
-                            @Html.DropDownListFor(model => model.IdVendedor, Model.VendedorList.OrderBy(o => o.Nome).Select(x => new SelectListItem
-                       {
-                           Value = x.IdVendedor.ToString(),
-                           Text = x.Nome
-                       }), "Selecione", new { @class = "btn btn-xs", @required = "required", @style = " width: 200px;  border-bottom: 1px solid #d9d9d9; border-radius: 5px;" })
+        <div class="col-md-4 well" style="background-color: lightgray">
 
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <label>Cliente</label>
-                        </td>
-                        <td>
+            <p class="text-center">
+                <b>Cadastrar Venda</b>
+            </p> 
+            <hr />
+            <table align="center">
 
-                            @Html.DropDownListFor(model => model.IdCliente, Model.ClienteList.OrderBy(o => o.NmCompleto).Select(x => new SelectListItem
-                       {
-                           Value = x.IdCliente.ToString(),
-                           Text = x.NmCompleto
-                       }), "Selecione", new { @class = "btn btn-xs", @required = "required", @style = " width: 200px;  border-bottom: 1px solid #d9d9d9; border-radius: 5px;" })
+                <tr>
+                    <td colspan="2">
+                        <div id="divIdVenda">
+                            @Html.Partial("_IdVenda")
+                        </div>
+                    </td>
+                </tr>
 
-                        </td>
-                    </tr>
-                    <tr>
-                        <td >
-                            <label>Status</label>
-                        </td>
-                        <td>
 
-                            @Html.DropDownListFor(model => model.IdStatus, Model.StatusList.OrderBy(o => o.NmStatus).Select(x => new SelectListItem
-                       {
-                           Value = x.IdStatus.ToString(),
-                           Text = x.NmStatus
-                       }), "Selecione", new { @class = "btn btn-xs", @required = "required", @style = " width: 200px;  border-bottom: 1px solid #d9d9d9; border-radius: 5px;" })
-                        </td>
-                    </tr>
+                <tr>
+                    <td align="center">
+                        <label class="label label-default text-justify">Vendedor</label>
+                    </td>
 
-                    <tr>
-                        <td>
-                            <input type="submit" name="submit" id="SalvarVenda" value="Salvar" class="btn btn-default btn-xs" />
-                        </td>
-                    </tr>
-                    @ViewBag.MsgErroVenda
+                    <td>
+                        @Html.DropDownListFor(model => model.IdVendedor, Model.VendedorList.OrderBy(o => o.Nome).Select(x => new SelectListItem
+                   {
+                       Value = x.IdVendedor.ToString(),
+                       Text = x.Nome
+                   }), "Selecione", new { @class = "btn btn-xs", @required = "required", @style = " width: 200px;  border-bottom: 1px solid #d9d9d9; border-radius: 5px;" })
 
-                </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td align="center">
+                        <label class="label label-default text-justify"> &nbsp Cliente &nbsp  </label>
+                    </td>
+                    <td>
 
-            </div>
+                        @Html.DropDownListFor(model => model.IdCliente, Model.ClienteList.OrderBy(o => o.NmCompleto).Select(x => new SelectListItem
+                   {
+                       Value = x.IdCliente.ToString(),
+                       Text = x.NmCompleto
+                   }), "Selecione", new { @class = "btn btn-xs", @required = "required", @style = " width: 200px;  border-bottom: 1px solid #d9d9d9; border-radius: 5px;" })
 
-            <div class="col-md-4">
+                    </td>
+                </tr>
+                <tr>
+                    <td align="center">
+                        <label class="label label-default text-justify"> &nbsp Status &nbsp </label>
+                    </td>
+                    <td>
 
-                <table>
-                    <tr>
-                        <td>
-                            <label>Produto</label>
-                        </td>
+                        @Html.DropDownListFor(model => model.IdStatus, Model.StatusList.OrderBy(o => o.NmStatus).Select(x => new SelectListItem
+                   {
+                       Value = x.IdStatus.ToString(),
+                       Text = x.NmStatus
+                   }), "Selecione", new { @class = "btn btn-xs", @required = "required", @style = " width: 200px;  border-bottom: 1px solid #d9d9d9; border-radius: 5px;" })
+                    </td>
+                </tr>
 
-                        <td>
-                            @Html.DropDownListFor(model => model.IdProduto, Model.ProdutoList.OrderBy(o => o.IdProduto).Select(x => new SelectListItem
-               {
-                   Value = x.IdProduto.ToString(),
-                   Text = x.Nome
-                    }), "Selecione", new { @class = " btn btn-xs ", @required = "required", @style = " width: 200px;;  border-bottom: 1px solid #d9d9d9; border-radius: 5px;" })
-                        </td>
-                    </tr>
+                <tr>
+                    <td colspan="2">
+                        <input type="submit" name="submit" id="SalvarVenda" value="Salvar" class="btn btn-default btn-xs" style=" width: 100%" />
+                    </td>
+                </tr>
+                @ViewBag.MsgErroVenda
 
-                    <tr>
-                        <td>
-                            <label>Quantidade</label>
-                        </td>
+            </table>
 
-                        <td>
-                            @Html.EditorFor(model => model.Quantidade, new { htmlAttributes = new { @class = "btn btn-xs", @style = " width: 200px;;  border-bottom: 1px solid #d9d9d9; border-radius: 5px;" } })
-                        </td>
-                    </tr>
+        </div>
 
-                    <tr>
-                        <td>
-                            <label>Valor Total</label>
-                        </td>
-                        <td>
-                            @Html.EditorFor(model => model.ValorProduto, new { htmlAttributes = new { @class = "btn btn-xs", @style = " width: 200px;;  border-bottom: 1px solid #d9d9d9; border-radius: 5px;" } })
-                        </td>
-                    </tr>
+        <div class="col-md-1">
+        </div>
 
-                    <tr>
-                        <td>
-                            <input type="submit" name="submit" id="SalvarItemVenda" value=" + " class="btn btn-default btn-xs" />
-                        </td>
-                    </tr>
+        <div class="col-md-7 well" style="background-color: lightgray">
+            <table align="center">
+                <tr>
+                    <td>
+                        <label class="label label-default text-justify"> &nbsp &nbsp Produto &nbsp &nbsp &nbsp </label>
+                    </td>
 
-                </table>
+                    <td>
+                        @Html.DropDownListFor(model => model.IdProduto, Model.ProdutoList.OrderBy(o => o.IdProduto).Select(x => new SelectListItem
+           {
+               Value = x.IdProduto.ToString(),
+               Text = x.Nome
+                }), "Selecione", new { @class = " btn btn-xs ", @required = "required", @style = " width: 200px;;  border-bottom: 1px solid #d9d9d9; border-radius: 5px;" })
+                    </td>
+                </tr>
 
-            </div>
+                <tr>
+                    <td>
+                        <label class="label label-default text-justify"> &nbsp Quantidade &nbsp </label>
+                    </td>
 
-            <div class="col-md-12">
-                <div class="row">
-                    @*<div id="divItemVenda" style="display: none;">*@
-                    <div id="divItemVenda">
-                        @Html.Partial("_PartialItemVenda")
-                    </div>
+                    <td>
+                        @Html.EditorFor(model => model.Quantidade, new { htmlAttributes = new { @class = "btn btn-xs", @style = " width: 200px;;  border-bottom: 1px solid #d9d9d9; border-radius: 5px;" } })
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <label class="label label-default text-justify"> &nbsp Valor Total &nbsp &nbsp </label>
+                    </td>
+                    <td>
+                        @Html.EditorFor(model => model.ValorProduto, new { htmlAttributes = new { @class = "btn btn-xs", @style = " width: 200px;;  border-bottom: 1px solid #d9d9d9; border-radius: 5px;" } })
+                    </td>
+                </tr>
+
+                <tr>
+                    <td colspan="2">
+                        <input type="submit" name="submit" id="SalvarItemVenda" value=" + " class="btn btn-default btn-xs" style=" width: 100%" />
+                    </td>
+                </tr>
+            </table>
+            <br />
+            <div class="row">
+                <div id="divItemVenda" class="panel panel-default">
+                    @Html.Partial("_PartialItemVenda")
                 </div>
+            </div>
 
-                @*Botão de voltar na lista de venda*@
-                @*<div>
+        </div>
+
+        <div class="col-md-12">
+
+
+            @*Botão de voltar na lista de venda*@
+            @*<div>
                 @Html.ActionLink("Lista de Produtos", "Index")
                   </div>*@
 
-            </div>
         </div>
-
     </div>
 
 </div>
-
 
 
 @section Scripts {

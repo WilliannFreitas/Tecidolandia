@@ -1,27 +1,23 @@
 ﻿@model Tecidolandia.Models.ViewEntities.OrdemDeVendaViewModel
 
-<div class="col-md-4">
 
-    <div class="row">
-        <div class="col-md-2">
-            <div>
-                <label>Nº Venda:</label>
-                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                @Html.HiddenFor(model => model.Venda.IdVenda)
-                @Html.DisplayFor(model => model.Venda.IdVenda)
-            </div>
-        </div>
-    </div>
 
-    <div class="row">
-        <div class="col-md-2">
-            <div>
-                <label>Criado em:</label>
-                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                @Html.HiddenFor(model => model.Venda.DtRegistro)
-                @Html.DisplayFor(model => model.Venda.DtRegistro)
+@*<div>
+    <div>*@
+@*<label>Nº Venda:</label>*@
+<label class="label label-default text-justify"> Nº Venda:  @Html.DisplayFor(model => model.Venda.IdVenda) </label>
+@*@Html.ValidationSummary(true, "", new { @class = "text-danger" })*@
+@*</div>
+    </div>*@
+&nbsp
 
-            </div>
-        </div>
-    </div>
-</div>
+@*<div>
+    <div>*@
+@*<label>Criado em:</label>*@
+<label class="label label-default text-justify"> Criado em:  @Html.DisplayFor(model => model.Venda.DtRegistro) </label>
+@*@Html.ValidationSummary(true, "", new { @class = "text-danger" })*@
+@*</div>
+    </div>*@
+
+@Html.HiddenFor(model => model.Venda.IdVenda)
+@Html.HiddenFor(model => model.Venda.DtRegistro)
