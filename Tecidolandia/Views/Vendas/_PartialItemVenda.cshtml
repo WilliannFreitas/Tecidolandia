@@ -4,60 +4,51 @@
 <div class="panel-heading text-center">
     <b>Lista de Produtos</b>
 </div>
-@*<h3 class="text-center">
-    
-</h3>*@
 
-
-<table class="table" align="center">
-    <tr>
-        <th>
-            <label class="label label-default text-justify"> &nbsp  Nome &nbsp  </label>
-        </th>
-        <th>
-            
-            <label class="label label-default text-justify"> &nbsp  Largura &nbsp  </label>
-        </th>
-        <th>
-            
-            <label class="label label-default text-justify"> &nbsp  Altura &nbsp  </label>
-        </th>
-        <th>
-            
-            <label class="label label-default text-justify"> &nbsp  Quantidade &nbsp  </label>
-        </th>
-        <th>
-            
-            <label class="label label-default text-justify"> &nbsp  Valor Unitário &nbsp  </label>
-        </th>
-    </tr>
-
-    @foreach (var item in Model.VendaItem)
-    {
+<table class="table">
+    <thead>
         <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Produtos.Nome)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Produtos.Largura)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Produtos.Altura)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Quantidade)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.VlTotal)
-            </td>
-            @*<td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.IdVendaItem }) |
-                @Html.ActionLink("Details", "Details", new { id = item.IdVendaItem }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.IdVendaItem })
-            </td>*@
+            <th scope="col"><label class="label label-default text-justify"> Nome </label></th>
+            <th scope="col"><label class="label label-default text-justify"> Largura </label></th>
+            <th scope="col"><label class="label label-default text-justify"> Altura </label></th>
+            <th scope="col"><label class="label label-default text-justify"> Quantidade </label></th>
+            <th scope="col"><label class="label label-default text-justify"> Valor Unitário </label></th>
+            <th scope="col"><label class="label label-default text-justify"> Valor Total do Item </label></th>
         </tr>
-    }
-
+    </thead>
+    <tbody>
+        @foreach (var item in Model.VendaItemValor)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Produtos.Nome)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Produtos.Largura)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Produtos.Altura)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Quantidade)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.VlTotal)
+                </td>
+                <td>
+                    @item.ValorTotalVenda.ToString("C")
+                </td>
+         
+                <td>
+                    @Html.ActionLink("Editar item", "Edit", new { id = item.IdVendaItem })
+                        @*@Html.ActionLink("Details", "Details", new { id = item.IdVendaItem }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.IdVendaItem })*@
+                    </td>
+            </tr>
+        }
+    </tbody>
 </table>
 
-
+<div class="label label-default text-justify">
+    Valor Total: @Model.Venda.VlTotal.ToString("C")
+</div>

@@ -38,6 +38,7 @@ namespace Tecidolandia
         #endregion
 
         #region Criar/Editar
+        //[HttpGet]
         public ActionResult CriarOuEditarOrdemDeVenda(long? idVenda)
         {
 
@@ -75,7 +76,9 @@ namespace Tecidolandia
             vm.ClienteList = db.Clientes.ToList();
             vm.StatusList = db.Status.ToList();
             vm.ProdutoList = db.Produtos.ToList();
-            vm.VendaItem = new List<VendaItem>();
+            vm.Venda = new Venda();
+            //vm.VendaItem = new List<VendaItem>();
+            vm.VendaItemValor = new List<VendaItemValor>();
 
 
             ViewBag.HasQuerysTicket = 1;
@@ -170,8 +173,51 @@ namespace Tecidolandia
 
                 //Lista de produtos da venda na ordem de venda.
                 var vm = new OrdemDeVendaViewModel();
-                vm.VendaItem = new List<VendaItem>();
-                vm.VendaItem = db.VendaItems.Where(b => b.IdVenda == itemVenda.IdVenda).ToList();
+                //vm.VendaItem = new List<VendaItem>();
+                //vm.VendaItem = db.VendaItems.Where(b => b.IdVenda == itemVenda.IdVenda).ToList();
+
+                var vendaItemList = db.VendaItems.Where(b => b.IdVenda == itemVenda.IdVenda).ToList();
+                var venda = db.Vendas.Where(b => b.IdVenda == itemVenda.IdVenda).FirstOrDefault();
+
+                double valorTotal = 0;
+                vm.VendaItemValor = new List<VendaItemValor>(); 
+
+                foreach (VendaItem item in vendaItemList) {
+
+                    //var auxVendaItemValor = new VendaItemValor()
+                    // {
+                    //     IdProduto = item.IdProduto,
+                    //     IdVenda = item.IdVenda,
+                    //     IdVendaItem = item.IdVendaItem,
+                    //     Quantidade = item.Quantidade,
+                    //     Vendas = item.Vendas,
+                    //     VlTotal = item.VlTotal,
+                    //     Produtos = item.Produtos,
+                    //     ValorTotalVenda = (item.VlTotal * item.Quantidade) 
+                    // };
+
+                    var auxVendaItemValor = new VendaItemValor();
+                    auxVendaItemValor.IdProduto = item.IdProduto;
+                    auxVendaItemValor.IdVenda = item.IdVenda;
+                    auxVendaItemValor.IdVendaItem = item.IdVendaItem;
+                    auxVendaItemValor.Quantidade = item.Quantidade;
+                    auxVendaItemValor.Vendas = item.Vendas;
+                    auxVendaItemValor.VlTotal = item.VlTotal;
+                    auxVendaItemValor.Produtos = item.Produtos;
+                    auxVendaItemValor.ValorTotalVenda = (item.VlTotal * item.Quantidade);
+              
+
+
+                    vm.VendaItemValor.Add(auxVendaItemValor);
+                    valorTotal += auxVendaItemValor.ValorTotalVenda;
+                }
+
+                venda.VlTotal = valorTotal;
+
+                db.Entry(venda).State = EntityState.Modified;
+                db.SaveChanges();
+
+                vm.Venda = venda;
 
                 var partial = PartialView("_PartialItemVenda", vm).RenderToString();
          
