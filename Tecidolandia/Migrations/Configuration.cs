@@ -9,8 +9,10 @@
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = false;
-            ContextKey = "Tecidolandia.Context.TecidolandiaContext";
+            AutomaticMigrationsEnabled = true;
+            ContextKey = "Tecidolandia.Models.TecidolandiaContext";
+            AutomaticMigrationDataLossAllowed = true;
+
         }
 
         protected override void Seed(Tecidolandia.Context.TecidolandiaContext context)

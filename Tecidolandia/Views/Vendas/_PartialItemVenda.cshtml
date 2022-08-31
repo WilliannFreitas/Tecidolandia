@@ -38,12 +38,15 @@
                 <td>
                     @item.ValorTotalVenda.ToString("C")
                 </td>
-         
+
                 <td>
-                    @Html.ActionLink("Editar item", "Edit", new { id = item.IdVendaItem })
-                        @*@Html.ActionLink("Details", "Details", new { id = item.IdVendaItem }) |
-                        @Html.ActionLink("Delete", "Delete", new { id = item.IdVendaItem })*@
-                    </td>
+                    @Html.ActionLink(" ", "Edit", new { id = item.IdVendaItem}, new { @class = "glyphicon glyphicon-pencil" })
+                    @*@Html.ActionLink("", "Delete", new { id = item.IdVendaItem}, new { @class = "glyphicon glyphicon-trash" })*@
+                    @*@Html.ActionLink("Details", "Details", new { id = item.IdVendaItem }) |*@
+                    @Html.ActionLink(" ", "Delete", new { id = item.IdVendaItem }, new { @class = "glyphicon glyphicon-trash" })
+
+                    @*<span class="glyphicon glyphicon-pencil" aria-hidden="false"></span>*@
+                </td>
             </tr>
         }
     </tbody>
