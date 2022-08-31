@@ -17,9 +17,11 @@ namespace Tecidolandia.Models.Entities
         public Int64 IdProduto { get; set; }
 
         [Column("NOME")]
+        [Display(Name = "Nome do Produto")]
         public string Nome { get; set; }
 
         [Column("DESCRICAO")]
+        [Display(Name = "Descrição")]
         public string Descricao { get; set; }
 
         //[Required(ErrorMessage = "O campo largura é obrigatório")]
@@ -54,6 +56,8 @@ namespace Tecidolandia.Models.Entities
         public DateTime? DtRegistro { get; set; }
 
         //propriedades de navegação
+
+        [Display(Name = "Tipo de Estampa")]
         public virtual TipoEstampa TipoEstampas { get; set; }
     }
 

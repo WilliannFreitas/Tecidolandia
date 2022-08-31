@@ -13,6 +13,7 @@ namespace Tecidolandia.Models.Entities
         public Int64 IdTipoEstampa { get; set; }
 
         [Column("NOME", Order = 3)]
+        [Display(Name = "Nome da Estampa")]
         public string Nome { get; set; }
 
         [MaxLength(255)]
