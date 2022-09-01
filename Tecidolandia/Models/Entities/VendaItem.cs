@@ -27,7 +27,7 @@ namespace Tecidolandia.Models.Entities
         public int Quantidade { get; set; }
 
         [Column("VL_TOTAL")]
-        [DataType(DataType.Currency)]
+        [DisplayFormat(DataFormatString = "{0:C2}", ApplyFormatInEditMode = false)]
         [Display(Name = "Valor Total")]
         public double VlTotal { get; set; }
 

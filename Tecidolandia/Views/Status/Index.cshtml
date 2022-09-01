@@ -4,10 +4,10 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2>Status da Venda</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Criar", "Create")
 </p>
 <table class="table">
     <tr>
@@ -29,9 +29,9 @@
             @Html.DisplayFor(modelItem => item.StatusVenda)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.IdStatus }) |
-            @Html.ActionLink("Details", "Details", new { id=item.IdStatus }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.IdStatus })
+            @Html.ActionLink("Editar", "Edit", new { id=item.IdStatus }) |
+            @Html.ActionLink("Detalhes", "Details", new { id=item.IdStatus }) |
+            @Html.ActionLink("Deletar", "Delete", new { id=item.IdStatus })
         </td>
     </tr>
 }

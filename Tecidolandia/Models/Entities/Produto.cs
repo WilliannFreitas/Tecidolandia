@@ -31,8 +31,9 @@ namespace Tecidolandia.Models.Entities
         //    ApplyFormatInEditMode = true,
         //    NullDisplayText = "Sem preço")]
         //[Range(1.00, 300.00, ErrorMessage = "O preço deverá ser entre 1 e 300.")]
-        [Column("LARGURA")]
         //[DecimalPrecision(10, 3)]
+        [Column("LARGURA")]
+        [DisplayFormat(DataFormatString = "{0:F}", ApplyFormatInEditMode = true)]
         public double Largura { get; set; }
 
         //[Required(ErrorMessage = "O campo altura é obrigatório")]
@@ -42,8 +43,9 @@ namespace Tecidolandia.Models.Entities
         //    ApplyFormatInEditMode = true,
         //    NullDisplayText = "Sem preço")]
         //[Range(1.00, 300.00, ErrorMessage = "O preço deverá ser entre 1 e 300.")]
-        [Column("ALTURA")]
         //[DecimalPrecision(10, 3)]
+        [Column("ALTURA")]
+        [DisplayFormat(DataFormatString = "{0:F}", ApplyFormatInEditMode = true)]
         public double Altura { get; set; }
 
         [ForeignKey("TipoEstampas")]
