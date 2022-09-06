@@ -25,6 +25,7 @@ namespace Tecidolandia.Context
 
             modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
+
         }
 
     }

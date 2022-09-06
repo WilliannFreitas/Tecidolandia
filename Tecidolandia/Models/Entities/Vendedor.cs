@@ -20,7 +20,8 @@ namespace Tecidolandia.Models.Entities
 
         
         [Column("DT_NASC")]
-        [DataType(DataType.Date)]
+        //[DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}", ApplyFormatInEditMode = true)]
         [Display(Name = "Data de Nascimento")]
         public DateTime DtNasc { get; set; }
     }

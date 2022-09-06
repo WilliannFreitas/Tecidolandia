@@ -15,7 +15,8 @@ namespace Tecidolandia.Models.Entities
         public Int64 IdVenda { get; set; }
 
         [Column("DT_REGISTRO")]
-        [DataType(DataType.Date)]
+        //[DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}", ApplyFormatInEditMode = true)]
         [Display(Name = "Data de Registro")]
         public DateTime DtRegistro { get; set; }
 
