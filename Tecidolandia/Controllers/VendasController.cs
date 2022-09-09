@@ -134,7 +134,7 @@ namespace Tecidolandia
                 var vm = new OrdemDeVendaViewModel();
                 vm.Venda = venda;
 
-                var partial = PartialView("_IdVenda", vm).RenderToString();
+                ; var partial = PartialView("_IdVenda", vm).RenderToString();
 
                 //VerifyIfCreateDirectory(ticket.IdTicket.ToString(), "Logs");
 
@@ -150,6 +150,23 @@ namespace Tecidolandia
             }
         }
         #endregion
+        [HttpPost]
+        public JsonResult MostrarDetalhesCliente(long idCliente)
+        {
+
+                var vm = new OrdemDeVendaViewModel();
+            try
+            {
+                vm.ClienteSelecionado = db.Clientes.Where(b => b.IdCliente == idCliente).FirstOrDefault();
+                var partial = PartialView("_PartialDetalhesCliente", vm).RenderToString();
+                return Json(new { status = "OK", description = "Sucesso!", partialView = partial }, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                ViewBag.MsgErroVenda = "Ocorreu um erro! " + ex.Message.ToString();
+                return Json(new { status = "NOK", description = "Erro ao Salvar - Exception: " + ex.Message.ToString() + " | InnerException" + ex.InnerException.InnerException.ToString() + " | StackTrace" + ex.StackTrace.ToString(), IdTicket = 0 }, JsonRequestBehavior.AllowGet);
+            }
+        }
 
 
 
@@ -173,16 +190,15 @@ namespace Tecidolandia
 
                 //Lista de produtos da venda na ordem de venda.
                 var vm = new OrdemDeVendaViewModel();
-                //vm.VendaItem = new List<VendaItem>();
-                //vm.VendaItem = db.VendaItems.Where(b => b.IdVenda == itemVenda.IdVenda).ToList();
 
                 var vendaItemList = db.VendaItems.Where(b => b.IdVenda == itemVenda.IdVenda).ToList();
                 var venda = db.Vendas.Where(b => b.IdVenda == itemVenda.IdVenda).FirstOrDefault();
 
                 double valorTotal = 0;
-                vm.VendaItemValor = new List<VendaItemValor>(); 
+                vm.VendaItemValor = new List<VendaItemValor>();
 
-                foreach (VendaItem item in vendaItemList) {
+                foreach (VendaItem item in vendaItemList)
+                {
 
                     //var auxVendaItemValor = new VendaItemValor()
                     // {
@@ -205,7 +221,7 @@ namespace Tecidolandia
                     auxVendaItemValor.VlTotal = item.VlTotal;
                     auxVendaItemValor.Produtos = item.Produtos;
                     auxVendaItemValor.ValorTotalVenda = (item.VlTotal * item.Quantidade);
-              
+
 
 
                     vm.VendaItemValor.Add(auxVendaItemValor);
@@ -220,17 +236,11 @@ namespace Tecidolandia
                 vm.Venda = venda;
 
                 var partial = PartialView("_PartialItemVenda", vm).RenderToString();
-         
-                ////VerifyIfCreateDirectory(ticket.IdTicket.ToString(), "Logs");
-
                 return Json(new { status = "OK", description = "Venda gerada com Sucesso!", partialView = partial }, JsonRequestBehavior.AllowGet);
-
             }
             catch (Exception ex)
             {
                 ViewBag.MsgErroVenda = "Ocorreu um erro! " + ex.Message.ToString();
-
-                //VerifyIfCreateDirectory(ticket.IdTicket.ToString(), "Logs");
                 return Json(new { status = "NOK", description = "Erro ao Salvar - Exception: " + ex.Message.ToString() + " | InnerException" + ex.InnerException.InnerException.ToString() + " | StackTrace" + ex.StackTrace.ToString(), IdTicket = 0 }, JsonRequestBehavior.AllowGet);
             }
         }

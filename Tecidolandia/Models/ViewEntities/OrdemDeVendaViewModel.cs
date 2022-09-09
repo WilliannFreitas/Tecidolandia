@@ -24,6 +24,10 @@ namespace Tecidolandia.Models.ViewEntities
         public List<VendaItemValor> VendaItemValor { get; set; }
         public long? Quantidade { get; set; }
         public long? ValorProduto { get; set; }
+
+        public Cliente ClienteSelecionado {get; set;}
+
+
     }
 
     public class VendaItemValor : VendaItem

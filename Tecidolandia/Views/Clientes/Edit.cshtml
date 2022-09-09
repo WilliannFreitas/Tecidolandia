@@ -4,7 +4,7 @@
     ViewBag.Title = "Edit";
 }
 
-<h2>Editar Cliente</h2>
+<h2>Edit</h2>
 
 
 @using (Html.BeginForm())
@@ -12,6 +12,7 @@
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
+        <h4>Cliente</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.IdCliente)
@@ -41,15 +42,51 @@
         </div>
 
         <div class="form-group">
+            @Html.LabelFor(model => model.NuDDDTelefone1, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.NuDDDTelefone1, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.NuDDDTelefone1, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.TelefoneAtivo1, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <div class="checkbox">
+                    @Html.EditorFor(model => model.TelefoneAtivo1)
+                    @Html.ValidationMessageFor(model => model.TelefoneAtivo1, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.NuDDDTelefone2, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.NuDDDTelefone2, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.NuDDDTelefone2, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.TelefoneAtivo2, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <div class="checkbox">
+                    @Html.EditorFor(model => model.TelefoneAtivo2)
+                    @Html.ValidationMessageFor(model => model.TelefoneAtivo2, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Salvar" class="btn btn-default" />
+                <input type="submit" value="Save" class="btn btn-default" />
             </div>
         </div>
     </div>
 }
 
 <div>
-    @Html.ActionLink("Voltar", "Index")
+    @Html.ActionLink("Back to List", "Index")
 </div>
 
 @section Scripts {

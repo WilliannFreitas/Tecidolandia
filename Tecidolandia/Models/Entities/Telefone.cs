@@ -29,10 +29,6 @@ namespace Tecidolandia.Models.Entities
         [Column("ID_CLIENTE")]
         public Int64 IdCliente { get; set; }
 
-        [ForeignKey("Vendedor")]
-        [Column("ID_VENDEDOR")]
-        public Int64 IdVendedor { get; set; }
-
         [Column("ATIVO")]
         public int Ativo { get; set; }
 

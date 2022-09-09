@@ -1,0 +1,51 @@
+﻿@model Tecidolandia.Models.ViewEntities.OrdemDeVendaViewModel
+
+
+<div class="text-center">
+    <div><h4><b>Detalhes do Cliente </b></h4></div>
+</div>
+<hr />
+
+<div>
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ClienteSelecionado.NmCompleto)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ClienteSelecionado.NmCompleto)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ClienteSelecionado.Facebook)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ClienteSelecionado.Facebook)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ClienteSelecionado.DtRegistro)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ClienteSelecionado.DtRegistro)
+        </dd>
+
+        <dt>
+            Telefone 1:
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ClienteSelecionado.NuDDDTelefone1)
+        </dd>
+
+        <dt>
+            Telefone 2:
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ClienteSelecionado.NuDDDTelefone2)
+        </dd>
+    </dl>
+</div>

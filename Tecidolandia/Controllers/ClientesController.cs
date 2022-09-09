@@ -9,7 +9,7 @@ using System.Web.Mvc;
 using Tecidolandia.Context;
 using Tecidolandia.Models.Entities;
 
-namespace Tecidolandia
+namespace Tecidolandia.Controllers
 {
     public class ClientesController : Controller
     {
@@ -47,7 +47,7 @@ namespace Tecidolandia
         // Para obter mais detalhes, confira https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "IdCliente,NmCompleto,Facebook,DtRegistro")] Cliente cliente)
+        public ActionResult Create([Bind(Include = "IdCliente,NmCompleto,Facebook,DtRegistro,NuDDDTelefone1,TelefoneAtivo1,NuDDDTelefone2,TelefoneAtivo2")] Cliente cliente)
         {
             if (ModelState.IsValid)
             {
@@ -79,7 +79,7 @@ namespace Tecidolandia
         // Para obter mais detalhes, confira https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "IdCliente,NmCompleto,Facebook,DtRegistro")] Cliente cliente)
+        public ActionResult Edit([Bind(Include = "IdCliente,NmCompleto,Facebook,DtRegistro,NuDDDTelefone1,TelefoneAtivo1,NuDDDTelefone2,TelefoneAtivo2")] Cliente cliente)
         {
             if (ModelState.IsValid)
             {

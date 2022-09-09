@@ -4,10 +4,10 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Clientes</h2>
+<h2>Index</h2>
 
 <p>
-    @Html.ActionLink("Criar Novo", "Create")
+    @Html.ActionLink("Create New", "Create")
 </p>
 <table class="table">
     <tr>
@@ -19,6 +19,12 @@
         </th>
         <th>
             @Html.DisplayNameFor(model => model.DtRegistro)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NuDDDTelefone1)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NuDDDTelefone2)
         </th>
         <th></th>
     </tr>
@@ -35,9 +41,15 @@
             @Html.DisplayFor(modelItem => item.DtRegistro)
         </td>
         <td>
-            @Html.ActionLink("Editar", "Edit", new { id=item.IdCliente }) |
-            @Html.ActionLink("Detalhes", "Details", new { id=item.IdCliente }) |
-            @Html.ActionLink("Deletar", "Delete", new { id=item.IdCliente })
+            @Html.DisplayFor(modelItem => item.NuDDDTelefone1)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NuDDDTelefone2)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.IdCliente }) |
+            @Html.ActionLink("Details", "Details", new { id=item.IdCliente }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.IdCliente })
         </td>
     </tr>
 }

@@ -27,5 +27,26 @@ namespace Tecidolandia.Models.Entities
         //[DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}", ApplyFormatInEditMode = true)]
         public DateTime DtRegistro { get; set; }
+
+
+        [Required(ErrorMessage = "O campo telefone é obrigatório")]
+        [Column("TELEFONE_1")]
+        [Display(Name = "1º DDD+Telefone")]
+        [DisplayFormat(DataFormatString = @"{0:(##) # ####-####}")]
+        public long NuDDDTelefone1 { get; set; }
+
+        [Column("TELEFONE_ATIVO_1")]
+        [Display(Name = "1º Telefone ativo?")]
+        public bool TelefoneAtivo1 { get; set; }
+
+        //[MaxLength(9)]
+        [Column("TELEFONE_2")]
+        [Display(Name = "2º Telefone")]
+        [DisplayFormat(DataFormatString = @"{0:(##) # ####-####}")]
+        public long NuDDDTelefone2 { get; set; }
+
+        [Column("TELEFONE_ATIVO_2")]
+        [Display(Name = "2º Telefone ativo?")]
+        public bool TelefoneAtivo2 { get; set; }
     }
 }
