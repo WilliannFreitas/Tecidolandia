@@ -47,11 +47,12 @@ namespace Tecidolandia.Controllers
         // Para obter mais detalhes, confira https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "IdCliente,NmCompleto,Facebook,DtRegistro,NuDDDTelefone1,TelefoneAtivo1,NuDDDTelefone2,TelefoneAtivo2")] Cliente cliente)
+        public ActionResult Create([Bind(Include = "IdCliente,NmCompleto,Facebook,NuDDDTelefone1,TelefoneAtivo1,NuDDDTelefone2,TelefoneAtivo2")] Cliente cliente)
         {
             if (ModelState.IsValid)
             {
                 db.Clientes.Add(cliente);
+                cliente.DtRegistro = DateTime.Now;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
