@@ -16,11 +16,12 @@ namespace Tecidolandia.Models.Entities
 
         [ForeignKey("Produtos")]
         [Column("ID_PRODUTO")]
+        [Display(Name = "Selecionar Produto")]
         public Int64 IdProduto { get; set; }
 
         [ForeignKey("Vendas")]
         [Column("ID_VENDA")]
-        [Display(Name = "Id da Venda")]
+        [Display(Name = "Selecionar Venda")]
         public Int64 IdVenda { get; set; }
 
         [Column("QUANTIDADE")]

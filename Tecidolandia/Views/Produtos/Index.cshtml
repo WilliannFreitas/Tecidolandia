@@ -26,9 +26,9 @@
         <th>
             @Html.DisplayNameFor(model => model.Altura)
         </th>
-        <th>
+        @*<th>
             @Html.DisplayNameFor(model => model.DtRegistro)
-        </th>
+        </th>*@
         <th></th>
     </tr>
 
@@ -49,9 +49,9 @@
         <td>
             @Html.DisplayFor(modelItem => item.Altura)
         </td>
-        <td>
+        @*<td>
             @Html.DisplayFor(modelItem => item.DtRegistro)
-        </td>
+        </td>*@
         <td>
             @Html.ActionLink("Editar", "Edit", new { id=item.IdProduto }) |
             @Html.ActionLink("Detalhes", "Details", new { id=item.IdProduto }) |

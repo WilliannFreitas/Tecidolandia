@@ -35,7 +35,7 @@ namespace Tecidolandia.Models.Entities
         //[DataType(DataType.Currency)]
         [Column("VL_METRO")]
         [DisplayFormat(DataFormatString = "{0:C2}", ApplyFormatInEditMode = false)]
-        [Display(Name = "Valor do metro")]
+        [Display(Name = "Valor do Metro")]
         public double VlMetro { get; set; }
     }
 }

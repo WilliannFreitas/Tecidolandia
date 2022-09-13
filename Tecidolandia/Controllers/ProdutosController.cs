@@ -49,10 +49,11 @@ namespace Tecidolandia
         // Para obter mais detalhes, confira https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "IdProduto,Nome,Descricao,Largura,Altura,IdTipoEstampa,DtRegistro")] Produto produto)
+        public ActionResult Create([Bind(Include = "IdProduto,Nome,Descricao,Largura,Altura,IdTipoEstampa")] Produto produto)
         {
             if (ModelState.IsValid)
             {
+                produto.DtRegistro = DateTime.Now;
                 db.Produtos.Add(produto);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -83,10 +84,11 @@ namespace Tecidolandia
         // Para obter mais detalhes, confira https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "IdProduto,Nome,Descricao,Largura,Altura,IdTipoEstampa,DtRegistro")] Produto produto)
+        public ActionResult Edit([Bind(Include = "IdProduto,Nome,Descricao,Largura,Altura,IdTipoEstampa")] Produto produto)
         {
             if (ModelState.IsValid)
             {
+                produto.DtRegistro = DateTime.Now;
                 db.Entry(produto).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");

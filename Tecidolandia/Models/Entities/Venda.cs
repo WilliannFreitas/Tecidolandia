@@ -11,6 +11,7 @@ namespace Tecidolandia.Models.Entities
     public class Venda
     {
         [Key]
+        [Display(Name = "Registro da Venda")]
         [Column("ID_VENDA")]
         public Int64 IdVenda { get; set; }
 

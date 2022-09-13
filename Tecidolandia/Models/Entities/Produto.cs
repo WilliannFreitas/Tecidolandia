@@ -50,12 +50,13 @@ namespace Tecidolandia.Models.Entities
 
         [ForeignKey("TipoEstampas")]
         [Column("ID_TIPO_ESTAMPA")]
+        [Display(Name = "Nome da Estampa")]
         public Int64 IdTipoEstampa { get; set; }
 
         [Column("DT_REGISTRO")]
         //[DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}", ApplyFormatInEditMode = true)]
-        [Display(Name = "Data de registro")]
+        //[Display(Name = "Data de registro")]
         public DateTime? DtRegistro { get; set; }
 
         //propriedades de navegação

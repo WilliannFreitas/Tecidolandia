@@ -51,8 +51,8 @@ namespace Tecidolandia.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Clientes.Add(cliente);
                 cliente.DtRegistro = DateTime.Now;
+                db.Clientes.Add(cliente);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -80,10 +80,11 @@ namespace Tecidolandia.Controllers
         // Para obter mais detalhes, confira https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "IdCliente,NmCompleto,Facebook,DtRegistro,NuDDDTelefone1,TelefoneAtivo1,NuDDDTelefone2,TelefoneAtivo2")] Cliente cliente)
+        public ActionResult Edit([Bind(Include = "IdCliente,NmCompleto,Facebook,NuDDDTelefone1,TelefoneAtivo1,NuDDDTelefone2,TelefoneAtivo2")] Cliente cliente)
         {
             if (ModelState.IsValid)
             {
+                cliente.DtRegistro = DateTime.Now;
                 db.Entry(cliente).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
