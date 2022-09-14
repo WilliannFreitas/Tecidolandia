@@ -29,9 +29,11 @@
             @Html.DisplayFor(modelItem => item.StatusVenda)
         </td>
         <td>
-            @Html.ActionLink("Editar", "Edit", new { id=item.IdStatus }) |
-            @Html.ActionLink("Detalhes", "Details", new { id=item.IdStatus }) |
-            @Html.ActionLink("Deletar", "Delete", new { id=item.IdStatus })
+            @Html.ActionLink(" ", "Edit", new { id = item.IdStatus }, new { @class = "glyphicon glyphicon-pencil" })
+            &nbsp
+            @Html.ActionLink(" ", "Details", new { id = item.IdStatus }, new { @class = "glyphicon glyphicon-option-horizontal" })
+            &nbsp
+            @Html.ActionLink(" ", "Delete", new { id = item.IdStatus }, new { @class = "glyphicon glyphicon-trash" })
         </td>
     </tr>
 }

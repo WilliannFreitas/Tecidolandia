@@ -47,9 +47,11 @@
             @Html.DisplayFor(modelItem => item.NuDDDTelefone2)
         </td>
         <td>
-            @Html.ActionLink("Editar", "Edit", new { id=item.IdCliente }) |
-            @Html.ActionLink("Detalhes", "Details", new { id=item.IdCliente }) |
-            @Html.ActionLink("Deletar", "Delete", new { id=item.IdCliente })
+            @Html.ActionLink(" ", "Edit", new { id = item.IdCliente }, new { @class = "glyphicon glyphicon-pencil" })
+            &nbsp
+            @Html.ActionLink(" ", "Details", new { id = item.IdCliente }, new { @class = "glyphicon glyphicon-option-horizontal" })
+            &nbsp
+            @Html.ActionLink(" ", "Delete", new { id = item.IdCliente }, new { @class = "glyphicon glyphicon-trash" })
         </td>
     </tr>
 }

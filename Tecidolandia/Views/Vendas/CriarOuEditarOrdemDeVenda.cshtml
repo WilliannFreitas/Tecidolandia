@@ -2,26 +2,31 @@
 
 @{
     ViewBag.Title = "Create";
+    int a = 0;
 }
 
 
 <div class="panel-body">
     <div class="col-md-12">
 
-        @*<div class="row">
-
-                <div id="divIdVenda">
-                    @Html.Partial("_IdVenda")
-                </div>
-
-            </div>*@
-
         <div class="col-md-12 well" style="background-color: #e9e9e9">
 
             <div class="text-center">
-                <div><h4><b>Cadastrar Venda</b></h4></div>
+                <div class="card">
+                    <div class="card-body">
+                        <h4><b>Cadastrar Venda</b></h4>
+                    </div>
+                </div>
             </div>
             <hr />
+
+            @*<div >
+                    <div class="row">
+                        <div id="divIdVenda class=" panel tab-pane">
+                            @Html.Partial("_IdVenda")
+                        </div>
+                    </div>
+                </div>*@
 
             <div class="col-md-6">
                 <table align="left">
@@ -87,7 +92,7 @@
 
             <div class="col-md-6">
                 <div class="row">
-                    <div id="divDetalhesCliente" class="panel panel-default">
+                    <div id="divDetalhesCliente" class="panel tab-pane">
                         @Html.Partial("_PartialDetalhesCliente")
                     </div>
                 </div>
@@ -106,10 +111,11 @@
 
                     <td>
                         @Html.DropDownListFor(model => model.IdProduto, Model.ProdutoList.OrderBy(o => o.IdProduto).Select(x => new SelectListItem
-           {
-               Value = x.IdProduto.ToString(),
-               Text = x.Nome
-                }), "Selecione", new { @class = " btn btn-xs ", @required = "required", @style = " width: 200px;;  border-bottom: 1px solid #d9d9d9; border-radius: 5px;" })
+                   {
+                       Value = x.IdProduto.ToString(),
+                       Text = x.Nome,
+
+                   }), "Selecione", new { @class = " btn btn-xs ", @required = "required", @style = " width: 200px;  border-bottom: 1px solid #d9d9d9; border-radius: 5px;" })
                     </td>
                 </tr>
 
@@ -119,18 +125,19 @@
                     </td>
 
                     <td>
-                        @Html.EditorFor(model => model.Quantidade, new { htmlAttributes = new { @class = "btn btn-xs", @style = " width: 200px;;  border-bottom: 1px solid #d9d9d9; border-radius: 5px;" } })
+                        @Html.EditorFor(model => model.Quantidade, new { htmlAttributes = new { @class = "btn btn-xs", @style = " width: 200px;  border-bottom: 1px solid #d9d9d9; border-radius: 5px;" } })
                     </td>
                 </tr>
 
-                <tr>
+                @*<tr>
                     <td>
                         <label class="label label-default text-justify"> &nbsp Valor &nbsp &nbsp </label>
                     </td>
                     <td>
-                        @Html.EditorFor(model => model.ValorProduto, new { htmlAttributes = new { @class = "btn btn-xs", @style = " width: 200px;;  border-bottom: 1px solid #d9d9d9; border-radius: 5px;" } })
+
+                        @Html.EditorFor(model => model.ValorProduto, new { htmlAttributes = new { @class = "btn btn-xs", @style = " width: 200px;  border-bottom: 1px solid #d9d9d9; border-radius: 5px;" } })
                     </td>
-                </tr>
+                </tr>*@
 
                 <tr>
                     <td colspan="2">
@@ -182,6 +189,21 @@
             /*console.log("mOSTROU", idCliente);*/
         });
 
+        $(document).on('change', '#Quantidade', function () {
+            let Quantidade = $("#Quantidade").val();
+            let IdProdutoSelecionado = $("#IdProduto").val();
+            //salvarItemVenda();
+            //let ValorProduto = $("#ValorProduto").val();
+
+
+            //document.querySelector("#ValorProduto").value = Quantidade * ValorProduto;
+
+            //mostrarDetalhesCliente(parseInt(idCliente));
+            /*console.log("mOSTROU", idCliente);*/
+        });
+
+
+
         function mostrarDetalhesCliente(idCliente) {
             //console.log("IDCliente", idCliente);
 
@@ -192,7 +214,7 @@
 
             if (idCliente > 0) {
                 console.log("JSON", json);
-                     
+
                 var result = chamarApi("/Vendas/MostrarDetalhesCliente", 'POST', json, "#divDetalhesCliente");
                 //if (result == "true") {
                 //    console.log("Venda item Sucesso Api");
@@ -212,11 +234,11 @@
             var ItemVenda_IdVenda = $("#Venda_IdVenda").val();
             var ItemVenda_IdProduto = $("#IdProduto").val();
             var ItemVenda_Quantidade = $("#Quantidade").val();
-            var ItemVenda_ValorProduto = $("#ValorProduto").val();
+            //var ItemVenda_ValorProduto = $("#ValorProduto").val();
 
             if (ItemVenda_IdProduto == "" || ItemVenda_IdProduto == undefined) { mensage += "Produto, "; }
             if (ItemVenda_Quantidade == "" || ItemVenda_Quantidade == undefined) { mensage += "Quantidade, "; }
-            if (ItemVenda_ValorProduto == "" || ItemVenda_ValorProduto == undefined) { mensage += "Valor Total, "; }
+            //if (ItemVenda_ValorProduto == "" || ItemVenda_ValorProduto == undefined) { mensage += "Valor Total, "; }
 
             if (mensage != "") {
                 console.log(mensage);
@@ -228,7 +250,7 @@
                     //IdVenda: 1,
                     IdProduto: parseInt(ItemVenda_IdProduto),
                     Quantidade: parseInt(ItemVenda_Quantidade),
-                    VlTotal: parseFloat(ItemVenda_ValorProduto),
+                    //VlTotal: parseFloat(ItemVenda_ValorProduto),
                 }
                 console.log("Else", ItemVenda);
 

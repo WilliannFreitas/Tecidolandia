@@ -37,7 +37,7 @@ namespace Tecidolandia.Models.ViewEntities
 
     public class VendaItemValor : VendaItem
     {
-        public double ValorTotalVenda { get; set; }
+        public double ValorUnitario { get; set; }
 
     }
 

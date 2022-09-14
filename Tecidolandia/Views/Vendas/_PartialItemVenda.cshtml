@@ -20,38 +20,40 @@
         @foreach (var item in Model.VendaItemValor)
         {
             <tr>
-                <td>
+                <td colspan="1">
                     @Html.DisplayFor(modelItem => item.Produtos.Nome)
                 </td>
-                <td>
+                <td colspan="1">
                     @Html.DisplayFor(modelItem => item.Produtos.Largura)
                 </td>
-                <td>
+                <td colspan="1">
                     @Html.DisplayFor(modelItem => item.Produtos.Altura)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Quantidade)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.VlTotal)
+                    @Html.DisplayFor(modelItem => item.ValorUnitario)
                 </td>
                 <td>
-                    @item.ValorTotalVenda.ToString("C")
+                    @item.VlTotal.ToString("C")
                 </td>
 
                 <td>
-                    @Html.ActionLink(" ", "Edit", new { id = item.IdVendaItem}, new { @class = "glyphicon glyphicon-pencil" })
-                    @*@Html.ActionLink("", "Delete", new { id = item.IdVendaItem}, new { @class = "glyphicon glyphicon-trash" })*@
-                    @*@Html.ActionLink("Details", "Details", new { id = item.IdVendaItem }) |*@
+                    @Html.ActionLink(" ", "Edit", new { id = item.IdVendaItem }, new { @class = "glyphicon glyphicon-pencil" })
+                    &nbsp
+                    @Html.ActionLink(" ", "Details", new { id = item.IdVendaItem }, new { @class = "glyphicon glyphicon-option-horizontal" })
+                    &nbsp
                     @Html.ActionLink(" ", "Delete", new { id = item.IdVendaItem }, new { @class = "glyphicon glyphicon-trash" })
-
-                    @*<span class="glyphicon glyphicon-pencil" aria-hidden="false"></span>*@
                 </td>
             </tr>
         }
     </tbody>
 </table>
 
-<div class="label label-default text-justify">
-    Valor Total: @Model.Venda.VlTotal.ToString("C")
-</div>
+@if (Model?.Venda?.VlTotal > 0)
+{
+    <div class="label label-default text-justify">
+        Valor Total: @Model.Venda.VlTotal.ToString("C")
+    </div>
+}

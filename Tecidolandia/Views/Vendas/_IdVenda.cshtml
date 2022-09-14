@@ -2,22 +2,17 @@
 
 
 
-@*<div>
-    <div>*@
-@*<label>Nº Venda:</label>*@
+
 <label class="label label-default text-justify"> Nº Venda:  @Html.DisplayFor(model => model.Venda.IdVenda) </label>
 @*@Html.ValidationSummary(true, "", new { @class = "text-danger" })*@
-@*</div>
-    </div>*@
+
+
 &nbsp
 
-@*<div>
-    <div>*@
-@*<label>Criado em:</label>*@
+
 <label class="label label-default text-justify"> Criado em:  @Html.DisplayFor(model => model.Venda.DtRegistro) </label>
 @*@Html.ValidationSummary(true, "", new { @class = "text-danger" })*@
-@*</div>
-    </div>*@
+
 
 @Html.HiddenFor(model => model.Venda.IdVenda)
 @Html.HiddenFor(model => model.Venda.DtRegistro)

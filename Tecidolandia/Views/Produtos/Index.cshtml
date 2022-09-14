@@ -52,11 +52,13 @@
         @*<td>
             @Html.DisplayFor(modelItem => item.DtRegistro)
         </td>*@
-        <td>
-            @Html.ActionLink("Editar", "Edit", new { id=item.IdProduto }) |
-            @Html.ActionLink("Detalhes", "Details", new { id=item.IdProduto }) |
-            @Html.ActionLink("Deletar", "Delete", new { id=item.IdProduto })
-        </td>
+    <td>
+        @Html.ActionLink(" ", "Edit", new { id = item.IdProduto }, new { @class = "glyphicon glyphicon-pencil" })
+        &nbsp
+        @Html.ActionLink(" ", "Details", new { id = item.IdProduto }, new { @class = "glyphicon glyphicon-option-horizontal" })
+        &nbsp
+        @Html.ActionLink(" ", "Delete", new { id = item.IdProduto }, new { @class = "glyphicon glyphicon-trash" })
+    </td>
     </tr>
 }
 
