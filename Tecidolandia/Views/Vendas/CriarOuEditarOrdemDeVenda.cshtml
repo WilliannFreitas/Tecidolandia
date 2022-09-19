@@ -59,7 +59,7 @@
 
                         </td>
                     </tr>
-                    <tr>
+                    @*<tr>
                         <td align="center">
                             <label class="label label-default text-justify m-2"> &nbsp Status &nbsp </label>
                         </td>
@@ -69,9 +69,9 @@
                        {
                            Value = x.IdStatus.ToString(),
                            Text = x.NmStatus
-                       }), "Selecione", new { @class = "btn btn-xs", @required = "required", @style = " width: 200px;  border-bottom: 1px solid #d9d9d9; border-radius: 5px;" })
+                       }), "Selecione", new { @class = "btn btn-xs", @required = "required", @style = " width: 200px;  border-bottom: 1px solid #d9d9d9; border-radius: 5px;", disabled = "disabled" })
                         </td>
-                    </tr>
+                    </tr>*@
 
                     <tr>
                         <td colspan="2">
@@ -277,13 +277,13 @@
             var mensage = "";
 
             var Venda_IdVenda = $("#IdVenda").val();
-            var Venda_IdStatus = $("#IdStatus").val();
+            //var Venda_IdStatus = $("#IdStatus").val();
             var Venda_IdCliente = $("#IdCliente").val();
             var Venda_IdVendedor = $("#IdVendedor").val();
 
             //console.log("Venda_IdStatus: " + Venda_IdStatus);
 
-            if (Venda_IdStatus == "" || Venda_IdStatus == undefined) { mensage += "Status, "; }
+            //if (Venda_IdStatus == "" || Venda_IdStatus == undefined) { mensage += "Status, "; }
             if (Venda_IdCliente == "" || Venda_IdCliente == undefined) { mensage += "Cliente, "; }
             if (Venda_IdVendedor == "" || Venda_IdVendedor == undefined) { mensage += "Vendedor, "; }
 
@@ -294,7 +294,7 @@
             } else {
                 Venda = {
                     IdVenda: parseInt(Venda_IdVenda),
-                    IdStatus: parseInt(Venda_IdStatus),
+                    //IdStatus: parseInt(Venda_IdStatus),
                     IdCliente: parseInt(Venda_IdCliente),
                     IdVendedor: parseInt(Venda_IdVendedor),
                 }

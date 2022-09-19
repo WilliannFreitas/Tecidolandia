@@ -110,6 +110,10 @@ namespace Tecidolandia
         [HttpPost]
         public JsonResult SalvarVenda(Venda venda)
         {
+            var vendaStatus = db.Status.Where(a => a.NmStatus.ToUpper() == "VENDA INICIADA").FirstOrDefault();
+            venda.IdStatus = vendaStatus.IdStatus;
+            //vendaStatus.IdStatus = venda.IdStatus;
+            
             try
             {
                 if (venda.IdVenda == 0 || venda.IdVenda == null)
