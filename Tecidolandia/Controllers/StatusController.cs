@@ -74,20 +74,20 @@ namespace Tecidolandia
             return View(status);
         }
 
-        // POST: Status/Edit/5
-        // Para proteger-se contra ataques de excesso de postagem, ative as propriedades específicas às quais deseja se associar. 
-        // Para obter mais detalhes, confira https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "IdStatus,NmStatus,StatusVenda")] Status status)
         {
+            var statusResult = db.Status.Where(b => b.IdStatus == status.IdStatus).FirstOrDefault();
+            statusResult.StatusVenda = status.StatusVenda;
+
             if (ModelState.IsValid)
             {
-                db.Entry(status).State = EntityState.Modified;
+                db.Entry(statusResult).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(status);
+            return View(statusResult);
         }
 
         // GET: Status/Delete/5
