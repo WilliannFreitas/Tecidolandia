@@ -236,5 +236,13 @@ namespace Tecidolandia
             }
         }
         #endregion
+
+        //[HttpPost]
+        //public JsonResult ConcluirVenda(long idVenda)
+        //{
+        //    var vendaStatus = db.Vendas.Where(a => a.IdVenda == idVenda).Include(p => p.Status);
+            
+            
+        //}
     }
 }

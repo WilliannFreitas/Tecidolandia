@@ -4,52 +4,62 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Vendas</h2>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="col-md-2">
+            <h2>Vendas</h2>
+        </div>
+        <div class="col-md-6">
+            <h2>@Html.ActionLink("Cadastrar Venda", "CriarOuEditarOrdemDeVenda", new { @class = "btn btn-default btn-xs" })</h2>
+        </div>
+    </div>
+</div>
 
+        <table class="table">
+            <tr>
+                <th>
+                    Vendedor
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Status.NmStatus)
+                </th>
+                <th>
+                    Cliente
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.DtRegistro)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.VlTotal)
+                </th>
+                <th></th>
+            </tr>
 
-<table class="table">
-    <tr>
-        <th>
-            Vendedor
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Status.NmStatus)
-        </th>
-        <th>
-            Cliente
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.DtRegistro)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.VlTotal)
-        </th>
-        <th></th>
-    </tr>
+        @foreach (var item in Model) {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Clientes.NmCompleto)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Status.NmStatus)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Vendedores.Nome)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DtRegistro)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.VlTotal)
+                </td>
+                <td>
+                    @Html.ActionLink(" ", "Edit", new { id = item.IdVenda }, new { @class = "glyphicon glyphicon-pencil" })
+                    &nbsp
+                    @Html.ActionLink(" ", "Details", new { id = item.IdVenda }, new { @class = "glyphicon glyphicon-option-horizontal" })
+                    &nbsp
+                    @Html.ActionLink(" ", "Delete", new { id = item.IdVenda }, new { @class = "glyphicon glyphicon-trash" })
+                </td>
+            </tr>
+        }
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Clientes.NmCompleto)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Status.NmStatus)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Vendedores.Nome)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.DtRegistro)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.VlTotal)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.IdVenda }) |
-            @Html.ActionLink("Details", "Details", new { id=item.IdVenda }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.IdVenda })
-        </td>
-    </tr>
-}
-
-</table>
+        </table>

@@ -32,6 +32,8 @@ namespace Tecidolandia.Models.ViewEntities
 
         public Cliente ClienteSelecionado {get; set;}
 
+        public long? ConcluirVenda { get; set;}
+
 
     }
 

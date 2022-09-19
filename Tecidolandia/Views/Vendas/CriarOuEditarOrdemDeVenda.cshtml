@@ -130,14 +130,14 @@
                 </tr>
 
                 @*<tr>
-                    <td>
-                        <label class="label label-default text-justify"> &nbsp Valor &nbsp &nbsp </label>
-                    </td>
-                    <td>
+                <td>
+                    <label class="label label-default text-justify"> &nbsp Valor &nbsp &nbsp </label>
+                </td>
+                <td>
 
-                        @Html.EditorFor(model => model.ValorProduto, new { htmlAttributes = new { @class = "btn btn-xs", @style = " width: 200px;  border-bottom: 1px solid #d9d9d9; border-radius: 5px;" } })
-                    </td>
-                </tr>*@
+                    @Html.EditorFor(model => model.ValorProduto, new { htmlAttributes = new { @class = "btn btn-xs", @style = " width: 200px;  border-bottom: 1px solid #d9d9d9; border-radius: 5px;" } })
+                </td>
+            </tr>*@
 
                 <tr>
                     <td colspan="2">
@@ -151,6 +151,10 @@
                     @Html.Partial("_PartialItemVenda")
                 </div>
             </div>
+
+            @*@Html.ActionLink("Lista de Vendas", "Index", new { @class = "input-group btn btn-default btn-xs" })
+
+            <input type="submit" name="" id="" value="Lista de Vendas" class="btn btn-default btn-xs" />*@
 
         </div>
 
@@ -189,18 +193,18 @@
             /*console.log("mOSTROU", idCliente);*/
         });
 
-        $(document).on('change', '#Quantidade', function () {
-            let Quantidade = $("#Quantidade").val();
-            let IdProdutoSelecionado = $("#IdProduto").val();
-            //salvarItemVenda();
-            //let ValorProduto = $("#ValorProduto").val();
+        //$(document).on('change', '#Quantidade', function () {
+        //    let Quantidade = $("#Quantidade").val();
+        //    let IdProdutoSelecionado = $("#IdProduto").val();
+        //    //salvarItemVenda();
+        //    //let ValorProduto = $("#ValorProduto").val();
 
 
-            //document.querySelector("#ValorProduto").value = Quantidade * ValorProduto;
+        //    //document.querySelector("#ValorProduto").value = Quantidade * ValorProduto;
 
-            //mostrarDetalhesCliente(parseInt(idCliente));
-            /*console.log("mOSTROU", idCliente);*/
-        });
+        //    //mostrarDetalhesCliente(parseInt(idCliente));
+        //    /*console.log("mOSTROU", idCliente);*/
+        //});
 
 
 
