@@ -25,7 +25,6 @@ namespace Tecidolandia
             return View(vendas.ToList());
         }
 
-
         protected override void Dispose(bool disposing)
         {
             if (disposing)
@@ -53,30 +52,17 @@ namespace Tecidolandia
             return View("CriarOuEditarOrdemDeVenda", vm);
         }
 
-        //public ActionResult CriarOuEditarItemDaVenda(long? idVenda)
-        //{
-        //    idVenda = idVenda ?? 1;
-
-        //    var vm = new OrdemDeVendaViewModel();
-
-        //    //if (idVenda > 0)
-        //    //    vm = this.Edit(idVenda);
-        //    //else
-        //        vm = this.Create();
-
-
-        //    return View("CriarOuEditarOrdemDeVenda", vm);
-        //}
-
         // GET: Vendas/Create
         private OrdemDeVendaViewModel Create()
         {
+            //Mostrar somente status ativos.
+            var statusAtivos = db.Status.Where(a => a.StatusVenda == true).ToList();
+
             var vm = new OrdemDeVendaViewModel();
             vm.VendedorList = db.Vendedores.ToList();
             vm.ClienteList = db.Clientes.ToList();
-            vm.StatusList = db.Status.ToList();
+            vm.StatusList = statusAtivos;
             vm.ProdutoList = db.Produtos.Include(p => p.TipoEstampas).ToList();
-            //vm.Venda = new Venda();
             vm.VendaItemValor = new List<VendaItemValor>();
 
             return vm;
@@ -106,7 +92,7 @@ namespace Tecidolandia
 
         #endregion
 
-        #region SalvarVenda
+        #region Salvar Venda
         [HttpPost]
         public JsonResult SalvarVenda(Venda venda)
         {
@@ -143,6 +129,7 @@ namespace Tecidolandia
 
         #endregion
 
+        #region Mostrar Detalhes do Clientes
         [HttpPost]
         public JsonResult MostrarDetalhesCliente(long idCliente)
         {
@@ -161,6 +148,7 @@ namespace Tecidolandia
                 return Json(new { status = "NOK", description = "Erro ao Salvar - Exception: " + ex.Message.ToString() + " | InnerException" + ex.InnerException.InnerException.ToString() + " | StackTrace" + ex.StackTrace.ToString(), IdTicket = 0 }, JsonRequestBehavior.AllowGet);
             }
         }
+        #endregion
 
         #region SalvarItemVenda \ ListaVenda
         [HttpPost]
@@ -170,7 +158,7 @@ namespace Tecidolandia
             {
                 var produtoList = db.Produtos.Where(b => b.IdProduto == itemVenda.IdProduto).Include(p => p.TipoEstampas).FirstOrDefault();
                 itemVenda.VlTotal = (itemVenda.Quantidade * produtoList.TipoEstampas.VlMetro);
-
+                
 
                 if (itemVenda.IdVendaItem == 0 || itemVenda.IdVendaItem == null)
                 {
@@ -216,7 +204,6 @@ namespace Tecidolandia
                     auxVendaItemValor.VlTotal = item.VlTotal;
                     auxVendaItemValor.ValorUnitario = db.Produtos.Where(b => b.IdProduto == item.IdProduto).Include(p => p.TipoEstampas).FirstOrDefault().TipoEstampas.VlMetro;
                     auxVendaItemValor.Produtos = item.Produtos;
-                    //auxVendaItemValor.ValorTotalVenda = item.VlTotal;
 
                     vm.VendaItemValor.Add(auxVendaItemValor);
                     valorTotal += auxVendaItemValor.VlTotal;
@@ -241,12 +228,5 @@ namespace Tecidolandia
         }
         #endregion
 
-        //[HttpPost]
-        //public JsonResult ConcluirVenda(long idVenda)
-        //{
-        //    var vendaStatus = db.Vendas.Where(a => a.IdVenda == idVenda).Include(p => p.Status);
-            
-            
-        //}
     }
 }

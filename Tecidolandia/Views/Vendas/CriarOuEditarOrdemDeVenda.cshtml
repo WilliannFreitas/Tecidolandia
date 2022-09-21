@@ -59,19 +59,6 @@
 
                         </td>
                     </tr>
-                    @*<tr>
-                        <td align="center">
-                            <label class="label label-default text-justify m-2"> &nbsp Status &nbsp </label>
-                        </td>
-                        <td>
-
-                            @Html.DropDownListFor(model => model.IdStatus, Model.StatusList.OrderBy(o => o.NmStatus).Select(x => new SelectListItem
-                       {
-                           Value = x.IdStatus.ToString(),
-                           Text = x.NmStatus
-                       }), "Selecione", new { @class = "btn btn-xs", @required = "required", @style = " width: 200px;  border-bottom: 1px solid #d9d9d9; border-radius: 5px;", disabled = "disabled" })
-                        </td>
-                    </tr>*@
 
                     <tr>
                         <td colspan="2">
@@ -121,15 +108,29 @@
                     </td>
                 </tr>
 
-                @*<tr>
-                <td>
-                    <label class="label label-default text-justify"> &nbsp Valor &nbsp &nbsp </label>
-                </td>
-                <td>
+                <tr>
+                    <td align="center">
+                        <label class="label label-default text-justify m-2">&nbsp &nbsp &nbsp Status &nbsp &nbsp &nbsp</label>
+                    </td>
+                    <td>
 
-                    @Html.EditorFor(model => model.ValorProduto, new { htmlAttributes = new { @class = "btn btn-xs", @style = " width: 200px;  border-bottom: 1px solid #d9d9d9; border-radius: 5px;" } })
-                </td>
-            </tr>*@
+                        @Html.DropDownListFor(model => model.IdStatus, Model.StatusList.OrderBy(o => o.NmStatus).Select(x => new SelectListItem
+                   {
+                       Value = x.IdStatus.ToString(),
+                       Text = x.NmStatus
+                   }), "Selecione", new { @class = "btn btn-xs", @required = "required", @style = " width: 200px;  border-bottom: 1px solid #d9d9d9; border-radius: 5px;" })
+                    </td>
+                </tr>
+
+                @*<tr>
+                        <td>
+                            <label class="label label-default text-justify"> &nbsp Valor &nbsp &nbsp </label>
+                        </td>
+                        <td>
+
+                            @Html.EditorFor(model => model.ValorProduto, new { htmlAttributes = new { @class = "btn btn-xs", @style = " width: 200px;  border-bottom: 1px solid #d9d9d9; border-radius: 5px;" } })
+                        </td>
+                    </tr>*@
 
                 <tr>
                     <td colspan="2">
@@ -146,7 +147,7 @@
 
             @*@Html.ActionLink("Lista de Vendas", "Index", new { @class = "input-group btn btn-default btn-xs" })
 
-            <input type="submit" name="" id="" value="Lista de Vendas" class="btn btn-default btn-xs" />*@
+                <input type="submit" name="" id="" value="Lista de Vendas" class="btn btn-default btn-xs" />*@
 
         </div>
 
