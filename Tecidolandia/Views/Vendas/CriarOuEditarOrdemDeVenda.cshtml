@@ -5,23 +5,15 @@
     int a = 0;
 }
 
-
 <div class="panel-body">
     <div class="col-md-12">
 
-        <div class="col-md-12 well" style="background-color: #e9e9e9">
+        <div class="col-md-12">
 
-            <div class="text-center">
-                <div class="card">
-                    <div class="card-body">
-                        <h4><b>Cadastrar Venda</b></h4>
-                    </div>
-                </div>
-            </div>
-            <hr />
+            <h4 class="text-center" style=" font-family: Segoe UI Historic, serif; width: 100%"><b>Cadastrar Venda</b></h4>
 
-            <div class="col-md-6">
-                <table align="left">
+            <div class="col-md-5 well">
+                <table align="center">
 
                     <tr>
                         <td colspan="2">
@@ -62,104 +54,95 @@
 
                     <tr>
                         <td colspan="2">
-                            <input type="submit" name="submit" id="SalvarVenda" value="Salvar" class="btn btn-default btn-xs" style=" width: 100%" />
+                            <input type="submit" name="submit" id="SalvarVenda" value="Salvar" class="btn btn-default btn-xs" style="width: 100%" />
                         </td>
                     </tr>
                     @ViewBag.MsgErroVenda
                 </table>
             </div>
 
-            <div class="col-md-6">
+            <div class="col-md-7 well">
                 <div class="row">
-                    <div id="divDetalhesCliente" class="panel tab-pane">
+                    <div id="divDetalhesCliente">
                         @Html.Partial("_PartialDetalhesCliente")
                     </div>
                 </div>
             </div>
         </div>
 
-        <div class="col-md-1">
+        <div class="col-md-12">
+            <div class="col-md-6 well">
+                <table align="center">
+                    <tr>
+                        <td>
+                            <label class="label label-default text-justify"> &nbsp &nbsp Produto &nbsp &nbsp &nbsp </label>
+                        </td>
+
+                        <td>
+                            @Html.DropDownListFor(model => model.IdProduto, Model.ProdutoList.OrderBy(o => o.IdProduto).Select(x => new SelectListItem
+                       {
+                           Value = x.IdProduto.ToString(),
+                           Text = x.Nome,
+
+                       }), "Selecione", new { @class = " btn btn-xs ", @required = "required", @style = " width: 200px;  border-bottom: 1px solid #d9d9d9; border-radius: 5px;" })
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <label class="label label-default text-justify"> &nbsp Quantidade &nbsp </label>
+                        </td>
+
+                        <td>
+                            @Html.EditorFor(model => model.Quantidade, new { htmlAttributes = new { @class = "btn btn-xs", @style = " width: 200px;  border-bottom: 1px solid #d9d9d9; border-radius: 5px;" } })
+                        </td>
+                    </tr>
+
+
+                    <tr>
+                        <td colspan="2">
+                            <input type="submit" name="submit" id="SalvarItemVenda" value=" + " class="btn btn-default btn-xs" style=" width: 100%" />
+                        </td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="col-md-6 well">
+                <table align="center">
+                    <tr>
+                        <td align="center">
+                            <label class="label label-default text-justify m-2">&nbsp &nbsp &nbsp Status &nbsp &nbsp &nbsp</label>
+
+                            @Html.DropDownListFor(model => model.IdStatus, Model.StatusList.OrderBy(o => o.NmStatus).Select(x => new SelectListItem
+                       {
+                           Value = x.IdStatus.ToString(),
+                           Text = x.NmStatus
+                       }), "Selecione", new { @class = "btn btn-xs", @required = "required", @style = " width: 200px; border-bottom: 1px solid #d9d9d9; border-radius: 5px;" })
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label class="label label-default text-justify"> &nbsp  Valor Total &nbsp </label>
+                            @Html.DisplayFor(model => model.Venda.VlTotal, new { htmlAttributes = new { @class = "btn btn-xs" } })
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="submit" name="submit" id="EditarVenda" value=" Salvar Venda " class="btn btn-default btn-xs" style=" width: 100%" />
+                        </td>
+                    </tr>
+                </table>
+            </div>
         </div>
 
-        <div class="col-md-12 well" style="background-color: #e9e9e9">
-            <table align="center">
-                <tr>
-                    <td>
-                        <label class="label label-default text-justify"> &nbsp &nbsp Produto &nbsp &nbsp &nbsp </label>
-                    </td>
-
-                    <td>
-                        @Html.DropDownListFor(model => model.IdProduto, Model.ProdutoList.OrderBy(o => o.IdProduto).Select(x => new SelectListItem
-                   {
-                       Value = x.IdProduto.ToString(),
-                       Text = x.Nome,
-
-                   }), "Selecione", new { @class = " btn btn-xs ", @required = "required", @style = " width: 200px;  border-bottom: 1px solid #d9d9d9; border-radius: 5px;" })
-                    </td>
-                </tr>
-
-                <tr>
-                    <td>
-                        <label class="label label-default text-justify"> &nbsp Quantidade &nbsp </label>
-                    </td>
-
-                    <td>
-                        @Html.EditorFor(model => model.Quantidade, new { htmlAttributes = new { @class = "btn btn-xs", @style = " width: 200px;  border-bottom: 1px solid #d9d9d9; border-radius: 5px;" } })
-                    </td>
-                </tr>
-
-                <tr>
-                    <td align="center">
-                        <label class="label label-default text-justify m-2">&nbsp &nbsp &nbsp Status &nbsp &nbsp &nbsp</label>
-                    </td>
-                    <td>
-
-                        @Html.DropDownListFor(model => model.IdStatus, Model.StatusList.OrderBy(o => o.NmStatus).Select(x => new SelectListItem
-                   {
-                       Value = x.IdStatus.ToString(),
-                       Text = x.NmStatus
-                   }), "Selecione", new { @class = "btn btn-xs", @required = "required", @style = " width: 200px;  border-bottom: 1px solid #d9d9d9; border-radius: 5px;" })
-                    </td>
-                </tr>
-
-                @*<tr>
-                        <td>
-                            <label class="label label-default text-justify"> &nbsp Valor &nbsp &nbsp </label>
-                        </td>
-                        <td>
-
-                            @Html.EditorFor(model => model.ValorProduto, new { htmlAttributes = new { @class = "btn btn-xs", @style = " width: 200px;  border-bottom: 1px solid #d9d9d9; border-radius: 5px;" } })
-                        </td>
-                    </tr>*@
-
-                <tr>
-                    <td colspan="2">
-                        <input type="submit" name="submit" id="SalvarItemVenda" value=" + " class="btn btn-default btn-xs" style=" width: 100%" />
-                    </td>
-                </tr>
-            </table>
-            <br />
+        <div class="col-md-12">
             <div class="row">
                 <div id="divItemVenda" class="panel panel-default">
                     @Html.Partial("_PartialItemVenda")
                 </div>
             </div>
-
-            @*@Html.ActionLink("Lista de Vendas", "Index", new { @class = "input-group btn btn-default btn-xs" })
-
-                <input type="submit" name="" id="" value="Lista de Vendas" class="btn btn-default btn-xs" />*@
-
         </div>
 
-        <div class="col-md-12">
-
-
-            @*Botão de voltar na lista de venda*@
-            @*<div>
-                @Html.ActionLink("Lista de Produtos", "Index")
-                  </div>*@
-
-        </div>
     </div>
 
 </div>
@@ -170,12 +153,17 @@
 
 
         $(document).on('click', '#SalvarVenda', function () {
-            //console.log("clicou Savar Pacote");
-            salvarVenda();
+            
+            SalvarVenda();
+        });
+
+        $(document).on('click', '#EditarVenda', function () {
+           /* console.log("clicou Salvar Pacote");*/
+            EditarVenda();
         });
 
         $(document).on('click', '#SalvarItemVenda', function () {
-            //console.log("clicou Savar Pacote");
+            
             salvarItemVenda();
         });
 
@@ -183,26 +171,10 @@
         $(document).on('change', '#IdCliente', function () {
             let idCliente = $("#IdCliente").val();
             mostrarDetalhesCliente(parseInt(idCliente));
-            /*console.log("mOSTROU", idCliente);*/
         });
-
-        //$(document).on('change', '#Quantidade', function () {
-        //    let Quantidade = $("#Quantidade").val();
-        //    let IdProdutoSelecionado = $("#IdProduto").val();
-        //    //salvarItemVenda();
-        //    //let ValorProduto = $("#ValorProduto").val();
-
-
-        //    //document.querySelector("#ValorProduto").value = Quantidade * ValorProduto;
-
-        //    //mostrarDetalhesCliente(parseInt(idCliente));
-        //    /*console.log("mOSTROU", idCliente);*/
-        //});
-
 
 
         function mostrarDetalhesCliente(idCliente) {
-            //console.log("IDCliente", idCliente);
 
             let obj = {
                 idCliente: parseInt(idCliente)
@@ -212,14 +184,8 @@
             if (idCliente > 0) {
                 console.log("JSON", json);
 
-                var result = chamarApi("/Vendas/MostrarDetalhesCliente", 'POST', json, "#divDetalhesCliente");
-                //if (result == "true") {
-                //    console.log("Venda item Sucesso Api");
+                var result = chamarApi("/Vendas/MostrarDetalhesCliente", 'POST', json, "#divDetalhesCliente", "Consultando Detalhes dos Clientes!");
 
-                //    if (msg.status != undefined && msg.status != '') {
-                //        $("#divIdVenda").html(msg.partialView);
-                //    }
-                //}
             }
         }
 
@@ -231,11 +197,11 @@
             var ItemVenda_IdVenda = $("#Venda_IdVenda").val();
             var ItemVenda_IdProduto = $("#IdProduto").val();
             var ItemVenda_Quantidade = $("#Quantidade").val();
-            //var ItemVenda_ValorProduto = $("#ValorProduto").val();
+
+            console.log("IdVenda", Venda_IdVenda);
 
             if (ItemVenda_IdProduto == "" || ItemVenda_IdProduto == undefined) { mensage += "Produto, "; }
             if (ItemVenda_Quantidade == "" || ItemVenda_Quantidade == undefined) { mensage += "Quantidade, "; }
-            //if (ItemVenda_ValorProduto == "" || ItemVenda_ValorProduto == undefined) { mensage += "Valor Total, "; }
 
             if (mensage != "") {
                 console.log(mensage);
@@ -244,10 +210,8 @@
             } else {
                 ItemVenda = {
                     IdVenda: parseInt(ItemVenda_IdVenda),
-                    //IdVenda: 1,
                     IdProduto: parseInt(ItemVenda_IdProduto),
                     Quantidade: parseInt(ItemVenda_Quantidade),
-                    //VlTotal: parseFloat(ItemVenda_ValorProduto),
                 }
                 console.log("Else", ItemVenda);
 
@@ -260,31 +224,19 @@
 
                 var result = chamarApi("/Vendas/SalvarItemVenda", 'POST', itemVenda, "#divItemVenda", "Item adicionado com Sucesso!");
 
-                if (result == "true") {
-                    console.log("Venda item Sucesso Api");
-
-                    //if (msg.status != undefined && msg.status != '') {
-                    //    $("#divIdVenda").html(msg.partialView);
-                    //}
-                }
-
-            } console.log("chamou", itemVenda);
+            }
 
         }
 
-        function salvarVenda() {
+        function SalvarVenda() {
 
             var Venda = {};
             var mensage = "";
 
-            var Venda_IdVenda = $("#IdVenda").val();
-            //var Venda_IdStatus = $("#IdStatus").val();
+            var Venda_IdVenda = $("#Venda_IdVenda").val();
             var Venda_IdCliente = $("#IdCliente").val();
             var Venda_IdVendedor = $("#IdVendedor").val();
 
-            //console.log("Venda_IdStatus: " + Venda_IdStatus);
-
-            //if (Venda_IdStatus == "" || Venda_IdStatus == undefined) { mensage += "Status, "; }
             if (Venda_IdCliente == "" || Venda_IdCliente == undefined) { mensage += "Cliente, "; }
             if (Venda_IdVendedor == "" || Venda_IdVendedor == undefined) { mensage += "Vendedor, "; }
 
@@ -295,7 +247,6 @@
             } else {
                 Venda = {
                     IdVenda: parseInt(Venda_IdVenda),
-                    //IdStatus: parseInt(Venda_IdStatus),
                     IdCliente: parseInt(Venda_IdCliente),
                     IdVendedor: parseInt(Venda_IdVendedor),
                 }
@@ -306,18 +257,60 @@
 
             if (venda.length > 0) {
 
-                var result = chamarApi("/Vendas/SalvarVenda", 'POST', venda, "#divIdVenda", "Venda Iniciada com Sucesso!");
+                var result = chamarApi("/Vendas/SalvarEditarVenda", 'POST', venda, "#divIdVenda", "Venda Iniciada com Sucesso!");
+
+                //if (result == "true") {
+                //    console.log("Venda Sucesso Api");
+
+                //    if (msg.status != undefined && msg.status != '') {
+                //        $("#divIdVenda").html(msg.partialView);
+                //    }
+                //}
+
+            }
+        }
+
+        function EditarVenda() {
+
+            var Venda = {};
+            var mensage = "";
+
+            var Venda_IdVenda = $("#Venda_IdVenda").val();
+            var Venda_IdStatus = $("#IdStatus").val();
+            var Venda_IdCliente = $("#IdCliente").val();
+            var Venda_IdVendedor = $("#IdVendedor").val();
+
+            console.log("IdVenda", Venda_IdVenda);
+
+            if (Venda_IdStatus == "" || Venda_IdStatus == undefined) { mensage += "Status, "; }
+
+            if (mensage != "") {
+                console.log(mensage);
+                return alert(mensage + ' não pode ser vazio!!');
+
+            } else {
+                Venda = {
+                    IdVenda: parseInt(Venda_IdVenda),
+                    IdStatus: parseInt(Venda_IdStatus),
+                    IdCliente: parseInt(Venda_IdCliente),
+                    IdVendedor: parseInt(Venda_IdVendedor),
+                }
+
+            }
+
+            var venda = JSON.stringify(Venda);
+
+            if (venda.length > 0) {
+
+                var result = chamarApi("/Vendas/SalvarEditarVenda", 'POST', venda, "#divIdVenda", "Venda Salva com Sucesso!");
 
                 if (result == "true") {
                     console.log("Venda Sucesso Api");
-
-                    //if (msg.status != undefined && msg.status != '') {
-                    //    $("#divIdVenda").html(msg.partialView);
-                    //}
                 }
 
             }
         }
+
 
         function chamarApi(_url, _method, _data, _partialViewName, _msgSucessoPersonalizada = "Concluido com Sucesso!") {
             var mensage = "";
@@ -356,7 +349,6 @@
                             $(_partialViewName).html(msg.partialView);
                         }
                     }
-                    /*                  console.log("msg", msg);*/
 
                 }
                 console.log(msg.description);

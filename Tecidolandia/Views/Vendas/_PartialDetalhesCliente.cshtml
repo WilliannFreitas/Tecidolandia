@@ -1,14 +1,65 @@
 ﻿@model Tecidolandia.Models.ViewEntities.OrdemDeVendaViewModel
 
 
-<div class="text-center">
-    <div><h4><b>Detalhes do Cliente </b></h4></div>
-</div>
-<hr />
+@*<div class="panel-heading text-center">
+        <b>Detalhes do Cliente</b>
+    </div>*@
 
+@*<h4 class="text-center" style="width: 100%"><b>Detalhes do Cliente</b></h4>*@
 <div>
-    <dl class="dl-horizontal">
-        <dt class = "btn btn-xs">
+    <p class=" text-center; label label-default text-justify m-2">Detalhes do Cliente</p>
+</div>
+
+<table class="col-md-7">
+    <tr>
+        <td class="label label-default text-justify m-2">
+            Nome Completo:
+        </td>
+        <td style="font-family: Segoe UI Historic, serif">
+            @Html.DisplayFor(model => model.ClienteSelecionado.NmCompleto)
+        </td>
+    </tr>
+    <tr>
+        <td class="label label-default text-justify m-2">
+            Página do Facebook:
+        </td>
+        <td style="font-family: Segoe UI Historic, serif">
+            @Html.DisplayFor(model => model.ClienteSelecionado.Facebook)
+        </td>
+    </tr>
+    <tr>
+        <td class="label label-default text-justify m-2">
+            Data de Registro:
+        </td>
+        <td style="font-family: Segoe UI Historic, serif">
+            @Html.DisplayFor(model => model.ClienteSelecionado.DtRegistro)
+        </td>
+    </tr>
+
+</table>
+
+<table class="col-md-5">
+    <tr>
+        <td class="label label-default text-justify m-2">
+            Telefone 1:
+        </td>
+        <td style="font-family: Segoe UI Historic, serif">
+            @Html.DisplayFor(model => model.ClienteSelecionado.NuDDDTelefone1)
+        </td>
+    </tr>
+    <tr>
+        <td class="label label-default text-justify m-2">
+            Telefone 2:
+        </td>
+        <td style="font-family: Segoe UI Historic, serif">
+            @Html.DisplayFor(model => model.ClienteSelecionado.NuDDDTelefone2)
+        </td>
+    </tr>
+</table>
+
+
+@*<dl class="dl-horizontal">
+        <dt class="btn btn-xs">
             @Html.DisplayNameFor(model => model.ClienteSelecionado.NmCompleto)
         </dt>
 
@@ -16,7 +67,7 @@
             @Html.DisplayFor(model => model.ClienteSelecionado.NmCompleto)
         </dd>
 
-        <dt class = "btn btn-xs">
+        <dt class="btn btn-xs">
             Página do Facebook:
         </dt>
 
@@ -24,7 +75,7 @@
             @Html.DisplayFor(model => model.ClienteSelecionado.Facebook)
         </dd>
 
-        <dt class = "btn btn-xs">
+        <dt class="btn btn-xs">
             Data de Registro:
         </dt>
 
@@ -32,7 +83,7 @@
             @Html.DisplayFor(model => model.ClienteSelecionado.DtRegistro)
         </dd>
 
-        <dt class = "btn btn-xs">
+        <dt class="btn btn-xs">
             Telefone 1:
         </dt>
 
@@ -40,12 +91,12 @@
             @Html.DisplayFor(model => model.ClienteSelecionado.NuDDDTelefone1)
         </dd>
 
-        <dt class = "btn btn-xs">
+        <dt class="btn btn-xs">
             Telefone 2:
         </dt>
 
         <dd>
             @Html.DisplayFor(model => model.ClienteSelecionado.NuDDDTelefone2)
         </dd>
-    </dl>
-</div>
+    </dl>*@
+

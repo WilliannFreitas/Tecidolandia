@@ -94,23 +94,26 @@ namespace Tecidolandia
 
         #region Salvar Venda
         [HttpPost]
-        public JsonResult SalvarVenda(Venda venda)
+        public JsonResult SalvarEditarVenda(Venda venda)
         {
-            var vendaStatus = db.Status.Where(a => a.NmStatus.ToUpper() == "VENDA INICIADA").FirstOrDefault();
-            venda.IdStatus = vendaStatus.IdStatus;
-            //vendaStatus.IdStatus = venda.IdStatus;
-            
+
             try
             {
                 if (venda.IdVenda == 0 || venda.IdVenda == null)
                 {
+                    var vendaStatus = db.Status.Where(a => a.NmStatus.ToUpper() == "VENDA INICIADA").FirstOrDefault();
+                    venda.IdStatus = vendaStatus.IdStatus;
+
                     venda.DtRegistro = DateTime.Now;
                     db.Vendas.Add(venda);
                     db.SaveChanges();
                 }
                 else
                 {
-                    db.Entry(venda).State = EntityState.Modified;
+                    var vendaStatus = db.Vendas.Where(a => a.IdVenda == venda.IdVenda).FirstOrDefault();
+                    vendaStatus.IdStatus = venda.IdStatus;
+
+                    db.Entry(vendaStatus).State = EntityState.Modified;
                     db.SaveChanges();
                 }
 
@@ -158,7 +161,7 @@ namespace Tecidolandia
             {
                 var produtoList = db.Produtos.Where(b => b.IdProduto == itemVenda.IdProduto).Include(p => p.TipoEstampas).FirstOrDefault();
                 itemVenda.VlTotal = (itemVenda.Quantidade * produtoList.TipoEstampas.VlMetro);
-                
+
 
                 if (itemVenda.IdVendaItem == 0 || itemVenda.IdVendaItem == null)
                 {
