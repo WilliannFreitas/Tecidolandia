@@ -94,7 +94,7 @@
                         </td>
 
                         <td>
-                            @Html.EditorFor(model => model.Quantidade, new { htmlAttributes = new { @class = "btn btn-xs", @style = " width: 200px;  border-bottom: 1px solid #d9d9d9; border-radius: 5px;" } })
+                            @Html.EditorFor(model => model.Quantidade, new { htmlAttributes = new { @class = "btn btn-xs", @type = "number", @style = "width: 200px;  border-bottom: 1px solid #d9d9d9; border-radius: 5px;" } })
                         </td>
                     </tr>
 
@@ -153,18 +153,19 @@
 
 
         $(document).on('click', '#SalvarVenda', function () {
-            
+
             SalvarVenda();
         });
 
         $(document).on('click', '#EditarVenda', function () {
-           /* console.log("clicou Salvar Pacote");*/
+            /* console.log("clicou Salvar Pacote");*/
             EditarVenda();
         });
 
         $(document).on('click', '#SalvarItemVenda', function () {
-            
+
             salvarItemVenda();
+            //bloquearCamposVenda();
         });
 
         /*Change Event*/
@@ -172,6 +173,44 @@
             let idCliente = $("#IdCliente").val();
             mostrarDetalhesCliente(parseInt(idCliente));
         });
+
+        //$(document).on('onkeypress', '#Quantidade', function () {
+        //    let idCliente = $("#IdCliente").val();
+        //    disallowNegativeNumber(parseInt(idVenda));
+        //});
+
+        //function disallowNegativeNumber(e) {
+        //    var charCode = (e.Quantidade) ? e.Quantidade : event.keyCode
+        //    if (charCode == 45) {
+        //        return false;
+        //    }
+        //    return true;
+        //}
+
+        //--------------------------------------------
+
+        //function blockAllFields() {
+        //    let Ticket_IdTicket = $("#Ticket_IdTicket").val();
+
+        //    controlerFields(true, 'IdProject');
+        //    controlerFields(true, 'Ticket_IdSolution');
+        //    controlerFields(true, 'HasSqlScripts');
+
+        //    if (parseInt(Ticket_IdTicket) > 0) {
+        //        controlerFields(true, 'IdEps');
+        //    }
+        //    checkActivateQuerys();
+        ////}
+
+        function controlerFields(pSelect, pFldName) {
+            console.log(pFldName + " / Disable = " + pSelect)
+            document.getElementById(pFldName).disabled = pSelect;
+        }
+
+        function bloquearCamposVenda() {
+            controlerFields(true, 'Venda_IdCliente');
+            controlerFields(true, 'Venda_IdVendedor');
+        }
 
 
         function mostrarDetalhesCliente(idCliente) {
@@ -184,7 +223,7 @@
             if (idCliente > 0) {
                 console.log("JSON", json);
 
-                var result = chamarApi("/Vendas/MostrarDetalhesCliente", 'POST', json, "#divDetalhesCliente", "Consultando Detalhes dos Clientes!");
+                var result = chamarApi("/Vendas/MostrarDetalhesCliente", 'POST', json, "#divDetalhesCliente", "Consultando Detalhes dos Clientes!", false);
 
             }
         }
@@ -222,11 +261,12 @@
 
             if (itemVenda.length > 0) {
 
-                var result = chamarApi("/Vendas/SalvarItemVenda", 'POST', itemVenda, "#divItemVenda", "Item adicionado com Sucesso!");
+                var result = chamarApi("/Vendas/SalvarItemVenda", 'POST', itemVenda, "#divItemVenda", "Item adicionado com Sucesso!", false);
 
             }
 
         }
+
 
         function SalvarVenda() {
 
@@ -257,15 +297,17 @@
 
             if (venda.length > 0) {
 
-                var result = chamarApi("/Vendas/SalvarEditarVenda", 'POST', venda, "#divIdVenda", "Venda Iniciada com Sucesso!");
-
-                //if (result == "true") {
-                //    console.log("Venda Sucesso Api");
-
-                //    if (msg.status != undefined && msg.status != '') {
-                //        $("#divIdVenda").html(msg.partialView);
-                //    }
-                //}
+                var result = chamarApi("/Vendas/SalvarEditarVenda", 'POST', venda, "#divIdVenda", "Venda Iniciada com Sucesso!", false);
+                console.log("result", result)
+                /*while (result == undefined) {*/
+                console.log("123");
+                if (result == "true") {
+                    console.log("***************************Venda Sucesso Api");
+                    controlerFields(true, "#IdVendedor");
+                    controlerFields(true, "#IdClient");
+                    //$("#IdVendedor").prop("disabled", true);
+                    //$("#IdCliente").prop("disabled", true);
+                }
 
             }
         }
@@ -312,7 +354,7 @@
         }
 
 
-        function chamarApi(_url, _method, _data, _partialViewName, _msgSucessoPersonalizada = "Concluido com Sucesso!") {
+        function chamarApi(_url, _method, _data, _partialViewName, _msgSucessoPersonalizada = "Concluido com Sucesso!", showPopUp = true) {
             var mensage = "";
 
             var result = "";
@@ -340,8 +382,9 @@
 
                 } else {
                     result = "true";
-                    alert(_msgSucessoPersonalizada);
-
+                    if (showPopUp) {
+                        alert(_msgSucessoPersonalizada);
+                    }
                     if (_partialViewName != null || _partialViewName != undefined) {
                         if (msg.partialView != undefined && msg.partialView != '') {
                             console.log("Partial atualizada: ", _partialViewName);
@@ -361,12 +404,14 @@
 
             var refreshId = setInterval(function () {
                 if (result != "") {
+                    console.log("teste true")
                     clearInterval(refreshId);
                     //sair do looping
                 }
             }, 100);
-
+            console.log("teste 123")
             return result;
+
         }
 
 

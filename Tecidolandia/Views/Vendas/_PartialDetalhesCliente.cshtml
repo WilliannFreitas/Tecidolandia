@@ -47,14 +47,18 @@
             @Html.DisplayFor(model => model.ClienteSelecionado.NuDDDTelefone1)
         </td>
     </tr>
-    <tr>
-        <td class="label label-default text-justify m-2">
-            Telefone 2:
-        </td>
-        <td style="font-family: Segoe UI Historic, serif">
-            @Html.DisplayFor(model => model.ClienteSelecionado.NuDDDTelefone2)
-        </td>
-    </tr>
+
+    @if (Model?.ClienteSelecionado?.NuDDDTelefone2 > 0)
+    {
+        <tr>
+            <td class="label label-default text-justify m-2">
+                Telefone 2:
+            </td>
+            <td style="font-family: Segoe UI Historic, serif">
+                @Html.DisplayFor(model => model.ClienteSelecionado.NuDDDTelefone2)
+            </td>
+        </tr>
+    }
 </table>
 
 
