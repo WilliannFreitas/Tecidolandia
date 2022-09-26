@@ -174,42 +174,15 @@
             mostrarDetalhesCliente(parseInt(idCliente));
         });
 
-        //$(document).on('onkeypress', '#Quantidade', function () {
-        //    let idCliente = $("#IdCliente").val();
-        //    disallowNegativeNumber(parseInt(idVenda));
-        //});
-
-        //function disallowNegativeNumber(e) {
-        //    var charCode = (e.Quantidade) ? e.Quantidade : event.keyCode
-        //    if (charCode == 45) {
-        //        return false;
-        //    }
-        //    return true;
-        //}
-
-        //--------------------------------------------
-
-        //function blockAllFields() {
-        //    let Ticket_IdTicket = $("#Ticket_IdTicket").val();
-
-        //    controlerFields(true, 'IdProject');
-        //    controlerFields(true, 'Ticket_IdSolution');
-        //    controlerFields(true, 'HasSqlScripts');
-
-        //    if (parseInt(Ticket_IdTicket) > 0) {
-        //        controlerFields(true, 'IdEps');
-        //    }
-        //    checkActivateQuerys();
-        ////}
 
         function controlerFields(pSelect, pFldName) {
             console.log(pFldName + " / Disable = " + pSelect)
-            document.getElementById(pFldName).disabled = pSelect;
+            document.querySelector(pFldName).disabled = pSelect;
         }
 
         function bloquearCamposVenda() {
-            controlerFields(true, 'Venda_IdCliente');
-            controlerFields(true, 'Venda_IdVendedor');
+            controlerFields(true, '#IdCliente');
+            controlerFields(true, '#IdVendedor');
         }
 
 
@@ -298,17 +271,8 @@
             if (venda.length > 0) {
 
                 var result = chamarApi("/Vendas/SalvarEditarVenda", 'POST', venda, "#divIdVenda", "Venda Iniciada com Sucesso!", false);
-                console.log("result", result)
-                /*while (result == undefined) {*/
-                console.log("123");
-                if (result == "true") {
-                    console.log("***************************Venda Sucesso Api");
-                    controlerFields(true, "#IdVendedor");
-                    controlerFields(true, "#IdClient");
-                    //$("#IdVendedor").prop("disabled", true);
-                    //$("#IdCliente").prop("disabled", true);
-                }
 
+                bloquearCamposVenda();
             }
         }
 
