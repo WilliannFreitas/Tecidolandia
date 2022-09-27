@@ -16,6 +16,7 @@ namespace Tecidolandia
     public class VendasController : Controller
     {
         private TecidolandiaContext db = new TecidolandiaContext();
+        private OrdemDeVendaViewModel vm = new OrdemDeVendaViewModel();
 
         #region TecidolandiaIndex
         // GET: Vendas
@@ -40,14 +41,10 @@ namespace Tecidolandia
         //[HttpGet]
         public ActionResult CriarOuEditarOrdemDeVenda(long? idVenda)
         {
-
-            var vm = new OrdemDeVendaViewModel();
-
             if (idVenda > 0)
                 vm = this.Edit(idVenda);
             else
                 vm = this.Create();
-
 
             return View("CriarOuEditarOrdemDeVenda", vm);
         }
@@ -55,10 +52,8 @@ namespace Tecidolandia
         // GET: Vendas/Create
         private OrdemDeVendaViewModel Create()
         {
-            //Mostrar somente status ativos.
             var statusAtivos = db.Status.Where(a => a.StatusVenda == true).ToList();
 
-            var vm = new OrdemDeVendaViewModel();
             vm.VendedorList = db.Vendedores.ToList();
             vm.ClienteList = db.Clientes.ToList();
             vm.StatusList = statusAtivos;
@@ -71,23 +66,8 @@ namespace Tecidolandia
         // GET: Vendas/Edit/5
         private OrdemDeVendaViewModel Edit(long? id)
         {
-            var vm = new OrdemDeVendaViewModel();
-
-            //if (id == null)
-            //{
-            //    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            //}
-            //Venda venda = db.Vendas.Find(id);
-            //if (venda == null)
-            //{
-            //    return HttpNotFound();
-            //}
-            //ViewBag.IdCliente = new SelectList(db.Clientes, "IdCliente", "NmCompleto", venda.IdCliente);
-            //ViewBag.IdStatus = new SelectList(db.Status, "IdStatus", "NmStatus", venda.IdStatus);
-            //ViewBag.IdVendedor = new SelectList(db.Vendedores, "IdVendedor", "Nome", venda.IdVendedor);
-
+            //criar edição.
             return vm;
-
         }
 
         #endregion
@@ -96,10 +76,9 @@ namespace Tecidolandia
         [HttpPost]
         public JsonResult SalvarEditarVenda(Venda venda)
         {
-
             try
             {
-                if (venda.IdVenda == 0 || venda.IdVenda == null)
+                if (venda.IdVenda == 0)
                 {
                     var vendaStatus = db.Status.Where(a => a.NmStatus.ToUpper() == "VENDA INICIADA").FirstOrDefault();
                     venda.IdStatus = vendaStatus.IdStatus;
@@ -117,7 +96,6 @@ namespace Tecidolandia
                     db.SaveChanges();
                 }
 
-                var vm = new OrdemDeVendaViewModel();
                 vm.Venda = venda;
 
                 var partial = PartialView("_IdVenda", vm).RenderToString();
@@ -136,9 +114,6 @@ namespace Tecidolandia
         [HttpPost]
         public JsonResult MostrarDetalhesCliente(long idCliente)
         {
-
-            var vm = new OrdemDeVendaViewModel();
-
             try
             {
                 vm.ClienteSelecionado = db.Clientes.Where(b => b.IdCliente == idCliente).FirstOrDefault();
@@ -162,8 +137,7 @@ namespace Tecidolandia
                 var produtoList = db.Produtos.Where(b => b.IdProduto == itemVenda.IdProduto).Include(p => p.TipoEstampas).FirstOrDefault();
                 itemVenda.VlTotal = (itemVenda.Quantidade * produtoList.TipoEstampas.VlMetro);
 
-
-                if (itemVenda.IdVendaItem == 0 || itemVenda.IdVendaItem == null)
+                if (itemVenda.IdVendaItem == 0)
                 {
                     db.VendaItems.Add(itemVenda);
                     db.SaveChanges();
@@ -174,9 +148,6 @@ namespace Tecidolandia
                     db.SaveChanges();
                 }
 
-                //Lista de produtos da venda na ordem de venda.
-                var vm = new OrdemDeVendaViewModel();
-
                 var vendaItemList = db.VendaItems.Where(b => b.IdVenda == itemVenda.IdVenda).Include(p => p.Produtos).ToList();
                 var venda = db.Vendas.Where(b => b.IdVenda == itemVenda.IdVenda).FirstOrDefault();
 
@@ -185,19 +156,6 @@ namespace Tecidolandia
 
                 foreach (VendaItem item in vendaItemList)
                 {
-
-                    //var auxVendaItemValor = new VendaItemValor()
-                    // {
-                    //     IdProduto = item.IdProduto,
-                    //     IdVenda = item.IdVenda,
-                    //     IdVendaItem = item.IdVendaItem,
-                    //     Quantidade = item.Quantidade,
-                    //     Vendas = item.Vendas,
-                    //     VlTotal = item.VlTotal,
-                    //     Produtos = item.Produtos,
-                    //     ValorTotalVenda = (item.VlTotal * item.Quantidade) 
-                    // };
-
                     var auxVendaItemValor = new VendaItemValor();
                     auxVendaItemValor.IdProduto = item.IdProduto;
                     auxVendaItemValor.IdVenda = item.IdVenda;

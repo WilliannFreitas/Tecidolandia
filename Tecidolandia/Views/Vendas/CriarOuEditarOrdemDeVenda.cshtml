@@ -2,13 +2,13 @@
 
 @{
     ViewBag.Title = "Create";
-    int a = 0;
+
 }
 
 <div class="panel-body">
     <div class="col-md-12">
 
-        <div class="col-md-12">
+        <div class="col-md-12" id="mod1">
 
             <h4 class="text-center" style=" font-family: Segoe UI Historic, serif; width: 100%"><b>Cadastrar Venda</b></h4>
 
@@ -70,77 +70,80 @@
             </div>
         </div>
 
-        <div class="col-md-12">
-            <div class="col-md-6 well">
-                <table align="center">
-                    <tr>
-                        <td>
-                            <label class="label label-default text-justify"> &nbsp &nbsp Produto &nbsp &nbsp &nbsp </label>
-                        </td>
+        <div id="mod2" style="Display: none">
+            <div class="col-md-12">
+                <div class="col-md-6 well">
+                    <table align="center">
+                        <tr>
+                            <td>
+                                <label class="label label-default text-justify"> &nbsp &nbsp Produto &nbsp &nbsp &nbsp </label>
+                            </td>
 
-                        <td>
-                            @Html.DropDownListFor(model => model.IdProduto, Model.ProdutoList.OrderBy(o => o.IdProduto).Select(x => new SelectListItem
-                       {
-                           Value = x.IdProduto.ToString(),
-                           Text = x.Nome,
+                            <td>
+                                @Html.DropDownListFor(model => model.IdProduto, Model.ProdutoList.OrderBy(o => o.IdProduto).Select(x => new SelectListItem
+                           {
+                               Value = x.IdProduto.ToString(),
+                               Text = x.Nome,
 
-                       }), "Selecione", new { @class = " btn btn-xs ", @required = "required", @style = " width: 200px;  border-bottom: 1px solid #d9d9d9; border-radius: 5px;" })
-                        </td>
-                    </tr>
+                           }), "Selecione", new { @class = " btn btn-xs ", @required = "required", @style = " width: 200px;  border-bottom: 1px solid #d9d9d9; border-radius: 5px;" })
+                            </td>
+                        </tr>
 
-                    <tr>
-                        <td>
-                            <label class="label label-default text-justify"> &nbsp Quantidade &nbsp </label>
-                        </td>
+                        <tr>
+                            <td>
+                                <label class="label label-default text-justify"> &nbsp Quantidade &nbsp </label>
+                            </td>
 
-                        <td>
-                            @Html.EditorFor(model => model.Quantidade, new { htmlAttributes = new { @class = "btn btn-xs", @type = "number", @style = "width: 200px;  border-bottom: 1px solid #d9d9d9; border-radius: 5px;" } })
-                        </td>
-                    </tr>
+                            <td>
+                                @Html.EditorFor(model => model.Quantidade, new { htmlAttributes = new { @class = "btn btn-xs", @type = "number", @style = "width: 200px;  border-bottom: 1px solid #d9d9d9; border-radius: 5px;" } })
+                            </td>
+                        </tr>
 
 
-                    <tr>
-                        <td colspan="2">
-                            <input type="submit" name="submit" id="SalvarItemVenda" value=" + " class="btn btn-default btn-xs" style=" width: 100%" />
-                        </td>
-                    </tr>
-                </table>
-            </div>
+                        <tr>
+                            <td colspan="2">
+                                <input type="submit" name="submit" id="SalvarItemVenda" value=" + " class="btn btn-default btn-xs" style=" width: 100%" />
+                            </td>
+                        </tr>
+                    </table>
+                </div>
 
-            <div class="col-md-6 well">
-                <table align="center">
-                    <tr>
-                        <td align="center">
-                            <label class="label label-default text-justify m-2">&nbsp &nbsp &nbsp Status &nbsp &nbsp &nbsp</label>
+                <div class="col-md-6 well">
+                    <table align="center">
+                        <tr>
+                            <td align="center">
+                                <label class="label label-default text-justify m-2">&nbsp &nbsp &nbsp Status &nbsp &nbsp &nbsp</label>
 
-                            @Html.DropDownListFor(model => model.IdStatus, Model.StatusList.OrderBy(o => o.NmStatus).Select(x => new SelectListItem
-                       {
-                           Value = x.IdStatus.ToString(),
-                           Text = x.NmStatus
-                       }), "Selecione", new { @class = "btn btn-xs", @required = "required", @style = " width: 200px; border-bottom: 1px solid #d9d9d9; border-radius: 5px;" })
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <label class="label label-default text-justify"> &nbsp  Valor Total &nbsp </label>
-                            @Html.DisplayFor(model => model.Venda.VlTotal, new { htmlAttributes = new { @class = "btn btn-xs" } })
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <input type="submit" name="submit" id="EditarVenda" value=" Salvar Venda " class="btn btn-default btn-xs" style=" width: 100%" />
-                        </td>
-                    </tr>
-                </table>
-            </div>
-        </div>
+                                @Html.DropDownListFor(model => model.IdStatus, Model.StatusList.OrderBy(o => o.NmStatus).Select(x => new SelectListItem
+                           {
+                               Value = x.IdStatus.ToString(),
+                               Text = x.NmStatus
+                           }), "Selecione", new { @class = "btn btn-xs", @required = "required", @style = " width: 200px; border-bottom: 1px solid #d9d9d9; border-radius: 5px;" })
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label class="label label-default text-justify"> &nbsp  Valor Total &nbsp </label>
+                                @Html.DisplayFor(model => model.Venda.VlTotal, new { htmlAttributes = new { @class = "btn btn-xs" } })
+                            </td>
+                        </tr>
+                        <tr>
 
-        <div class="col-md-12">
-            <div class="row">
-                <div id="divItemVenda" class="panel panel-default">
-                    @Html.Partial("_PartialItemVenda")
+                            <td>
+                                <input type="submit" name="submit" id="EditarVenda" value=" Salvar Venda " class="btn btn-default btn-xs" style=" width: 100%" />
+                            </td>
+                        </tr>
+                    </table>
                 </div>
             </div>
+            <div class="col-md-12">
+                <div class="row">
+                    <div id="divItemVenda" class="panel panel-default">
+                        @Html.Partial("_PartialItemVenda")
+                    </div>
+                </div>
+            </div>
+
         </div>
 
     </div>
@@ -151,40 +154,58 @@
 @section Scripts {
     <script type="text/javascript">
 
-
         $(document).on('click', '#SalvarVenda', function () {
-
             SalvarVenda();
+            bloquearCamposVenda();
+
         });
 
         $(document).on('click', '#EditarVenda', function () {
-            /* console.log("clicou Salvar Pacote");*/
             EditarVenda();
+
+            let _status = $('#IdStatus').find(":selected").text().toUpperCase();
+           
+            if (_status == 'CONCLUÍDO') {
+                ControleDeCamposItemVenda(true);
+            } else {
+                ControleDeCamposItemVenda(false);
+            }
         });
 
         $(document).on('click', '#SalvarItemVenda', function () {
-
             salvarItemVenda();
-            //bloquearCamposVenda();
         });
 
-        /*Change Event*/
         $(document).on('change', '#IdCliente', function () {
             let idCliente = $("#IdCliente").val();
             mostrarDetalhesCliente(parseInt(idCliente));
         });
 
-
         function controlerFields(pSelect, pFldName) {
-            console.log(pFldName + " / Disable = " + pSelect)
             document.querySelector(pFldName).disabled = pSelect;
+        }
+
+        function ControleDeVisibilidadeProdutosVenda() {
+            let _venda = $('#Venda_IdVenda').find(":selected").val;
+
+            if (_venda == 0) {
+                document.getElementById('mod2').style.display = 'none';;
+            } else {
+                document.getElementById('mod2').style.display = 'block';;
+            }
+        }
+
+        function ControleDeCamposItemVenda(eAtivar) {
+            controlerFields(eAtivar, '#IdProduto');
+            controlerFields(eAtivar, '#Quantidade');
+            controlerFields(eAtivar, '#SalvarItemVenda');
         }
 
         function bloquearCamposVenda() {
             controlerFields(true, '#IdCliente');
             controlerFields(true, '#IdVendedor');
+            controlerFields(true, '#SalvarVenda');
         }
-
 
         function mostrarDetalhesCliente(idCliente) {
 
@@ -216,7 +237,6 @@
             if (ItemVenda_Quantidade == "" || ItemVenda_Quantidade == undefined) { mensage += "Quantidade, "; }
 
             if (mensage != "") {
-                console.log(mensage);
                 return alert(mensage + ' não pode(m) ser vazio(s)!!');
 
             } else {
@@ -240,7 +260,6 @@
 
         }
 
-
         function SalvarVenda() {
 
             var Venda = {};
@@ -254,7 +273,6 @@
             if (Venda_IdVendedor == "" || Venda_IdVendedor == undefined) { mensage += "Vendedor, "; }
 
             if (mensage != "") {
-                console.log(mensage);
                 return alert(mensage + ' não pode(m) ser vazio(s)!!');
 
             } else {
@@ -272,7 +290,8 @@
 
                 var result = chamarApi("/Vendas/SalvarEditarVenda", 'POST', venda, "#divIdVenda", "Venda Iniciada com Sucesso!", false);
 
-                bloquearCamposVenda();
+                console.log("result da api SalvarVenda", result);
+                ControleDeVisibilidadeProdutosVenda();
             }
         }
 
@@ -318,7 +337,7 @@
         }
 
 
-        function chamarApi(_url, _method, _data, _partialViewName, _msgSucessoPersonalizada = "Concluido com Sucesso!", showPopUp = true) {
+        async function chamarApi(_url, _method, _data, _partialViewName, _msgSucessoPersonalizada = "Concluido com Sucesso!", showPopUp = true) {
             var mensage = "";
 
             var result = "";
@@ -337,12 +356,8 @@
                     let results = "----";
                     if (msg.mesage != undefined && msg.mesage != '') { results = msg.mesage; }
 
-                    //toast("Atenção", results, "error");
-                    console.log(msg.error);
                     alert('Ops! Ocorreu um Erro!! :' + msg.error);
-
                     result = "false";
-                    //console.log("msg", msg);
 
                 } else {
                     result = "true";
@@ -351,7 +366,6 @@
                     }
                     if (_partialViewName != null || _partialViewName != undefined) {
                         if (msg.partialView != undefined && msg.partialView != '') {
-                            console.log("Partial atualizada: ", _partialViewName);
 
                             $(_partialViewName).html(msg.partialView);
                         }
@@ -361,20 +375,17 @@
                 console.log(msg.description);
                 mensage = msg.description;
             }).fail(function (jqXHR, textStatus, msg) {
-                console.log(`${textStatus} - ${msg} - ${jqXHR}`);
-                console.log(msg.description);
                 mensage = msg.description;
             });
 
             var refreshId = setInterval(function () {
                 if (result != "") {
-                    console.log("teste true")
                     clearInterval(refreshId);
                     //sair do looping
                 }
             }, 100);
-            console.log("teste 123")
-            return result;
+
+            return await Promise.all(result);
 
         }
 

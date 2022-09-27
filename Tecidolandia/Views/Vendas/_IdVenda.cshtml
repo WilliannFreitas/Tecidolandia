@@ -1,17 +1,11 @@
 ﻿@model Tecidolandia.Models.ViewEntities.OrdemDeVendaViewModel
 
 
-
-
 <label class="label label-default text-justify"> Nº Venda:  @Html.DisplayFor(model => model.Venda.IdVenda) </label>
-@*@Html.ValidationSummary(true, "", new { @class = "text-danger" })*@
-
 
 &nbsp
 
-
 <label class="label label-default text-justify"> Criado em:  @Html.DisplayFor(model => model.Venda.DtRegistro) </label>
-@*@Html.ValidationSummary(true, "", new { @class = "text-danger" })*@
 
 
 @Html.HiddenFor(model => model.Venda.IdVenda)
