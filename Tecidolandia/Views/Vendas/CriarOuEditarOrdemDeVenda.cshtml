@@ -156,8 +156,6 @@
 
         $(document).on('click', '#SalvarVenda', function () {
             SalvarVenda();
-            bloquearCamposVenda();
-
         });
 
         $(document).on('click', '#EditarVenda', function () {
@@ -292,6 +290,7 @@
 
                 console.log("result da api SalvarVenda", result);
                 ControleDeVisibilidadeProdutosVenda();
+                bloquearCamposVenda()
             }
         }
 
@@ -372,7 +371,6 @@
                     }
 
                 }
-                console.log(msg.description);
                 mensage = msg.description;
             }).fail(function (jqXHR, textStatus, msg) {
                 mensage = msg.description;
