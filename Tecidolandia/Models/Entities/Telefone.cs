@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Web;
 
 namespace Tecidolandia.Models.Entities
 {
@@ -15,12 +12,10 @@ namespace Tecidolandia.Models.Entities
         public int IdTelefone { get; set; }
 
         [Required(ErrorMessage = "O campo DDD é obrigatório")]
-        //[MaxLength(3)]
         [Column("DDD")]
         public int Ddd { get; set; }
 
         [Required(ErrorMessage = "O campo telefone é obrigatório")]
-        //[MaxLength(9)]
         [Column("TELEFONE")]
         [Display(Name = "Telefone")]
         public int NuTelefone { get; set; }

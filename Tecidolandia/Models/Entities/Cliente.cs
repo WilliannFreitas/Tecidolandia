@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Web;
 
 namespace Tecidolandia.Models.Entities
 {
@@ -23,12 +20,9 @@ namespace Tecidolandia.Models.Entities
         public string Facebook { get; set; }
 
         [Column("DT_REGISTRO")]
-        //[Display(Name = "Data de registro")]
         [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}", ApplyFormatInEditMode = true)]
         public DateTime DtRegistro { get; set; }
 
-        //[Required(ErrorMessage = "O campo telefone é obrigatório")]
-        //[StringLength(14, MinimumLength = 9, ErrorMessage = "Adicione o DDD com 2 caracteres e o telefone com 9 caracteres")]
         [RegularExpression(@"^\(?[1-9]{2}\)? ?(?:[2-8]|9[1-9])[0-9]{3}\-?[0-9]{4}$", ErrorMessage = "Telefone Inválido")]
         [Column("TELEFONE_1")]
         [Display(Name = "*(DDD) Telefone Celular")]
@@ -40,7 +34,6 @@ namespace Tecidolandia.Models.Entities
         public bool TelefoneAtivo1 { get; set; }
 
         [RegularExpression(@"^\(?[1-9]{2}\)? ?(?:[2-8]|9[1-9])[0-9]{3}\-?[0-9]{4}$", ErrorMessage = "Telefone Inválido")]
-        //[StringLength(14, MinimumLength = 9, ErrorMessage = "Adicione o DDD com 2 caracteres e o telefone com 9 caracteres")]
         [Column("TELEFONE_2")]
         [Display(Name = "(DDD) Telefone Fixo")]
         [DisplayFormat(DataFormatString = @"{0:(##) ####-####}")]

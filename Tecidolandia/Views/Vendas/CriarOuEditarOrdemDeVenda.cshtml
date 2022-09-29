@@ -95,7 +95,7 @@
                             </td>
 
                             <td>
-                                @Html.EditorFor(model => model.Quantidade, new { htmlAttributes = new { @class = "btn btn-xs", @type = "number", @style = "width: 200px;  border-bottom: 1px solid #d9d9d9; border-radius: 5px;" } })
+                                @Html.EditorFor(model => model.Quantidade, new { htmlAttributes = new { @class = "btn btn-xs", @type = "number, min = 0, max = 9999", @style = "width: 200px;  border-bottom: 1px solid #d9d9d9; border-radius: 5px;" } })
                             </td>
                         </tr>
 
@@ -183,7 +183,7 @@
             document.querySelector(pFldName).disabled = pSelect;
         }
 
-        function ControleDeVisibilidadeProdutosVenda() {
+        function controleDeVisibilidadeProdutosVenda() {
             let _venda = $('#Venda_IdVenda').find(":selected").val;
 
             if (_venda == 0) {
@@ -213,10 +213,7 @@
             var json = JSON.stringify(obj);
 
             if (idCliente > 0) {
-                console.log("JSON", json);
-
                 var result = chamarApi("/Vendas/MostrarDetalhesCliente", 'POST', json, "#divDetalhesCliente", "Consultando Detalhes dos Clientes!", false);
-
             }
         }
 
@@ -229,10 +226,8 @@
             var ItemVenda_IdProduto = $("#IdProduto").val();
             var ItemVenda_Quantidade = $("#Quantidade").val();
 
-            console.log("IdVenda", Venda_IdVenda);
-
             if (ItemVenda_IdProduto == "" || ItemVenda_IdProduto == undefined) { mensage += "Produto, "; }
-            if (ItemVenda_Quantidade == "" || ItemVenda_Quantidade == undefined) { mensage += "Quantidade, "; }
+            if (ItemVenda_Quantidade == "" || ItemVenda_Quantidade == undefined || ItemVenda_Quantidade <= 0) { mensage += "Quantidade, "; }
 
             if (mensage != "") {
                 return alert(mensage + ' não pode(m) ser vazio(s)!!');
@@ -243,13 +238,10 @@
                     IdProduto: parseInt(ItemVenda_IdProduto),
                     Quantidade: parseInt(ItemVenda_Quantidade),
                 }
-                console.log("Else", ItemVenda);
 
             }
 
             var itemVenda = JSON.stringify(ItemVenda);
-            console.log("Json", itemVenda);
-
             if (itemVenda.length > 0) {
 
                 var result = chamarApi("/Vendas/SalvarItemVenda", 'POST', itemVenda, "#divItemVenda", "Item adicionado com Sucesso!", false);
@@ -288,8 +280,7 @@
 
                 var result = chamarApi("/Vendas/SalvarEditarVenda", 'POST', venda, "#divIdVenda", "Venda Iniciada com Sucesso!", false);
 
-                console.log("result da api SalvarVenda", result);
-                ControleDeVisibilidadeProdutosVenda();
+                controleDeVisibilidadeProdutosVenda();
                 bloquearCamposVenda()
             }
         }
@@ -303,8 +294,6 @@
             var Venda_IdStatus = $("#IdStatus").val();
             var Venda_IdCliente = $("#IdCliente").val();
             var Venda_IdVendedor = $("#IdVendedor").val();
-
-            console.log("IdVenda", Venda_IdVenda);
 
             if (Venda_IdStatus == "" || Venda_IdStatus == undefined) { mensage += "Status, "; }
 
@@ -328,13 +317,8 @@
 
                 var result = chamarApi("/Vendas/SalvarEditarVenda", 'POST', venda, "#divIdVenda", "Venda Salva com Sucesso!");
 
-                if (result == "true") {
-                    console.log("Venda Sucesso Api");
-                }
-
             }
         }
-
 
         async function chamarApi(_url, _method, _data, _partialViewName, _msgSucessoPersonalizada = "Concluido com Sucesso!", showPopUp = true) {
             var mensage = "";
@@ -386,7 +370,6 @@
             return await Promise.all(result);
 
         }
-
 
     </script>
 

@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Web;
 
 namespace Tecidolandia.Models.Entities
 {
@@ -16,7 +13,6 @@ namespace Tecidolandia.Models.Entities
         public Int64 IdVenda { get; set; }
 
         [Column("DT_REGISTRO")]
-        //[DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}", ApplyFormatInEditMode = true)]
         [Display(Name = "Data de Registro")]
         public DateTime DtRegistro { get; set; }
@@ -44,7 +40,5 @@ namespace Tecidolandia.Models.Entities
         public virtual Cliente Clientes { get; set; }
         public virtual Vendedor Vendedores { get; set; }
         public virtual Status Status { get; set; }
-
-        //public virtual Status VendaItem { get; set; }
     }
 }

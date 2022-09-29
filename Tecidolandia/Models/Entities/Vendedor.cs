@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Web;
 
 namespace Tecidolandia.Models.Entities
 {
@@ -17,7 +14,6 @@ namespace Tecidolandia.Models.Entities
         [Required(ErrorMessage = "O campo nome é obrigatório")]
         [Column("NOME")]
         public String Nome { get; set; }
-
         
         [Column("DT_NASC")]
         //[DataType(DataType.Date)]
