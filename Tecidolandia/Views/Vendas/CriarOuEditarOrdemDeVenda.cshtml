@@ -124,7 +124,7 @@
                         <tr>
                             <td>
                                 <label class="label label-default text-justify"> &nbsp  Valor Total &nbsp </label>
-                                @Html.DisplayFor(model => model.Venda.VlTotal, new { htmlAttributes = new { @class = "btn btn-xs" } })
+                                @Html.DisplayFor(model => @Model.Venda.VlTotal, new { htmlAttributes = new { @class = "btn btn-xs" } })
                             </td>
                         </tr>
                         <tr>
@@ -227,7 +227,7 @@
             var ItemVenda_Quantidade = $("#Quantidade").val();
 
             if (ItemVenda_IdProduto == "" || ItemVenda_IdProduto == undefined) { mensage += "Produto, "; }
-            if (ItemVenda_Quantidade == "" || ItemVenda_Quantidade == undefined || ItemVenda_Quantidade <= 0) { mensage += "Quantidade, "; }
+            if (ItemVenda_Quantidade == "" || ItemVenda_Quantidade == undefined) { mensage += "Quantidade, "; }
 
             if (mensage != "") {
                 return alert(mensage + ' não pode(m) ser vazio(s)!!');
@@ -285,7 +285,7 @@
             }
         }
 
-        function EditarVenda() {
+        async function EditarVenda() {
 
             var Venda = {};
             var mensage = "";
@@ -297,8 +297,8 @@
 
             if (Venda_IdStatus == "" || Venda_IdStatus == undefined) { mensage += "Status, "; }
 
+
             if (mensage != "") {
-                console.log(mensage);
                 return alert(mensage + ' não pode ser vazio!!');
 
             } else {
@@ -315,10 +315,14 @@
 
             if (venda.length > 0) {
 
-                var result = chamarApi("/Vendas/SalvarEditarVenda", 'POST', venda, "#divIdVenda", "Venda Salva com Sucesso!");
+                 var result = chamarApi("/Vendas/SalvarEditarVenda", 'POST', venda, "#divIdVenda", "Venda Salva com Sucesso!");
 
             }
         }
+
+        //function sleep(ms) {
+        //    return new Promise(resolve => setTimeout(resolve, ms))
+        //}
 
         async function chamarApi(_url, _method, _data, _partialViewName, _msgSucessoPersonalizada = "Concluido com Sucesso!", showPopUp = true) {
             var mensage = "";
@@ -367,8 +371,11 @@
                 }
             }, 100);
 
-            return await Promise.all(result);
-
+            //async function timeoutHandler() {
+            //    await sleep(1)
+            //    return result;
+            //}
+            //setTimeout(timeoutHandler, 10000)
         }
 
     </script>
