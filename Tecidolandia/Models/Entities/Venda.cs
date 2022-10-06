@@ -39,6 +39,6 @@ namespace Tecidolandia.Models.Entities
         //propriedades de navegação
         public virtual Cliente Clientes { get; set; }
         public virtual Vendedor Vendedores { get; set; }
-        public virtual Status Status { get; set; }
+        public virtual Status Status { get; set; }  
     }
 }
