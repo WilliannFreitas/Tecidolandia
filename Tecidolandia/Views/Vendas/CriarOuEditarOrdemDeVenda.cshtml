@@ -4,7 +4,7 @@
     ViewBag.Title = "Create";
 }
 
-<div class="panel-body">
+<div class="panel-body" onload="controleDeVisibilidadeProdutosVenda()">
     <div class="col-md-12">
 
         <div class="col-md-12" id="mod1">
@@ -123,7 +123,8 @@
                         <tr>
                             <td>
                                 <label class="label label-default text-justify"> &nbsp  Valor Total &nbsp </label>
-                                @Html.DisplayFor(model => @Model.Venda.VlTotal, new { htmlAttributes = new { @class = "btn btn-xs", @type = "number"} })
+                                @*@Html.DisplayFor(model => @Model.VendaVenda.VlTotal.VlTotal, new { htmlAttributes = new { @class = "btn btn-xs", @style = " width: 200px; border-bottom: 1px solid #d9d9d9; border-radius: 5px;" } })*@
+                                @Html.EditorFor(model => model.Venda.VlTotal, new { htmlAttributes = new { @class = "btn btn-xs", @type = "number, min = 0, max = 9999", @style = "width: 200px;  border-bottom: 1px solid #d9d9d9; border-radius: 5px;" } })
                             </td>
                         </tr>
                         <tr>
@@ -139,7 +140,6 @@
                 <div class="row">
                     <div id="divItemVenda" class="panel panel-default">
                         @Html.Partial("_PartialItemVenda")
-
                     </div>
                 </div>
             </div>
@@ -154,19 +154,17 @@
 @section Scripts {
     <script type="text/javascript">
 
+        controleDeVisibilidadeProdutosVenda();
+
         $(document).on('click', '#SalvarVenda', function () {
             SalvarVenda();
         });
-
-        //$(document).on('onload', '#SalvarVenda', function () {
-        //    SalvarVenda();
-        //});
 
         $(document).on('click', '#EditarVenda', function () {
             EditarVenda();
 
             let _status = $('#IdStatus').find(":selected").text().toUpperCase();
-           
+
             if (_status == 'CONCLUÍDO') {
                 ControleDeCamposItemVenda(true);
             } else {
@@ -190,6 +188,7 @@
         function controleDeVisibilidadeProdutosVenda() {
             let _venda = $('#Venda_IdVenda').find(":selected").val;
 
+            console.log('bateu onload');
             if (_venda == 0) {
                 document.getElementById('mod2').style.display = 'none';;
             } else {
@@ -207,6 +206,7 @@
             controlerFields(true, '#IdCliente');
             controlerFields(true, '#IdVendedor');
             controlerFields(true, '#SalvarVenda');
+            controlerFields(true, "#Venda_VlTotal")
         }
 
         function mostrarDetalhesCliente(idCliente) {
@@ -319,7 +319,7 @@
 
             if (venda.length > 0) {
 
-                 var result = chamarApi("/Vendas/SalvarEditarVenda", 'POST', venda, "#divIdVenda", "Venda Salva com Sucesso!");
+                var result = chamarApi("/Vendas/SalvarEditarVenda", 'POST', venda, "#divIdVenda", "Venda Salva com Sucesso!");
 
             }
         }

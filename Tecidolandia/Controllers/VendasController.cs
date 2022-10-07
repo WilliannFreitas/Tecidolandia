@@ -66,8 +66,12 @@ namespace Tecidolandia
         {
             var vendaItemList = db.VendaItems.Where(b => b.IdVenda == id).Include(p => p.Produtos).ToList();
             var statusAtivos = db.Status.Where(a => a.StatusVenda == true).ToList();
-
             vm.Venda = db.Vendas.Where(a => a.IdVenda == id).FirstOrDefault();
+
+            vm.IdCliente = vm.Venda.IdCliente;
+            vm.IdVendedor = vm.Venda.IdVendedor;
+            vm.IdStatus = vm.Venda.IdStatus;
+
             vm.VendedorList = db.Vendedores.ToList();
             vm.ClienteList = db.Clientes.ToList();
             vm.StatusList = statusAtivos;
@@ -89,6 +93,7 @@ namespace Tecidolandia
                 auxVendaItemValor.Produtos = item.Produtos;
 
                 vm.VendaItemValor.Add(auxVendaItemValor);
+
             }
             return vm;
         }

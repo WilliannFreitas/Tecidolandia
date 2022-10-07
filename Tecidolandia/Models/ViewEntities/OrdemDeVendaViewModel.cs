@@ -26,6 +26,8 @@ namespace Tecidolandia.Models.ViewEntities
         public Venda Venda { get; set; }
         public List<VendaItemValor> VendaItemValor { get; set; }
         public long? Quantidade { get; set; }
+
+        [DataType(DataType.Currency)]
         public long? ValorProduto { get; set; }
         public Cliente ClienteSelecionado {get; set;}
         public long? ConcluirVenda { get; set;}
@@ -34,6 +36,7 @@ namespace Tecidolandia.Models.ViewEntities
 
     public class VendaItemValor : VendaItem
     {
+        [DataType(DataType.Currency)]
         public double ValorUnitario { get; set; }
     }
 
