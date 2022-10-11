@@ -122,9 +122,9 @@
                         </tr>
                         <tr>
                             <td>
-                                <label class="label label-default text-justify"> &nbsp  Valor Total &nbsp </label>
-                                @*@Html.DisplayFor(model => @Model.VendaVenda.VlTotal.VlTotal, new { htmlAttributes = new { @class = "btn btn-xs", @style = " width: 200px; border-bottom: 1px solid #d9d9d9; border-radius: 5px;" } })*@
-                                @Html.EditorFor(model => model.Venda.VlTotal, new { htmlAttributes = new { @class = "btn btn-xs", @type = "number, min = 0, max = 9999", @style = "width: 200px;  border-bottom: 1px solid #d9d9d9; border-radius: 5px;" } })
+                                <div id="divVlTotal">
+                                    @Html.Partial("_PartialVlTotal")
+                                </div>
                             </td>
                         </tr>
                         <tr>
@@ -174,6 +174,7 @@
 
         $(document).on('click', '#SalvarItemVenda', function () {
             salvarItemVenda();
+
         });
 
         $(document).on('change', '#IdCliente', function () {
@@ -351,6 +352,7 @@
                     result = "false";
 
                 } else {
+                    console.log("entrou no else")
                     result = "true";
                     if (showPopUp) {
                         alert(_msgSucessoPersonalizada);
@@ -358,7 +360,13 @@
                     if (_partialViewName != null || _partialViewName != undefined) {
                         if (msg.partialView != undefined && msg.partialView != '') {
 
+                            console.log("variavel", _partialViewName)
+                            console.log("mensagem", msg.partialView)
                             $(_partialViewName).html(msg.partialView);
+                            if (msg.partialView != undefined && msg.partialView != '') {
+                                $('#divVlTotal').html(msg.partialViewVlTotal);
+                            }
+
                         }
                     }
 

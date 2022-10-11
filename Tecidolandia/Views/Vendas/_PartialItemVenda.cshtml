@@ -40,11 +40,9 @@
                 </td>
 
                 <td>
-                    @Html.ActionLink(" ", "Edit", new { id = item.IdVendaItem }, new { @class = "glyphicon glyphicon-pencil" })
+                    @Html.ActionLink(" ", "./Edit", "VendaItens", new { id = item.IdVendaItem }, new { @class = "glyphicon glyphicon-pencil" })
                     &nbsp
-                    @Html.ActionLink(" ", "Details", new { id = item.IdVendaItem }, new { @class = "glyphicon glyphicon-option-horizontal" })
-                    &nbsp
-                    @Html.ActionLink(" ", "Delete", new { id = item.IdVendaItem }, new { @class = "glyphicon glyphicon-trash" })
+                    @Html.ActionLink(" ", "Delete", "VendaItens", new { id = item.IdVendaItem }, new { @class = "glyphicon glyphicon-trash" })
                 </td>
             </tr>
         }

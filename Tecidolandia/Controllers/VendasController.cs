@@ -58,6 +58,7 @@ namespace Tecidolandia
             vm.ProdutoList = db.Produtos.Include(p => p.TipoEstampas).ToList();
             vm.VendaItemValor = new List<VendaItemValor>();
 
+
             return vm;
         }
 
@@ -66,8 +67,9 @@ namespace Tecidolandia
         {
             var vendaItemList = db.VendaItems.Where(b => b.IdVenda == id).Include(p => p.Produtos).ToList();
             var statusAtivos = db.Status.Where(a => a.StatusVenda == true).ToList();
-            vm.Venda = db.Vendas.Where(a => a.IdVenda == id).FirstOrDefault();
+            var valorVenda = db.Vendas.Where(a => a.VlTotal == id).FirstOrDefault();
 
+            vm.Venda = db.Vendas.Where(a => a.IdVenda == id).FirstOrDefault();
             vm.IdCliente = vm.Venda.IdCliente;
             vm.IdVendedor = vm.Venda.IdVendedor;
             vm.IdStatus = vm.Venda.IdStatus;
@@ -200,6 +202,7 @@ namespace Tecidolandia
                     valorTotal += auxVendaItemValor.VlTotal;
                 }
                 venda.VlTotal = valorTotal;
+                //vm.Venda.VlTotal = venda.VlTotal;
 
                 db.Entry(venda).State = EntityState.Modified;
                 db.SaveChanges();
@@ -207,8 +210,9 @@ namespace Tecidolandia
                 vm.Venda = venda;
 
                 var partial = PartialView("_PartialItemVenda", vm).RenderToString();
+                var partialVlTotal = PartialView("_PartialVlTotal", vm).RenderToString();
 
-                return Json(new { status = "OK", description = "Venda gerada com Sucesso!", partialView = partial }, JsonRequestBehavior.AllowGet);
+                return Json(new { status = "OK", description = "Venda gerada com Sucesso!", partialView = partial, partialViewVlTotal = partialVlTotal}, JsonRequestBehavior.AllowGet);
             }
             catch (Exception ex)
             {
