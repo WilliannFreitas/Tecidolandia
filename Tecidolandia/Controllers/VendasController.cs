@@ -69,7 +69,8 @@ namespace Tecidolandia
             var statusAtivos = db.Status.Where(a => a.StatusVenda == true).ToList();
             var valorVenda = db.Vendas.Where(a => a.VlTotal == id).FirstOrDefault();
 
-            vm.Venda = db.Vendas.Where(a => a.IdVenda == id).FirstOrDefault();
+            //vm.Venda = db.Vendas.Where(a => a.IdVenda == id).FirstOrDefault();
+            vm.Venda = AtualizarValorTotalVenda(id);
             vm.IdCliente = vm.Venda.IdCliente;
             vm.IdVendedor = vm.Venda.IdVendedor;
             vm.IdStatus = vm.Venda.IdStatus;
@@ -97,6 +98,7 @@ namespace Tecidolandia
                 vm.VendaItemValor.Add(auxVendaItemValor);
 
             }
+            
             return vm;
         }
 
@@ -180,45 +182,49 @@ namespace Tecidolandia
                     db.SaveChanges();
                 }
 
-                var vendaItemList = db.VendaItems.Where(b => b.IdVenda == itemVenda.IdVenda).Include(p => p.Produtos).ToList();
-                var venda = db.Vendas.Where(b => b.IdVenda == itemVenda.IdVenda).FirstOrDefault();
-
-                double valorTotal = 0;
-                vm.VendaItemValor = new List<VendaItemValor>();
-
-                foreach (VendaItem item in vendaItemList)
-                {
-                    var auxVendaItemValor = new VendaItemValor();
-                    auxVendaItemValor.IdProduto = item.IdProduto;
-                    auxVendaItemValor.IdVenda = item.IdVenda;
-                    auxVendaItemValor.IdVendaItem = item.IdVendaItem;
-                    auxVendaItemValor.Quantidade = item.Quantidade;
-                    auxVendaItemValor.Vendas = item.Vendas;
-                    auxVendaItemValor.VlTotal = item.VlTotal;
-                    auxVendaItemValor.ValorUnitario = db.Produtos.Where(b => b.IdProduto == item.IdProduto).Include(p => p.TipoEstampas).FirstOrDefault().TipoEstampas.VlMetro;
-                    auxVendaItemValor.Produtos = item.Produtos;
-
-                    vm.VendaItemValor.Add(auxVendaItemValor);
-                    valorTotal += auxVendaItemValor.VlTotal;
-                }
-                venda.VlTotal = valorTotal;
-                //vm.Venda.VlTotal = venda.VlTotal;
-
-                db.Entry(venda).State = EntityState.Modified;
-                db.SaveChanges();
-
-                vm.Venda = venda;
+                vm.Venda = AtualizarValorTotalVenda(itemVenda.IdVenda);
 
                 var partial = PartialView("_PartialItemVenda", vm).RenderToString();
                 var partialVlTotal = PartialView("_PartialVlTotal", vm).RenderToString();
 
-                return Json(new { status = "OK", description = "Venda gerada com Sucesso!", partialView = partial, partialViewVlTotal = partialVlTotal}, JsonRequestBehavior.AllowGet);
+                return Json(new { status = "OK", description = "Venda gerada com Sucesso!", partialView = partial, partialViewVlTotal = partialVlTotal }, JsonRequestBehavior.AllowGet);
             }
             catch (Exception ex)
             {
                 ViewBag.MsgErroVenda = "Ocorreu um erro! " + ex.Message.ToString();
                 return Json(new { status = "NOK", description = "Erro ao Salvar - Exception: " + ex.Message.ToString() + " | InnerException" + ex.InnerException.InnerException.ToString() + " | StackTrace" + ex.StackTrace.ToString(), IdTicket = 0 }, JsonRequestBehavior.AllowGet);
             }
+        }
+
+        private Venda AtualizarValorTotalVenda(long? id)
+        {
+            var venda = db.Vendas.Where(b => b.IdVenda == id).FirstOrDefault();
+            var vendaItemList = db.VendaItems.Where(b => b.IdVenda == id).Include(p => p.Produtos).ToList();
+
+            double valorTotal = 0;
+            vm.VendaItemValor = new List<VendaItemValor>();
+
+            foreach (VendaItem item in vendaItemList)
+            {
+                var auxVendaItemValor = new VendaItemValor();
+                auxVendaItemValor.IdProduto = item.IdProduto;
+                auxVendaItemValor.IdVenda = item.IdVenda;
+                auxVendaItemValor.IdVendaItem = item.IdVendaItem;
+                auxVendaItemValor.Quantidade = item.Quantidade;
+                auxVendaItemValor.Vendas = item.Vendas;
+                auxVendaItemValor.VlTotal = item.VlTotal;
+                auxVendaItemValor.ValorUnitario = db.Produtos.Where(b => b.IdProduto == item.IdProduto).Include(p => p.TipoEstampas).FirstOrDefault().TipoEstampas.VlMetro;
+                auxVendaItemValor.Produtos = item.Produtos;
+
+                vm.VendaItemValor.Add(auxVendaItemValor);
+                valorTotal += auxVendaItemValor.VlTotal;
+            }
+            venda.VlTotal = valorTotal;
+            //vm.Venda.VlTotal = venda.VlTotal;
+
+            db.Entry(venda).State = EntityState.Modified;
+            db.SaveChanges();
+            return venda;
         }
         #endregion
 

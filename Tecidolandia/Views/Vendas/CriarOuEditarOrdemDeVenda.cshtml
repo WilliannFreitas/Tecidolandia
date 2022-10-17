@@ -94,7 +94,7 @@
                             </td>
 
                             <td>
-                                @Html.EditorFor(model => model.Quantidade, new { htmlAttributes = new { @class = "btn btn-xs", @type = "number, min = 0, max = 9999", @style = "width: 200px;  border-bottom: 1px solid #d9d9d9; border-radius: 5px;" } })
+                                @Html.EditorFor(model => model.Quantidade, new { htmlAttributes = new { @class = "btn btn-xs", @type = "number", @min = 1, @max = 9999, @step = "0", @style = "width: 200px;  border-bottom: 1px solid #d9d9d9; border-radius: 5px;" } })
                             </td>
                         </tr>
 
@@ -154,10 +154,11 @@
 @section Scripts {
     <script type="text/javascript">
 
-        controleDeVisibilidadeProdutosVenda();
 
         $(document).on('click', '#SalvarVenda', function () {
             SalvarVenda();
+            controlerFields(true, "#Venda_VlTotal");
+            document.getElementById("#Venda_VlTotal").disabled = true;
         });
 
         $(document).on('click', '#EditarVenda', function () {
@@ -182,6 +183,14 @@
             mostrarDetalhesCliente(parseInt(idCliente));
         });
 
+        var IdVenda = $("#Venda_IdVenda").val();
+        var ProdutoQ = $("#Quantidade").val();
+
+        if (IdVenda > 0) {
+            controleDeVisibilidadeProdutosVenda();
+            controlerFields(true, "#Venda_VlTotal");
+        }
+
         function controlerFields(pSelect, pFldName) {
             document.querySelector(pFldName).disabled = pSelect;
         }
@@ -189,7 +198,6 @@
         function controleDeVisibilidadeProdutosVenda() {
             let _venda = $('#Venda_IdVenda').find(":selected").val;
 
-            console.log('bateu onload');
             if (_venda == 0) {
                 document.getElementById('mod2').style.display = 'none';;
             } else {
@@ -207,7 +215,6 @@
             controlerFields(true, '#IdCliente');
             controlerFields(true, '#IdVendedor');
             controlerFields(true, '#SalvarVenda');
-            controlerFields(true, "#Venda_VlTotal")
         }
 
         function mostrarDetalhesCliente(idCliente) {
@@ -232,7 +239,7 @@
             var ItemVenda_Quantidade = $("#Quantidade").val();
 
             if (ItemVenda_IdProduto == "" || ItemVenda_IdProduto == undefined) { mensage += "Produto, "; }
-            if (ItemVenda_Quantidade == "" || ItemVenda_Quantidade == undefined) { mensage += "Quantidade, "; }
+            if (ItemVenda_Quantidade == "" || ItemVenda_Quantidade == undefined || ItemVenda_Quantidade <= 0) { mensage += "Quantidade, "; }
 
             if (mensage != "") {
                 return alert(mensage + ' não pode(m) ser vazio(s)!!');
@@ -325,10 +332,6 @@
             }
         }
 
-        //function sleep(ms) {
-        //    return new Promise(resolve => setTimeout(resolve, ms))
-        //}
-
         async function chamarApi(_url, _method, _data, _partialViewName, _msgSucessoPersonalizada = "Concluido com Sucesso!", showPopUp = true) {
             var mensage = "";
 
@@ -351,8 +354,7 @@
                     alert('Ops! Ocorreu um Erro!! :' + msg.error);
                     result = "false";
 
-                } else {
-                    console.log("entrou no else")
+                } else { 
                     result = "true";
                     if (showPopUp) {
                         alert(_msgSucessoPersonalizada);
@@ -360,8 +362,8 @@
                     if (_partialViewName != null || _partialViewName != undefined) {
                         if (msg.partialView != undefined && msg.partialView != '') {
 
-                            console.log("variavel", _partialViewName)
-                            console.log("mensagem", msg.partialView)
+                            //console.log("variavel", _partialViewName)
+                            //console.log("mensagem", msg.partialView)
                             $(_partialViewName).html(msg.partialView);
                             if (msg.partialView != undefined && msg.partialView != '') {
                                 $('#divVlTotal').html(msg.partialViewVlTotal);

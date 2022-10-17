@@ -289,7 +289,7 @@
     <Content Include="Views\VendaItems\Delete.cshtml" />
     <Content Include="Views\VendaItems\Details.cshtml" />
     <Content Include="Views\VendaItems\Edit.cshtml" />
-    <Content Include="Views\VendaItems\Index.cshtml" />
+    <Content Include="Views\VendaItems\_Index.cshtml" />
     <Content Include="Views\Produtos\Create.cshtml" />
     <Content Include="Views\Produtos\Delete.cshtml" />
     <Content Include="Views\Produtos\Details.cshtml" />

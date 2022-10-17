@@ -1,4 +1,4 @@
-﻿ using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
@@ -8,13 +8,14 @@ using System.Web;
 using System.Web.Mvc;
 using Tecidolandia.Context;
 using Tecidolandia.Models.Entities;
+using Tecidolandia.Models.ViewEntities;
 
 namespace Tecidolandia
 {
     public class VendaItemsController : Controller
     {
         private TecidolandiaContext db = new TecidolandiaContext();
-
+        private OrdemDeVendaViewModel vmOrdemDeVendaViewModel = new OrdemDeVendaViewModel();
         // GET: VendaItems
         public ActionResult Index()
         {
@@ -88,15 +89,14 @@ namespace Tecidolandia
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "IdVendaItem,IdProduto,IdVenda,Quantidade,VlTotal")] VendaItem vendaItem)
         {
+            var vendaController = new VendasController();
             if (ModelState.IsValid)
             {
                 db.Entry(vendaItem).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
             }
-            ViewBag.IdProduto = new SelectList(db.Produtos, "IdProduto", "Nome", vendaItem.IdProduto);
-            ViewBag.IdVenda = new SelectList(db.Vendas, "IdVenda", "IdVenda", vendaItem.IdVenda);
-            return View(vendaItem);
+
+            return RedirectToAction("CriarOuEditarOrdemDeVenda", "Vendas", new { id = vendaItem.IdVenda });
         }
 
         // GET: VendaItems/Delete/5
