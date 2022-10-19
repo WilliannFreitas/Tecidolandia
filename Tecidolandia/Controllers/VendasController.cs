@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
+using System.Net;
 using System.Web.Mvc;
 using Tecidolandia.Context;
 using Tecidolandia.Extensions;
@@ -20,12 +21,14 @@ namespace Tecidolandia
         // GET: Vendas
         public ActionResult Index()
         {
-            var vendas = db.Vendas.Include(v => v.Clientes).Include(v => v.Status).Include(v => v.Vendedores);
+            var idStatus = db.Status.Where(a => a.NmStatus.ToUpper() == "VENDA DELETADA").FirstOrDefault().IdStatus;
+            var vendas = db.Vendas.Include(v => v.Clientes).Include(v => v.Status).Include(v => v.Vendedores).Where(v => v.IdStatus != idStatus);
             return View(vendas.ToList());
         }
 
         protected override void Dispose(bool disposing)
         {
+
             if (disposing)
             {
                 db.Dispose();
@@ -61,6 +64,35 @@ namespace Tecidolandia
 
             return vm;
         }
+
+        // GET: Venda/Delete/5
+        public ActionResult Delete(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Venda venda = db.Vendas.Find(id);
+            if (venda == null)
+            {
+                return HttpNotFound();
+            }
+            return View(venda);
+        }
+
+        // POST: Venda/Delete/5
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteConfirmed(int id)
+        {
+            Venda venda = db.Vendas.Find(id);
+            //db.Vendas.Remove(venda);
+            venda.IdStatus = db.Status.Where(a => a.NmStatus.ToUpper() == "VENDA DELETADA").FirstOrDefault().IdStatus;
+            db.Entry(venda).State = EntityState.Modified;
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+
 
         // GET: Vendas/Edit/5
         private OrdemDeVendaViewModel Edit(long? id)
@@ -371,6 +403,7 @@ namespace Tecidolandia
 
             };
             status.Add(status1);
+            
 
             Status status2 = new Status()
             {
@@ -387,6 +420,14 @@ namespace Tecidolandia
 
             };
             status.Add(status3);
+
+            Status status4 = new Status()
+            {
+                NmStatus = "Venda Deletada",
+                StatusVenda = true
+
+            };
+            status.Add(status4);
 
             db.Status.AddRange(status);
             db.SaveChanges();

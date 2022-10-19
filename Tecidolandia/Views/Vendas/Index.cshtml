@@ -18,13 +18,13 @@
         <table class="table">
             <tr>
                 <th>
-                    Vendedor
+                    Cliente
                 </th>
                 <th>
                     @Html.DisplayNameFor(model => model.Status.NmStatus)
                 </th>
                 <th>
-                    Cliente
+                    Vendedor
                 </th>
                 <th>
                     @Html.DisplayNameFor(model => model.DtRegistro)
@@ -55,7 +55,7 @@
                 <td>
                     @Html.ActionLink(" ", "CriarOuEditarOrdemDeVenda", new { id = item.IdVenda }, new { @class = "glyphicon glyphicon-pencil" })
                     &nbsp
-                    @Html.ActionLink(" ", "Details", new { id = item.IdVenda }, new { @class = "glyphicon glyphicon-option-horizontal" })
+                    @*@Html.ActionLink(" ", "Details", new { id = item.IdVenda }, new { @class = "glyphicon glyphicon-option-horizontal" })*@
                     &nbsp
                     @Html.ActionLink(" ", "Delete", new { id = item.IdVenda }, new { @class = "glyphicon glyphicon-trash" })
                 </td>

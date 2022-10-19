@@ -154,11 +154,8 @@
 @section Scripts {
     <script type="text/javascript">
 
-
         $(document).on('click', '#SalvarVenda', function () {
             SalvarVenda();
-            controlerFields(true, "#Venda_VlTotal");
-            document.getElementById("#Venda_VlTotal").disabled = true;
         });
 
         $(document).on('click', '#EditarVenda', function () {
@@ -175,7 +172,6 @@
 
         $(document).on('click', '#SalvarItemVenda', function () {
             salvarItemVenda();
-
         });
 
         $(document).on('change', '#IdCliente', function () {
@@ -188,7 +184,6 @@
 
         if (IdVenda > 0) {
             controleDeVisibilidadeProdutosVenda();
-            controlerFields(true, "#Venda_VlTotal");
         }
 
         function controlerFields(pSelect, pFldName) {
@@ -231,6 +226,7 @@
 
         function salvarItemVenda() {
 
+            console.log(" iniciando salvarItemVenda")
             var ItemVenda = {};
             var mensage = "";
 
@@ -259,6 +255,7 @@
                 var result = chamarApi("/Vendas/SalvarItemVenda", 'POST', itemVenda, "#divItemVenda", "Item adicionado com Sucesso!", false);
 
             }
+            console.log(" finalizando salvarItemVenda")
 
         }
 
@@ -367,6 +364,7 @@
                             $(_partialViewName).html(msg.partialView);
                             if (msg.partialView != undefined && msg.partialView != '') {
                                 $('#divVlTotal').html(msg.partialViewVlTotal);
+                                controlerFields(true, "#Venda_VlTotal");
                             }
 
                         }
