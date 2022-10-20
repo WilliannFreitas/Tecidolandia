@@ -73,6 +73,9 @@ namespace Tecidolandia
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             VendaItem vendaItem = db.VendaItems.Find(id);
+            //VendaItemValor vendaItemValor = new VendaItemValor();
+            //vendaItemValor = vendaItem. * vendaItem.Quantidade
+
             if (vendaItem == null)
             {
                 return HttpNotFound();
@@ -83,8 +86,6 @@ namespace Tecidolandia
         }
 
         // POST: VendaItems/Edit/5
-        // Para proteger-se contra ataques de excesso de postagem, ative as propriedades específicas às quais deseja se associar. 
-        // Para obter mais detalhes, confira https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "IdVendaItem,IdProduto,IdVenda,Quantidade,VlTotal")] VendaItem vendaItem)
@@ -92,10 +93,12 @@ namespace Tecidolandia
             var vendaController = new VendasController();
             if (ModelState.IsValid)
             {
-                db.Entry(vendaItem).State = EntityState.Modified;
+                var itemEditadoComProduto = db.VendaItems.Include(v => v.Produtos).Where(a => a.IdVendaItem == vendaItem.IdVendaItem).FirstOrDefault();
+                var tipoEstampaProduto = db.TipoEstampas.Where(a => a.IdTipoEstampa == itemEditadoComProduto.Produtos.IdTipoEstampa).FirstOrDefault();
+                itemEditadoComProduto.VlTotal = vendaItem.Quantidade * tipoEstampaProduto.VlMetro;
+                db.Entry(itemEditadoComProduto).State = EntityState.Modified;
                 db.SaveChanges();
             }
-
             return RedirectToAction("CriarOuEditarOrdemDeVenda", "Vendas", new { id = vendaItem.IdVenda });
         }
 
@@ -122,7 +125,7 @@ namespace Tecidolandia
             VendaItem vendaItem = db.VendaItems.Find(id);
             db.VendaItems.Remove(vendaItem);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("CriarOuEditarOrdemDeVenda", "Vendas", new { id = vendaItem.IdVenda });
         }
 
         protected override void Dispose(bool disposing)

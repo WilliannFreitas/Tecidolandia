@@ -6,11 +6,8 @@
 
 <div class="panel-body" onload="controleDeVisibilidadeProdutosVenda()">
     <div class="col-md-12">
-
         <div class="col-md-12" id="mod1">
-
             <h4 class="text-center" style=" font-family: Segoe UI Historic, serif; width: 100%"><b>Cadastrar Venda</b></h4>
-
             <div class="col-md-5 well">
                 <table align="center">
 
@@ -128,7 +125,6 @@
                             </td>
                         </tr>
                         <tr>
-
                             <td>
                                 <input type="submit" name="submit" id="EditarVenda" value=" Salvar Venda " class="btn btn-default btn-xs" style=" width: 100%" />
                             </td>
@@ -143,13 +139,9 @@
                     </div>
                 </div>
             </div>
-
         </div>
-
     </div>
-
 </div>
-
 
 @section Scripts {
     <script type="text/javascript">
@@ -184,6 +176,8 @@
 
         if (IdVenda > 0) {
             controleDeVisibilidadeProdutosVenda();
+            bloquearCamposVenda();
+            controlerFields(true, "#Venda_VlTotal");
         }
 
         function controlerFields(pSelect, pFldName) {
@@ -225,11 +219,8 @@
         }
 
         function salvarItemVenda() {
-
-            console.log(" iniciando salvarItemVenda")
             var ItemVenda = {};
             var mensage = "";
-
             var ItemVenda_IdVenda = $("#Venda_IdVenda").val();
             var ItemVenda_IdProduto = $("#IdProduto").val();
             var ItemVenda_Quantidade = $("#Quantidade").val();
@@ -239,31 +230,23 @@
 
             if (mensage != "") {
                 return alert(mensage + ' não pode(m) ser vazio(s)!!');
-
             } else {
                 ItemVenda = {
                     IdVenda: parseInt(ItemVenda_IdVenda),
                     IdProduto: parseInt(ItemVenda_IdProduto),
                     Quantidade: parseInt(ItemVenda_Quantidade),
                 }
-
             }
 
             var itemVenda = JSON.stringify(ItemVenda);
             if (itemVenda.length > 0) {
-
                 var result = chamarApi("/Vendas/SalvarItemVenda", 'POST', itemVenda, "#divItemVenda", "Item adicionado com Sucesso!", false);
-
             }
-            console.log(" finalizando salvarItemVenda")
-
         }
 
         function SalvarVenda() {
-
             var Venda = {};
             var mensage = "";
-
             var Venda_IdVenda = $("#Venda_IdVenda").val();
             var Venda_IdCliente = $("#IdCliente").val();
             var Venda_IdVendedor = $("#IdVendedor").val();
@@ -295,17 +278,14 @@
         }
 
         async function EditarVenda() {
-
             var Venda = {};
             var mensage = "";
-
             var Venda_IdVenda = $("#Venda_IdVenda").val();
             var Venda_IdStatus = $("#IdStatus").val();
             var Venda_IdCliente = $("#IdCliente").val();
             var Venda_IdVendedor = $("#IdVendedor").val();
 
             if (Venda_IdStatus == "" || Venda_IdStatus == undefined) { mensage += "Status, "; }
-
 
             if (mensage != "") {
                 return alert(mensage + ' não pode ser vazio!!');
@@ -323,15 +303,12 @@
             var venda = JSON.stringify(Venda);
 
             if (venda.length > 0) {
-
                 var result = chamarApi("/Vendas/SalvarEditarVenda", 'POST', venda, "#divIdVenda", "Venda Salva com Sucesso!");
-
             }
         }
 
         async function chamarApi(_url, _method, _data, _partialViewName, _msgSucessoPersonalizada = "Concluido com Sucesso!", showPopUp = true) {
             var mensage = "";
-
             var result = "";
 
             $.ajax({
@@ -358,18 +335,13 @@
                     }
                     if (_partialViewName != null || _partialViewName != undefined) {
                         if (msg.partialView != undefined && msg.partialView != '') {
-
-                            //console.log("variavel", _partialViewName)
-                            //console.log("mensagem", msg.partialView)
                             $(_partialViewName).html(msg.partialView);
                             if (msg.partialView != undefined && msg.partialView != '') {
                                 $('#divVlTotal').html(msg.partialViewVlTotal);
                                 controlerFields(true, "#Venda_VlTotal");
                             }
-
                         }
                     }
-
                 }
                 mensage = msg.description;
             }).fail(function (jqXHR, textStatus, msg) {
@@ -382,14 +354,7 @@
                     //sair do looping
                 }
             }, 100);
-
-            //async function timeoutHandler() {
-            //    await sleep(1)
-            //    return result;
-            //}
-            //setTimeout(timeoutHandler, 10000)
         }
-
     </script>
 
 }

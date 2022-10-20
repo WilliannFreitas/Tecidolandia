@@ -53,9 +53,9 @@
     {
         @Html.AntiForgeryToken()
 
-        <div class="form-actions no-color">
-            <input type="submit" value="Deletar" class="btn btn-default" /> |
-            @Html.ActionLink("Voltar", "Index")
-        </div>
+<div class="form-actions no-color">
+    <input type="submit" value="Deletar" class="btn btn-default" /> |
+    @Html.ActionLink("Voltar", "CriarOuEditarOrdemDeVenda", new { id = Model.IdVenda })
+</div>
     }
 </div>

@@ -61,6 +61,30 @@ namespace Tecidolandia
             vm.ProdutoList = db.Produtos.Include(p => p.TipoEstampas).ToList();
             vm.VendaItemValor = new List<VendaItemValor>();
 
+            return vm;
+        }
+
+        // GET: Vendas/Edit/5
+        private OrdemDeVendaViewModel Edit(long? id)
+        {
+            var vendaItemList = db.VendaItems.Where(b => b.IdVenda == id).Include(p => p.Produtos).ToList();
+            var statusAtivos = db.Status.Where(a => a.StatusVenda == true).ToList();
+            var valorVenda = db.Vendas.Where(a => a.VlTotal == id).FirstOrDefault();
+
+            vm.Venda = AtualizarValorTotalVenda(id);
+            vm.IdCliente = vm.Venda.IdCliente;
+            vm.IdVendedor = vm.Venda.IdVendedor;
+            vm.IdStatus = vm.Venda.IdStatus;
+
+            vm.VendedorList = db.Vendedores.ToList();
+            vm.ClienteList = db.Clientes.ToList();
+            vm.StatusList = statusAtivos;
+            vm.ProdutoList = db.Produtos.Include(p => p.TipoEstampas).ToList();
+            vm.ClienteSelecionado = db.Clientes.Where(b => b.IdCliente == vm.Venda.IdCliente).FirstOrDefault();
+
+            vm.VendaItemValor = new List<VendaItemValor>();
+
+            VlUnitVendaItem(vendaItemList);
 
             return vm;
         }
@@ -93,28 +117,8 @@ namespace Tecidolandia
             return RedirectToAction("Index");
         }
 
-
-        // GET: Vendas/Edit/5
-        private OrdemDeVendaViewModel Edit(long? id)
+        private void VlUnitVendaItem(List<VendaItem> vendaItemList)
         {
-            var vendaItemList = db.VendaItems.Where(b => b.IdVenda == id).Include(p => p.Produtos).ToList();
-            var statusAtivos = db.Status.Where(a => a.StatusVenda == true).ToList();
-            var valorVenda = db.Vendas.Where(a => a.VlTotal == id).FirstOrDefault();
-
-            //vm.Venda = db.Vendas.Where(a => a.IdVenda == id).FirstOrDefault();
-            vm.Venda = AtualizarValorTotalVenda(id);
-            vm.IdCliente = vm.Venda.IdCliente;
-            vm.IdVendedor = vm.Venda.IdVendedor;
-            vm.IdStatus = vm.Venda.IdStatus;
-
-            vm.VendedorList = db.Vendedores.ToList();
-            vm.ClienteList = db.Clientes.ToList();
-            vm.StatusList = statusAtivos;
-            vm.ProdutoList = db.Produtos.Include(p => p.TipoEstampas).ToList();
-            vm.ClienteSelecionado = db.Clientes.Where(b => b.IdCliente == vm.Venda.IdCliente).FirstOrDefault();
-
-            vm.VendaItemValor = new List<VendaItemValor>();
-
             foreach (VendaItem item in vendaItemList)
             {
                 var auxVendaItemValor = new VendaItemValor();
@@ -128,10 +132,7 @@ namespace Tecidolandia
                 auxVendaItemValor.Produtos = item.Produtos;
 
                 vm.VendaItemValor.Add(auxVendaItemValor);
-
             }
-            
-            return vm;
         }
 
         #endregion
@@ -232,6 +233,7 @@ namespace Tecidolandia
         {
             var venda = db.Vendas.Where(b => b.IdVenda == id).FirstOrDefault();
             var vendaItemList = db.VendaItems.Where(b => b.IdVenda == id).Include(p => p.Produtos).ToList();
+            var cliente = db.Clientes.Where(b => b.IdCliente == id).ToList();
 
             double valorTotal = 0;
             vm.VendaItemValor = new List<VendaItemValor>();
@@ -252,7 +254,6 @@ namespace Tecidolandia
                 valorTotal += auxVendaItemValor.VlTotal;
             }
             venda.VlTotal = valorTotal;
-            //vm.Venda.VlTotal = venda.VlTotal;
 
             db.Entry(venda).State = EntityState.Modified;
             db.SaveChanges();
@@ -403,7 +404,7 @@ namespace Tecidolandia
 
             };
             status.Add(status1);
-            
+
 
             Status status2 = new Status()
             {

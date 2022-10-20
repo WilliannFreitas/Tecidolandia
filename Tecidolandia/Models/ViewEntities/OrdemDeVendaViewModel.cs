@@ -1,15 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Web;
 using Tecidolandia.Models.Entities;
 
 namespace Tecidolandia.Models.ViewEntities
 {
     public class OrdemDeVendaViewModel
     {
-
         public long? IdVendedor { get; set; }
         public List<Vendedor> VendedorList { get; set; }
 
@@ -31,7 +27,6 @@ namespace Tecidolandia.Models.ViewEntities
         public long? ValorProduto { get; set; }
         public Cliente ClienteSelecionado {get; set;}
         public long? ConcluirVenda { get; set;}
-
     }
 
     public class VendaItemValor : VendaItem
@@ -39,6 +34,4 @@ namespace Tecidolandia.Models.ViewEntities
         [DataType(DataType.Currency)]
         public double ValorUnitario { get; set; }
     }
-
-
 }
