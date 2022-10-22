@@ -4,6 +4,8 @@
     ViewBag.Title = "Create";
 }
 
+<link href="@Url.Content("~/Content/EditSite.css")" rel="stylesheet" type="text/css" />
+
 <div class="panel-body" onload="controleDeVisibilidadeProdutosVenda()">
     <div class="col-md-12">
         <div class="col-md-12" id="mod1">
@@ -328,7 +330,7 @@
                     alert('Ops! Ocorreu um Erro!! :' + msg.error);
                     result = "false";
 
-                } else { 
+                } else {
                     result = "true";
                     if (showPopUp) {
                         alert(_msgSucessoPersonalizada);

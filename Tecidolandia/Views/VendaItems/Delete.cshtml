@@ -4,6 +4,8 @@
     ViewBag.Title = "Delete";
 }
 
+<link href="@Url.Content("~/Content/EditSite.css")" rel="stylesheet" type="text/css" />
+
 <h3>Tem certeza que deseja deletar esta item?</h3>
 <div>
     <hr />
@@ -42,7 +44,8 @@
 
     </dl>
 
-    @using (Html.BeginForm()) {
+    @using (Html.BeginForm())
+    {
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">
