@@ -5,4 +5,11 @@
     background-position: center center;
     /*background-repeat: no-repeat;*/
     background-size: 200px;
+
+    /*Shorthand - background
+        color > image > position > repeat > [size] > attachment
+         
+        background:   black   url('../../Imagens/Floral.jpg')   center center   no-repeat  (cover)  fixed;
+        background-size: cover;
+    */
 }

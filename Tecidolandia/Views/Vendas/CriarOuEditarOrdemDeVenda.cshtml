@@ -4,13 +4,19 @@
     ViewBag.Title = "Create";
 }
 
+<style>
+    div#container {
+        overflow-x: auto;
+    }
+</style>
+
 <link href="@Url.Content("~/Content/EditSite.css")" rel="stylesheet" type="text/css" />
 
 <div class="panel-body" onload="controleDeVisibilidadeProdutosVenda()">
     <div class="col-md-12">
         <div class="col-md-12" id="mod1">
             <h4 class="text-center" style=" font-family: Segoe UI Historic, serif; width: 100%"><b>Cadastrar Venda</b></h4>
-            <div class="col-md-5 well">
+            <div class="col-md-5 well" id="container">
                 <table align="center">
 
                     <tr>
@@ -59,7 +65,7 @@
                 </table>
             </div>
 
-            <div class="col-md-7 well">
+            <div class="col-md-7 well" id="container">
                 <div class="row">
                     <div id="divDetalhesCliente">
                         @Html.Partial("_PartialDetalhesCliente")
@@ -106,7 +112,7 @@
                     </table>
                 </div>
 
-                <div class="col-md-6 well">
+                <div class="col-md-6 well" id="container">
                     <table align="center">
                         <tr>
                             <td align="center">

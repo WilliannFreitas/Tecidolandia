@@ -181,9 +181,6 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
-    <Compile Include="Context\Conventions\DecimalModelBinder.cs" />
-    <Compile Include="Context\Conventions\DecimalPrecisionAttribute.cs" />
-    <Compile Include="Context\Conventions\DecimalPrecisionAttributeConvention.cs" />
     <Compile Include="Context\TecidolandiaContext.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ClientesController.cs" />
@@ -318,6 +315,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Users\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

@@ -12,6 +12,7 @@ using Tecidolandia.Models.ViewEntities;
 
 namespace Tecidolandia
 {
+    [Authorize]
     public class VendasController : Controller
     {
         private TecidolandiaContext db = new TecidolandiaContext();
@@ -25,10 +26,8 @@ namespace Tecidolandia
             var vendas = db.Vendas.Include(v => v.Clientes).Include(v => v.Status).Include(v => v.Vendedores).Where(v => v.IdStatus != idStatus);
             return View(vendas.ToList());
         }
-
         protected override void Dispose(bool disposing)
         {
-
             if (disposing)
             {
                 db.Dispose();
@@ -54,7 +53,7 @@ namespace Tecidolandia
         private OrdemDeVendaViewModel Create()
         {
             var statusAtivos = db.Status.Where(a => a.StatusVenda == true).ToList();
-
+            
             vm.VendedorList = db.Vendedores.ToList();
             vm.ClienteList = db.Clientes.ToList();
             vm.StatusList = statusAtivos;

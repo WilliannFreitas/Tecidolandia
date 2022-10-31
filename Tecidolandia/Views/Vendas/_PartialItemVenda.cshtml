@@ -1,53 +1,60 @@
 ﻿@model Tecidolandia.Models.ViewEntities.OrdemDeVendaViewModel
 
+<style>
+    div#container {
+        overflow-x: auto;
+    }
+</style>
 
 <div class="panel-heading text-center" style=" font-family: Segoe UI Historic, serif;">
     <b>Lista de Produtos</b>
 </div>
 
-<table class="table">
-    <thead>
-        <tr>
-            <th scope="col"><label class="label label-default text-justify"> Nome </label></th>
-            <th scope="col"><label class="label label-default text-justify"> Largura </label></th>
-            <th scope="col"><label class="label label-default text-justify"> Altura </label></th>
-            <th scope="col"><label class="label label-default text-justify"> Quantidade </label></th>
-            <th scope="col"><label class="label label-default text-justify"> Valor Unitário </label></th>
-            <th scope="col"><label class="label label-default text-justify"> Valor Total do Item </label></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model.VendaItemValor)
-        {
+<div id="container">
+    <table class="table">
+        <thead>
             <tr>
-                <td colspan="1">
-                    @Html.DisplayFor(modelItem => item.Produtos.Nome)
-                </td>
-                <td colspan="1">
-                    @Html.DisplayFor(modelItem => item.Produtos.Largura)
-                </td>
-                <td colspan="1">
-                    @Html.DisplayFor(modelItem => item.Produtos.Altura)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Quantidade)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ValorUnitario)
-                </td>
-                <td>
-                    @item.VlTotal.ToString("C")
-                </td>
-
-                <td>
-                    @Html.ActionLink(" ", "./Edit", "VendaItems", new { id = item.IdVendaItem }, new { @class = "glyphicon glyphicon-pencil" })
-                    &nbsp
-                    @Html.ActionLink(" ", "Delete", "VendaItems", new { id = item.IdVendaItem }, new { @class = "glyphicon glyphicon-trash" })
-                </td>
+                <th scope="col"><label class="label label-default text-justify"> Nome </label></th>
+                <th scope="col"><label class="label label-default text-justify"> Largura </label></th>
+                <th scope="col"><label class="label label-default text-justify"> Altura </label></th>
+                <th scope="col"><label class="label label-default text-justify"> Quantidade </label></th>
+                <th scope="col"><label class="label label-default text-justify"> Valor Unitário </label></th>
+                <th scope="col"><label class="label label-default text-justify"> Valor Total do Item </label></th>
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.VendaItemValor)
+            {
+                <tr>
+                    <td colspan="1">
+                        @Html.DisplayFor(modelItem => item.Produtos.Nome)
+                    </td>
+                    <td colspan="1">
+                        @Html.DisplayFor(modelItem => item.Produtos.Largura)
+                    </td>
+                    <td colspan="1">
+                        @Html.DisplayFor(modelItem => item.Produtos.Altura)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Quantidade)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ValorUnitario)
+                    </td>
+                    <td>
+                        @item.VlTotal.ToString("C")
+                    </td>
+
+                    <td>
+                        @Html.ActionLink(" ", "./Edit", "VendaItems", new { id = item.IdVendaItem }, new { @class = "glyphicon glyphicon-pencil" })
+                        &nbsp
+                        @Html.ActionLink(" ", "Delete", "VendaItems", new { id = item.IdVendaItem }, new { @class = "glyphicon glyphicon-trash" })
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
 
 @if (Model?.Venda?.VlTotal > 0)
 {

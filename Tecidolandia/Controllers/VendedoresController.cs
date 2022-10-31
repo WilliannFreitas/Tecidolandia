@@ -11,6 +11,7 @@ using Tecidolandia.Models.Entities;
 
 namespace Tecidolandia
 {
+    [Authorize]
     public class VendedoresController : Controller
     {
         private TecidolandiaContext db = new TecidolandiaContext();
