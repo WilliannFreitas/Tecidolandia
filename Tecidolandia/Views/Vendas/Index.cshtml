@@ -1,4 +1,8 @@
-﻿@model IEnumerable<Tecidolandia.Models.Entities.Venda>
+﻿@*@model IEnumerable<Tecidolandia.Models.Entities.Venda>*@
+@model PagedList.IPagedList<Tecidolandia.Models.Entities.Venda>
+@using PagedList.Mvc
+
+<link href="~/Content/PagedList.css" rel="stylesheet" />
 
 @{
     ViewBag.Title = "Index";
@@ -7,40 +11,40 @@
 <link href="@Url.Content("~/Content/EditSite.css")" rel="stylesheet" type="text/css" />
 
 
+
 <div class="row">
     <div class="col-lg-12">
         <div class="col-md-9">
             <h2>Lista de Vendas</h2>
         </div>
-        <div class="col-md-3    " >
+        <div class="col-md-3    ">
             <h2>@Html.ActionLink("Cadastrar Venda", "CriarOuEditarOrdemDeVenda", new { @class = "btn btn-default btn-xs" })</h2>
         </div>
     </div>
 </div>
 
-<table class="table well">
+<table id="tabelaVendas" class="table well">
     <tr>
         <th>
             <label class="label label-default text-justify m-2">Cliente</label>
         </th>
         <th>
             @*@Html.DisplayNameFor(model => model.Status.NmStatus)*@
-            <label class="label label-default text-justify m-2">@Html.DisplayNameFor(model => model.Status.NmStatus)</label>
+            <label class="label label-default text-justify m-2">@Html.DisplayName("Status")</label>
 
         </th>
         <th>
-            <label class="label label-default text-justify m-2">Vendedor</label>
+            <label class="label label-default text-justify m-2">@Html.DisplayName("Vendedor")</label>
 
         </th>
         <th>
-            
-            <label class="label label-default text-justify m-2">@Html.DisplayNameFor(model => model.DtRegistro)</label>
+
+            <label class="label label-default text-justify m-2">@Html.DisplayName("Data de Registro")</label>
         </th>
         <th>
-            
-            <label class="label label-default text-justify m-2">@Html.DisplayNameFor(model => model.VlTotal)</label>
+
+            <label class="label label-default text-justify m-2">@Html.DisplayName("Valor Total")</label>
         </th>
-        <th></th>
     </tr>
 
     @foreach (var item in Model)
@@ -70,3 +74,7 @@
     }
 
 </table>
+<br />
+Página @Model.PageNumber de @Model.PageCount
+
+@Html.PagedListPager(Model, page => Url.Action("Index", new {pagina = page}))

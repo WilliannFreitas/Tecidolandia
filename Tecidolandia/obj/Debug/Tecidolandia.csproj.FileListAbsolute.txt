@@ -128,9 +128,11 @@ D:\REPO\Tecidolandia\Tecidolandia\bin\pt-br\Microsoft.Owin.Security.Google.resou
 D:\REPO\Tecidolandia\Tecidolandia\bin\pt-br\Microsoft.Owin.Security.Twitter.resources.dll
 D:\REPO\Tecidolandia\Tecidolandia\bin\pt-br\Microsoft.Owin.Security.MicrosoftAccount.resources.dll
 D:\REPO\Tecidolandia\Tecidolandia\obj\Debug\Tecidolandia.csproj.AssemblyReference.cache
-D:\REPO\Tecidolandia\Tecidolandia\obj\Debug\Tecidolandia.Migrations.Inicial.resources
-D:\REPO\Tecidolandia\Tecidolandia\obj\Debug\Tecidolandia.csproj.GenerateResource.cache
 D:\REPO\Tecidolandia\Tecidolandia\obj\Debug\Tecidolandia.csproj.CoreCompileInputs.cache
 D:\REPO\Tecidolandia\Tecidolandia\obj\Debug\Tecidolandia.csproj.CopyComplete
 D:\REPO\Tecidolandia\Tecidolandia\obj\Debug\Tecidolandia.dll
 D:\REPO\Tecidolandia\Tecidolandia\obj\Debug\Tecidolandia.pdb
+D:\REPO\Tecidolandia\Tecidolandia\bin\PagedList.dll
+D:\REPO\Tecidolandia\Tecidolandia\bin\PagedList.Mvc.dll
+D:\REPO\Tecidolandia\Tecidolandia\bin\PagedList.xml
+D:\REPO\Tecidolandia\Tecidolandia\bin\PagedList.Mvc.xml

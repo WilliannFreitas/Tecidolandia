@@ -9,6 +9,7 @@ using Tecidolandia.Context;
 using Tecidolandia.Extensions;
 using Tecidolandia.Models.Entities;
 using Tecidolandia.Models.ViewEntities;
+using PagedList;
 
 namespace Tecidolandia
 {
@@ -20,11 +21,14 @@ namespace Tecidolandia
 
         #region TecidolandiaIndex
         // GET: Vendas
-        public ActionResult Index()
+        public ActionResult Index(int? pagina)
         {
+            int tamanhoPagina = 15;
+            int numeroPagina = pagina ?? 1;
+
             var idStatus = db.Status.Where(a => a.NmStatus.ToUpper() == "VENDA DELETADA").FirstOrDefault().IdStatus;
             var vendas = db.Vendas.Include(v => v.Clientes).Include(v => v.Status).Include(v => v.Vendedores).Where(v => v.IdStatus != idStatus);
-            return View(vendas.ToList());
+            return View(vendas.OrderBy(p => p.IdVenda).ToPagedList(numeroPagina, tamanhoPagina));
         }
         protected override void Dispose(bool disposing)
         {
