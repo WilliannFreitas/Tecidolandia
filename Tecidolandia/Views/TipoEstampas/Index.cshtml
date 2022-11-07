@@ -4,44 +4,47 @@
     ViewBag.Title = "Index";
 }
 
+<link href="@Url.Content("~/Content/EditSite.css")" rel="stylesheet" type="text/css" />
+
 <h2>Tipos de Estampa</h2>
 
 <p>
     @Html.ActionLink("Criar Nova", "Create")
 </p>
-<table class="table">
+<table class="table well">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Nome)
+            <label class="label label-default text-justify m-2">@Html.DisplayNameFor(model => model.Nome)</label>
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Descricao)
+            <label class="label label-default text-justify m-2">@Html.DisplayNameFor(model => model.Descricao)</label>
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.VlMetro)
+            <label class="label label-default text-justify m-2">@Html.DisplayNameFor(model => model.VlMetro)</label>
         </th>
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Nome)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Descricao)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.VlMetro)
-        </td>
-        <td>
-            @Html.ActionLink(" ", "Edit", new { id = item.IdTipoEstampa }, new { @class = "glyphicon glyphicon-pencil" })
-            &nbsp
-            @Html.ActionLink(" ", "Details", new { id = item.IdTipoEstampa }, new { @class = "glyphicon glyphicon-option-horizontal" })
-            &nbsp
-            @Html.ActionLink(" ", "Delete", new { id = item.IdTipoEstampa }, new { @class = "glyphicon glyphicon-trash" })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nome)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Descricao)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.VlMetro)
+            </td>
+            <td>
+                @Html.ActionLink(" ", "Edit", new { id = item.IdTipoEstampa }, new { @class = "glyphicon glyphicon-pencil" })
+                &nbsp
+                @Html.ActionLink(" ", "Details", new { id = item.IdTipoEstampa }, new { @class = "glyphicon glyphicon-option-horizontal" })
+                &nbsp
+                @Html.ActionLink(" ", "Delete", new { id = item.IdTipoEstampa }, new { @class = "glyphicon glyphicon-trash" })
+            </td>
+        </tr>
+    }
 
 </table>

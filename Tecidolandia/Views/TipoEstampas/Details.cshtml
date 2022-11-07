@@ -4,11 +4,12 @@
     ViewBag.Title = "Details";
 }
 
+<link href="@Url.Content("~/Content/EditSite.css")" rel="stylesheet" type="text/css" />
+
 <h2>Detalhes do Tipo de Estampa - @Html.DisplayFor(model => model.Nome)</h2>
 
-<div>
-    
-    <hr />
+<div class="well">
+
     <dl class="dl-horizontal">
         <dt>
             @Html.DisplayNameFor(model => model.Nome)

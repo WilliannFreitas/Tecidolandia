@@ -234,6 +234,7 @@
     <Content Include="Imagens\Floral.jpg" />
     <Content Include="Imagens\Granito.jpg" />
     <Content Include="Imagens\Tecidolândia.png" />
+    <Content Include="Imagens\Text.Sobre.png" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />

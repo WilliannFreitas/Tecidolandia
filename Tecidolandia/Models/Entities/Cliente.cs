@@ -13,7 +13,7 @@ namespace Tecidolandia.Models.Entities
 
         [Required(ErrorMessage = "O campo Nome é obrigatório")]
         [Column("NM_COMPLETO")]
-        [Display(Name = "*Nome Completo")]
+        [Display(Name = "Nome Completo")]
         public string NmCompleto { get; set; }
 
         [Column("FACEBOOK")]
@@ -25,7 +25,7 @@ namespace Tecidolandia.Models.Entities
 
         [RegularExpression(@"^\(?[1-9]{2}\)? ?(?:[2-8]|9[1-9])[0-9]{3}\-?[0-9]{4}$", ErrorMessage = "Telefone Inválido")]
         [Column("TELEFONE_1")]
-        [Display(Name = "*(DDD) Telefone Celular")]
+        [Display(Name = "(DDD) Telefone Celular")]
         [DisplayFormat(DataFormatString = @"{0:(##) # ####-####}")]
         public long NuDDDTelefone1 { get; set; }
 

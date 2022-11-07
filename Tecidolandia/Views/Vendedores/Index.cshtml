@@ -4,38 +4,41 @@
     ViewBag.Title = "Index";
 }
 
+<link href="@Url.Content("~/Content/EditSite.css")" rel="stylesheet" type="text/css" />
+
 <h2>Vendendores</h2>
 
 <p>
     @Html.ActionLink("Criar", "Create")
 </p>
-<table class="table">
+<table class="table well">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Nome)
+            <label class="label label-default text-justify m-2">@Html.DisplayNameFor(model => model.Nome)</label>
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.DtNasc)
+            <label class="label label-default text-justify m-2">@Html.DisplayNameFor(model => model.DtNasc)</label>
         </th>
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Nome)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.DtNasc)
-        </td>
-        <td>
-            @Html.ActionLink(" ", "Edit", new { id = item.IdVendedor }, new { @class = "glyphicon glyphicon-pencil" })
-            &nbsp
-            @Html.ActionLink(" ", "Details", new { id = item.IdVendedor }, new { @class = "glyphicon glyphicon-option-horizontal" })
-            &nbsp
-            @Html.ActionLink(" ", "Delete", new { id = item.IdVendedor }, new { @class = "glyphicon glyphicon-trash" })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nome)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DtNasc)
+            </td>
+            <td>
+                @Html.ActionLink(" ", "Edit", new { id = item.IdVendedor }, new { @class = "glyphicon glyphicon-pencil" })
+                &nbsp
+                @Html.ActionLink(" ", "Details", new { id = item.IdVendedor }, new { @class = "glyphicon glyphicon-option-horizontal" })
+                &nbsp
+                @Html.ActionLink(" ", "Delete", new { id = item.IdVendedor }, new { @class = "glyphicon glyphicon-trash" })
+            </td>
+        </tr>
+    }
 
 </table>

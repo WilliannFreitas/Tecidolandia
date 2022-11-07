@@ -4,27 +4,29 @@
     ViewBag.Title = "Index";
 }
 
+<link href="@Url.Content("~/Content/EditSite.css")" rel="stylesheet" type="text/css" />
+
 <h2>Clientes</h2>
 <p>
     @Html.ActionLink("Criar", "Create")
 </p>
-<table class="table">
+<table class="table well">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.NmCompleto)
-        </th>
+            <label class="label label-default text-justify m-2">@Html.DisplayNameFor(model => model.NmCompleto)</label>
+</th>
         <th>
-            @Html.DisplayNameFor(model => model.Facebook)
-        </th>
+            <label class="label label-default text-justify m-2">@Html.DisplayNameFor(model => model.Facebook)</label>
+</th>
         @*<th>
                 @Html.DisplayNameFor(model => model.DtRegistro)
             </th>*@
         <th>
-            @Html.DisplayNameFor(model => model.NuDDDTelefone1)
-        </th>
+            <label class="label label-default text-justify m-2">@Html.DisplayNameFor(model => model.NuDDDTelefone1)</label>
+</th>
         <th>
-            @Html.DisplayNameFor(model => model.NuDDDTelefone2)
-        </th>
+            <label class="label label-default text-justify m-2">@Html.DisplayNameFor(model => model.NuDDDTelefone2)</label>
+</th>
         <th></th>
     </tr>
 

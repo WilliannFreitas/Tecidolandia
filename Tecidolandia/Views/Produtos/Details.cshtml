@@ -4,10 +4,11 @@
     ViewBag.Title = "Details";
 }
 
+<link href="@Url.Content("~/Content/EditSite.css")" rel="stylesheet" type="text/css" />
+
 <h2>Detalhes do Produto -  @Html.DisplayFor(model => model.Nome)</h2>
 
-<div>
-    <hr />
+<div class="well">
     <dl class="dl-horizontal">
         <dt>
             @Html.DisplayNameFor(model => model.TipoEstampas.Nome)
@@ -50,12 +51,12 @@
         </dd>
 
         @*<dt>
-            @Html.DisplayNameFor(model => model.DtRegistro)
-        </dt>
+                @Html.DisplayNameFor(model => model.DtRegistro)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.DtRegistro)
-        </dd>*@
+            <dd>
+                @Html.DisplayFor(model => model.DtRegistro)
+            </dd>*@
 
     </dl>
 </div>
