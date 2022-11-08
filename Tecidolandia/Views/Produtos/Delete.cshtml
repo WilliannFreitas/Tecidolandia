@@ -1,0 +1,71 @@
+﻿@model Tecidolandia.Models.Entities.Produto
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<link href="@Url.Content("~/Content/EditSite.css")" rel="stylesheet" type="text/css" />
+
+<h3>Tem certeza que deseja excluir este item?</h3>
+<div class="well">
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.TipoEstampas.Nome)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TipoEstampas.Nome)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Nome)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Nome)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Descricao)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Descricao)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Largura)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Largura)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Altura)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Altura)
+        </dd>
+
+        @*<dt>
+                @Html.DisplayNameFor(model => model.DtRegistro)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.DtRegistro)
+            </dd>*@
+
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Deletar" class="btn btn-default" /> |
+            @Html.ActionLink("Voltar", "Index")
+        </div>
+    }
+</div>

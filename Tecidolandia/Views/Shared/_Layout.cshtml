@@ -1,30 +1,47 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - Meu Aplicativo ASP.NET</title>
+    <title>@ViewBag.Title - TECIDOLANDIA</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
-
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
+                    <span class="icon-bar">abc</span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("Nome do aplicativo", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                @Html.ActionLink("Tecidolandia", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                    <li>@*@Html.ActionLink("Home", "About", "Home")*@</li>
+
+
                     <li>@Html.ActionLink("Sobre", "About", "Home")</li>
                     <li>@Html.ActionLink("Contato", "Contact", "Home")</li>
+                    <li>@Html.ActionLink("Vendas", "Index", "Vendas")</li>
+                    @*<li>@Html.ActionLink("Vender", "CriarOuEditarOrdemDeVenda", "Vendas")</li>*@
+                    @*<li>@Html.ActionLink("VendaItems", "Index", "VendaItems")</li>*@
+
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Cadastrar <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li>@Html.ActionLink("Clientes", "Index", "Clientes")</li>
+                            <li>@Html.ActionLink("Vendedores", "Index", "Vendedores")</li>
+                            <li>@Html.ActionLink("Tipos de Estampas", "Index", "TipoEstampas")</li>
+                            <li>@Html.ActionLink("Produtos", "Index", "Produtos")</li>
+                            <li>@Html.ActionLink("Status", "Index", "Status")</li>
+                            <li>@*@Html.ActionLink("Itens da Venda", "Index", "VendaItems")*@</li>
+                            <li>@*@Html.ActionLink("Vendas", "Index", "Vendas")*@</li>
+                        </ul>
+                    </li>
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>
@@ -32,12 +49,11 @@
     </div>
     <div class="container body-content">
         @RenderBody()
-        <hr />
+        <br />
         <footer>
-            <p>&copy; @DateTime.Now.Year - Meu Aplicativo ASP.NET</p>
+            <p style="font-family: Segoe UI Historic, serif;">&copy; @DateTime.Now.Year - Aplicação desenvolvida por Williann Carlos de Freitas</p>
         </footer>
     </div>
-
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)

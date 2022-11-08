@@ -1,0 +1,5 @@
+﻿@model Tecidolandia.Models.ViewEntities.OrdemDeVendaViewModel
+
+<label class="label label-default text-justify"> &nbsp  Valor Total &nbsp </label>
+@*@Html.DisplayFor(model => model.Venda.VlTotal, new { htmlAttributes = new { @class = "btn btn-xs", @type = "number, min = 0, max = 9999", @style = " width: 200px; border-bottom: 1px solid #d9d9d9; border-radius: 5px;" } })*@
+@Html.EditorFor(model => model.Venda.VlTotal, new { htmlAttributes = new { @class = "btn btn-xs", @type = "number, min = 0, max = 9999", @style = "width: 200px;  border-bottom: 1px solid #d9d9d9; border-radius: 5px;" } })

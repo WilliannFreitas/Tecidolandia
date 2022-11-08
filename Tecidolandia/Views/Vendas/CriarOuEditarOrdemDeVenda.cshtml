@@ -1,0 +1,368 @@
+﻿@model Tecidolandia.Models.ViewEntities.OrdemDeVendaViewModel
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<style>
+    div#container {
+        overflow-x: auto;
+    }
+</style>
+
+<link href="@Url.Content("~/Content/EditSite.css")" rel="stylesheet" type="text/css" />
+
+<div class="panel-body" onload="controleDeVisibilidadeProdutosVenda()">
+    <div class="col-md-12">
+        <div class="col-md-12" id="mod1">
+            <h4 class="text-center" style=" font-family: Segoe UI Historic, serif; width: 100%"><b>Cadastrar Venda</b></h4>
+            <div class="col-md-5 well" id="container">
+                <table align="center">
+
+                    <tr>
+                        <td colspan="2">
+                            <div id="divIdVenda">
+                                @Html.Partial("_IdVenda")
+                            </div>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td align="center">
+                            <label class="label label-default text-justify m-2">Vendedor</label>
+                        </td>
+
+                        <td>
+                            @Html.DropDownListFor(model => model.IdVendedor, Model.VendedorList.OrderBy(o => o.Nome).Select(x => new SelectListItem
+                       {
+                           Value = x.IdVendedor.ToString(),
+                           Text = x.Nome
+                       }), "Selecione", new { @class = "btn btn-xs", @required = "required", @style = " width: 200px;  border-bottom: 1px solid #d9d9d9; border-radius: 5px;" })
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td align="center">
+                            <label class="label label-default text-justify"> &nbsp Cliente &nbsp  </label>
+                        </td>
+                        <td>
+
+                            @Html.DropDownListFor(model => model.IdCliente, Model.ClienteList.OrderBy(o => o.NmCompleto).Select(x => new SelectListItem
+                       {
+                           Value = x.IdCliente.ToString(),
+                           Text = x.NmCompleto
+                       }), "Selecione", new { @class = "btn btn-xs", @required = "required", @style = " width: 200px;  border-bottom: 1px solid #d9d9d9; border-radius: 5px;" })
+
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td colspan="2">
+                            <input type="submit" name="submit" id="SalvarVenda" value="Salvar" class="btn btn-default btn-xs" style="width: 100%" />
+                        </td>
+                    </tr>
+                    @ViewBag.MsgErroVenda
+                </table>
+            </div>
+
+            <div class="col-md-7 well" id="container">
+                <div class="row">
+                    <div id="divDetalhesCliente">
+                        @Html.Partial("_PartialDetalhesCliente")
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="mod2" style="Display: none">
+            <div class="col-md-12">
+                <div class="col-md-6 well">
+                    <table align="center">
+                        <tr>
+                            <td>
+                                <label class="label label-default text-justify"> &nbsp &nbsp Produto &nbsp &nbsp &nbsp </label>
+                            </td>
+
+                            <td>
+                                @Html.DropDownListFor(model => model.IdProduto, Model.ProdutoList.OrderBy(o => o.IdProduto).Select(x => new SelectListItem
+                           {
+                               Value = x.IdProduto.ToString(),
+                               Text = x.Nome,
+
+                           }), "Selecione", new { @class = " btn btn-xs ", @required = "required", @style = " width: 200px;  border-bottom: 1px solid #d9d9d9; border-radius: 5px;" })
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                <label class="label label-default text-justify"> &nbsp Quantidade &nbsp </label>
+                            </td>
+
+                            <td>
+                                @Html.EditorFor(model => model.Quantidade, new { htmlAttributes = new { @class = "btn btn-xs", @type = "number", @min = 1, @max = 9999, @step = "0", @style = "width: 200px;  border-bottom: 1px solid #d9d9d9; border-radius: 5px;" } })
+                            </td>
+                        </tr>
+
+
+                        <tr>
+                            <td colspan="2">
+                                <input type="submit" name="submit" id="SalvarItemVenda" value=" + " class="btn btn-default btn-xs" style=" width: 100%" />
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div class="col-md-6 well" id="container">
+                    <table align="center">
+                        <tr>
+                            <td align="center">
+                                <label class="label label-default text-justify m-2">&nbsp &nbsp &nbsp Status &nbsp &nbsp &nbsp</label>
+
+                                @Html.DropDownListFor(model => model.IdStatus, Model.StatusList.OrderBy(o => o.NmStatus).Select(x => new SelectListItem
+                           {
+                               Value = x.IdStatus.ToString(),
+                               Text = x.NmStatus
+                           }), "Selecione", new { @class = "btn btn-xs", @required = "required", @style = " width: 200px; border-bottom: 1px solid #d9d9d9; border-radius: 5px;" })
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div id="divVlTotal">
+                                    @Html.Partial("_PartialVlTotal")
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input type="submit" name="submit" id="EditarVenda" value=" Salvar Venda " class="btn btn-default btn-xs" style=" width: 100%" />
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="row">
+                    <div id="divItemVenda" class="panel panel-default">
+                        @Html.Partial("_PartialItemVenda")
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script type="text/javascript">
+
+        $(document).on('click', '#SalvarVenda', function () {
+            SalvarVenda();
+        });
+
+        $(document).on('click', '#EditarVenda', function () {
+            EditarVenda();
+
+            let _status = $('#IdStatus').find(":selected").text().toUpperCase();
+
+            if (_status == 'CONCLUÍDO') {
+                ControleDeCamposItemVenda(true);
+            } else {
+                ControleDeCamposItemVenda(false);
+            }
+        });
+
+        $(document).on('click', '#SalvarItemVenda', function () {
+            salvarItemVenda();
+        });
+
+        $(document).on('change', '#IdCliente', function () {
+            let idCliente = $("#IdCliente").val();
+            mostrarDetalhesCliente(parseInt(idCliente));
+        });
+
+        var IdVenda = $("#Venda_IdVenda").val();
+        var ProdutoQ = $("#Quantidade").val();
+
+        if (IdVenda > 0) {
+            controleDeVisibilidadeProdutosVenda();
+            bloquearCamposVenda();
+            controlerFields(true, "#Venda_VlTotal");
+        }
+
+        function controlerFields(pSelect, pFldName) {
+            document.querySelector(pFldName).disabled = pSelect;
+        }
+
+        function controleDeVisibilidadeProdutosVenda() {
+            let _venda = $('#Venda_IdVenda').find(":selected").val;
+
+            if (_venda == 0) {
+                document.getElementById('mod2').style.display = 'none';;
+            } else {
+                document.getElementById('mod2').style.display = 'block';;
+            }
+        }
+
+        function ControleDeCamposItemVenda(eAtivar) {
+            controlerFields(eAtivar, '#IdProduto');
+            controlerFields(eAtivar, '#Quantidade');
+            controlerFields(eAtivar, '#SalvarItemVenda');
+        }
+
+        function bloquearCamposVenda() {
+            controlerFields(true, '#IdCliente');
+            controlerFields(true, '#IdVendedor');
+            controlerFields(true, '#SalvarVenda');
+        }
+
+        function mostrarDetalhesCliente(idCliente) {
+
+            let obj = {
+                idCliente: parseInt(idCliente)
+            }
+            var json = JSON.stringify(obj);
+
+            if (idCliente > 0) {
+                var result = chamarApi("/Vendas/MostrarDetalhesCliente", 'POST', json, "#divDetalhesCliente", "Consultando Detalhes dos Clientes!", false);
+            }
+        }
+
+        function salvarItemVenda() {
+            var ItemVenda = {};
+            var mensage = "";
+            var ItemVenda_IdVenda = $("#Venda_IdVenda").val();
+            var ItemVenda_IdProduto = $("#IdProduto").val();
+            var ItemVenda_Quantidade = $("#Quantidade").val();
+
+            if (ItemVenda_IdProduto == "" || ItemVenda_IdProduto == undefined) { mensage += "Produto, "; }
+            if (ItemVenda_Quantidade == "" || ItemVenda_Quantidade == undefined || ItemVenda_Quantidade <= 0) { mensage += "Quantidade, "; }
+
+            if (mensage != "") {
+                return alert(mensage + ' não pode(m) ser vazio(s)!!');
+            } else {
+                ItemVenda = {
+                    IdVenda: parseInt(ItemVenda_IdVenda),
+                    IdProduto: parseInt(ItemVenda_IdProduto),
+                    Quantidade: parseInt(ItemVenda_Quantidade),
+                }
+            }
+
+            var itemVenda = JSON.stringify(ItemVenda);
+            if (itemVenda.length > 0) {
+                var result = chamarApi("/Vendas/SalvarItemVenda", 'POST', itemVenda, "#divItemVenda", "Item adicionado com Sucesso!", false);
+            }
+        }
+
+        function SalvarVenda() {
+            var Venda = {};
+            var mensage = "";
+            var Venda_IdVenda = $("#Venda_IdVenda").val();
+            var Venda_IdCliente = $("#IdCliente").val();
+            var Venda_IdVendedor = $("#IdVendedor").val();
+
+            if (Venda_IdCliente == "" || Venda_IdCliente == undefined) { mensage += "Cliente, "; }
+            if (Venda_IdVendedor == "" || Venda_IdVendedor == undefined) { mensage += "Vendedor, "; }
+
+            if (mensage != "") {
+                return alert(mensage + ' não pode(m) ser vazio(s)!!');
+
+            } else {
+                Venda = {
+                    IdVenda: parseInt(Venda_IdVenda),
+                    IdCliente: parseInt(Venda_IdCliente),
+                    IdVendedor: parseInt(Venda_IdVendedor),
+                }
+
+            }
+
+            var venda = JSON.stringify(Venda);
+
+            if (venda.length > 0) {
+
+                var result = chamarApi("/Vendas/SalvarEditarVenda", 'POST', venda, "#divIdVenda", "Venda Iniciada com Sucesso!", false);
+
+                controleDeVisibilidadeProdutosVenda();
+                bloquearCamposVenda()
+            }
+        }
+
+        async function EditarVenda() {
+            var Venda = {};
+            var mensage = "";
+            var Venda_IdVenda = $("#Venda_IdVenda").val();
+            var Venda_IdStatus = $("#IdStatus").val();
+            var Venda_IdCliente = $("#IdCliente").val();
+            var Venda_IdVendedor = $("#IdVendedor").val();
+
+            if (Venda_IdStatus == "" || Venda_IdStatus == undefined) { mensage += "Status, "; }
+
+            if (mensage != "") {
+                return alert(mensage + ' não pode ser vazio!!');
+
+            } else {
+                Venda = {
+                    IdVenda: parseInt(Venda_IdVenda),
+                    IdStatus: parseInt(Venda_IdStatus),
+                    IdCliente: parseInt(Venda_IdCliente),
+                    IdVendedor: parseInt(Venda_IdVendedor),
+                }
+
+            }
+
+            var venda = JSON.stringify(Venda);
+
+            if (venda.length > 0) {
+                var result = chamarApi("/Vendas/SalvarEditarVenda", 'POST', venda, "#divIdVenda", "Venda Salva com Sucesso!");
+            }
+        }
+
+        async function chamarApi(_url, _method, _data, _partialViewName, _msgSucessoPersonalizada = "Concluido com Sucesso!", showPopUp = true) {
+            var mensage = "";
+            var result = "";
+
+            $.ajax({
+                url: _url,
+                method: _method,
+                data: _data,
+                dataType: "json",
+                cache: false,
+                contentType: 'application/json; charset=utf-8',
+                processData: false
+            }).done(function (msg) {
+
+                if (msg.status.includes("NOK")) {
+                    let results = "----";
+                    if (msg.mesage != undefined && msg.mesage != '') { results = msg.mesage; }
+
+                    alert('Ops! Ocorreu um Erro!! :' + msg.error);
+                    result = "false";
+
+                } else {
+                    result = "true";
+                    if (showPopUp) {
+                        alert(_msgSucessoPersonalizada);
+                    }
+                    if (_partialViewName != null || _partialViewName != undefined) {
+                        if (msg.partialView != undefined && msg.partialView != '') {
+                            $(_partialViewName).html(msg.partialView);
+                            if (msg.partialView != undefined && msg.partialView != '') {
+                                $('#divVlTotal').html(msg.partialViewVlTotal);
+                                controlerFields(true, "#Venda_VlTotal");
+                            }
+                        }
+                    }
+                }
+                mensage = msg.description;
+            }).fail(function (jqXHR, textStatus, msg) {
+                mensage = msg.description;
+            });
+
+            var refreshId = setInterval(function () {
+                if (result != "") {
+                    clearInterval(refreshId);
+                    //sair do looping
+                }
+            }, 100);
+        }
+    </script>
+
+}

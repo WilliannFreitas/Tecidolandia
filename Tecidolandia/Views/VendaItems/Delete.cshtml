@@ -1,0 +1,56 @@
+﻿@model Tecidolandia.Models.Entities.VendaItem
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<link href="@Url.Content("~/Content/EditSite.css")" rel="stylesheet" type="text/css" />
+
+<h3>Tem certeza que deseja deletar esta item?</h3>
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Produtos.Nome)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Produtos.Nome)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Vendas.IdVenda)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Vendas.IdVenda)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Quantidade)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Quantidade)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.VlTotal)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.VlTotal)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Deletar" class="btn btn-default" /> |
+            @Html.ActionLink("Voltar", "CriarOuEditarOrdemDeVenda")
+        </div>
+    }
+</div>

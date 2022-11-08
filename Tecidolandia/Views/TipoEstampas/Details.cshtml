@@ -1,0 +1,43 @@
+﻿@model Tecidolandia.Models.Entities.TipoEstampa
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<link href="@Url.Content("~/Content/EditSite.css")" rel="stylesheet" type="text/css" />
+
+<h2>Detalhes do Tipo de Estampa - @Html.DisplayFor(model => model.Nome)</h2>
+
+<div class="well">
+
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Nome)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Nome)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Descricao)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Descricao)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.VlMetro)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.VlMetro)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Editar", "Edit", new { id = Model.IdTipoEstampa }) |
+    @Html.ActionLink("Voltar", "Index")
+</p>

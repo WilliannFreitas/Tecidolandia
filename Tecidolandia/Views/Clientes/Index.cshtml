@@ -1,0 +1,61 @@
+﻿@model IEnumerable<Tecidolandia.Models.Entities.Cliente>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<link href="@Url.Content("~/Content/EditSite.css")" rel="stylesheet" type="text/css" />
+
+<h2>Clientes</h2>
+<p>
+    @Html.ActionLink("Criar", "Create")
+</p>
+<table class="table well">
+    <tr>
+        <th>
+            <label class="label label-default text-justify m-2">@Html.DisplayNameFor(model => model.NmCompleto)</label>
+</th>
+        <th>
+            <label class="label label-default text-justify m-2">@Html.DisplayNameFor(model => model.Facebook)</label>
+</th>
+        @*<th>
+                @Html.DisplayNameFor(model => model.DtRegistro)
+            </th>*@
+        <th>
+            <label class="label label-default text-justify m-2">@Html.DisplayNameFor(model => model.NuDDDTelefone1)</label>
+</th>
+        <th>
+            <label class="label label-default text-justify m-2">@Html.DisplayNameFor(model => model.NuDDDTelefone2)</label>
+</th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.NmCompleto)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Facebook)
+            </td>
+            @*<td>
+                    @Html.DisplayFor(modelItem => item.DtRegistro)
+                </td>*@
+            <td>
+                @Html.DisplayFor(modelItem => item.NuDDDTelefone1)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NuDDDTelefone2)
+            </td>
+            <td>
+                @Html.ActionLink(" ", "Edit", new { id = item.IdCliente }, new { @class = "glyphicon glyphicon-pencil" })
+                &nbsp
+                @Html.ActionLink(" ", "Details", new { id = item.IdCliente }, new { @class = "glyphicon glyphicon-option-horizontal" })
+                &nbsp
+                @Html.ActionLink(" ", "Delete", new { id = item.IdCliente }, new { @class = "glyphicon glyphicon-trash" })
+            </td>
+        </tr>
+    }
+
+</table>

@@ -1,0 +1,56 @@
+﻿@model Tecidolandia.Models.ViewEntities.OrdemDeVendaViewModel
+
+<div>
+    <p class=" text-center; label label-default text-justify m-2">Detalhes do Cliente</p>
+</div>
+
+<table class="col-md-7">
+    <tr>
+        <td class="label label-default text-justify m-2">
+            Nome Completo:
+        </td>
+        <td style="font-family: Segoe UI Historic, serif">
+            @Html.DisplayFor(model => model.ClienteSelecionado.NmCompleto)
+        </td>
+    </tr>
+    <tr>
+        <td class="label label-default text-justify m-2">
+            Página do Facebook:
+        </td>
+        <td style="font-family: Segoe UI Historic, serif">
+            @Html.DisplayFor(model => model.ClienteSelecionado.Facebook)
+        </td>
+    </tr>
+    <tr>
+        <td class="label label-default text-justify m-2">
+            Data de Registro:
+        </td>
+        <td style="font-family: Segoe UI Historic, serif">
+            @Html.DisplayFor(model => model.ClienteSelecionado.DtRegistro)
+        </td>
+    </tr>
+
+</table>
+
+<table class="col-md-5">
+    <tr>
+        <td class="label label-default text-justify m-2">
+            Telefone 1:
+        </td>
+        <td style="font-family: Segoe UI Historic, serif">
+            @Html.DisplayFor(model => model.ClienteSelecionado.NuDDDTelefone1)
+        </td>
+    </tr>
+
+    @if (Model?.ClienteSelecionado?.NuDDDTelefone2 > 0)
+    {
+        <tr>
+            <td class="label label-default text-justify m-2">
+                Telefone 2:
+            </td>
+            <td style="font-family: Segoe UI Historic, serif">
+                @Html.DisplayFor(model => model.ClienteSelecionado.NuDDDTelefone2)
+            </td>
+        </tr>
+    }
+</table>

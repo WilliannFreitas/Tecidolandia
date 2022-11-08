@@ -8,6 +8,13 @@ namespace Tecidolandia
         // Para obter mais informações sobre o agrupamento, visite https://go.microsoft.com/fwlink/?LinkId=301862
         public static void RegisterBundles(BundleCollection bundles)
         {
+            // Validações no padrão brasileiro
+            bundles.Add(
+                new ScriptBundle("~/bundles/validations_pt-br")
+                    .Include(
+                        "~/Scripts/jquery.validate.custom.pt-br*"));
+
+
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
                         "~/Scripts/jquery-{version}.js"));
 

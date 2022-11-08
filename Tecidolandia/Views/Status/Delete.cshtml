@@ -1,0 +1,40 @@
+﻿@model Tecidolandia.Models.Entities.Status
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<link href="@Url.Content("~/Content/EditSite.css")" rel="stylesheet" type="text/css" />
+
+<h3>Tem certeza que deseja excluir este item?</h3>
+<div class="well">
+
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.NmStatus)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NmStatus)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.StatusVenda)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.StatusVenda)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Deletar" class="btn btn-default" /> |
+            @Html.ActionLink("Voltar", "Index")
+        </div>
+    }
+</div>

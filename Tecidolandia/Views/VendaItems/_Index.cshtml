@@ -1,0 +1,56 @@
+﻿@model IEnumerable<Tecidolandia.Models.Entities.VendaItem>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Itens da Venda</h2>
+
+<p>
+    @Html.ActionLink("Criar", "Create")
+</p>
+
+<div class="well">
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Produtos.Nome)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Vendas.IdVenda)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Quantidade)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.VlTotal)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr style="color: black">
+                <td>
+                    @Html.DisplayFor(modelItem => item.Produtos.Nome)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Vendas.IdVenda)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Quantidade)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.VlTotal)
+                </td>
+                <td>
+                    @Html.ActionLink(" ", "Edit", new { id = item.IdVendaItem }, new { @class = "glyphicon glyphicon-pencil" })
+                    &nbsp
+                    @Html.ActionLink(" ", "Details", new { id = item.IdVendaItem }, new { @class = "glyphicon glyphicon-option-horizontal" })
+                    &nbsp
+                    @Html.ActionLink(" ", "Delete", new { id = item.IdVendaItem }, new { @class = "glyphicon glyphicon-trash" })
+                </td>
+            </tr>
+        }
+    </table>
+</div>

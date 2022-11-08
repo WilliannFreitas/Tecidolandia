@@ -1,0 +1,66 @@
+﻿@model Tecidolandia.Models.Entities.Produto
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<link href="@Url.Content("~/Content/EditSite.css")" rel="stylesheet" type="text/css" />
+
+<h2>Detalhes do Produto -  @Html.DisplayFor(model => model.Nome)</h2>
+
+<div class="well">
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.TipoEstampas.Nome)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TipoEstampas.Nome)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Nome)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Nome)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Descricao)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Descricao)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Largura)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Largura)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Altura)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Altura)
+        </dd>
+
+        @*<dt>
+                @Html.DisplayNameFor(model => model.DtRegistro)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.DtRegistro)
+            </dd>*@
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Editar", "Edit", new { id = Model.IdProduto }) |
+    @Html.ActionLink("Voltar", "Index")
+</p>

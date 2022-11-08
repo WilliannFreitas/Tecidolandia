@@ -1,0 +1,12 @@
+﻿@model Tecidolandia.Models.ViewEntities.OrdemDeVendaViewModel
+
+
+<label class="label label-default text-justify"> Nº Venda:  @Html.DisplayFor(model => model.Venda.IdVenda) </label>
+
+&nbsp
+
+<label class="label label-default text-justify"> Criado em:  @Html.DisplayFor(model => model.Venda.DtRegistro) </label>
+
+
+@Html.HiddenFor(model => model.Venda.IdVenda)
+@Html.HiddenFor(model => model.Venda.DtRegistro)
