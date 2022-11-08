@@ -7,6 +7,7 @@
 # or wget:
 # wget --no-check-certificate http://gist.githubusercontent.com/kmorcinek/2710267/raw/.gitignore
 
+
 # User-specific files
 *.suo
 *.user
@@ -231,3 +232,9 @@ Tecidolandia/obj/Debug/Tecidolandia.csproj.GenerateResource.cache
 Tecidolandia/obj/Debug/Tecidolandia.dll
 Tecidolandia/obj/Debug/Tecidolandia.Migrations.Inicial.resources
 Tecidolandia/obj/Debug/Tecidolandia.pdb
+
+/.vs
+/Tecidolandia/bin
+/Tecidolandia/obj/Debug
+/Tecidolandia/.vs/Tecidolandia/FileContentIndex
+
