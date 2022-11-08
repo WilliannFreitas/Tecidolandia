@@ -23,6 +23,7 @@ namespace Tecidolandia
         // GET: Vendas
         public ActionResult Index(int? pagina)
         {
+            PreencherTabelas();
             int tamanhoPagina = 15;
             int numeroPagina = pagina ?? 1;
 
@@ -322,9 +323,10 @@ namespace Tecidolandia
             Cliente cliente1 = new Cliente()
             {
                 NmCompleto = "João Bilbo",
-                Facebook = "Bolseiro@gmail.com",
+                Facebook = "/JBolseiro",
                 NuDDDTelefone1 = 48991919191,
-                TelefoneAtivo1 = true
+                TelefoneAtivo1 = true,
+                DtRegistro = DateTime.Now
 
             };
             clientes.Add(cliente1);
@@ -332,11 +334,12 @@ namespace Tecidolandia
             Cliente cliente2 = new Cliente()
             {
                 NmCompleto = "Mithril Ferreira",
-                Facebook = "mtferreira@gmail.com",
+                Facebook = "/mtferreira",
                 NuDDDTelefone1 = 48991919898,
                 TelefoneAtivo1 = true,
                 NuDDDTelefone2 = 4834489595,
-                TelefoneAtivo2 = true
+                TelefoneAtivo2 = true,
+                DtRegistro = DateTime.Now
 
             };
             clientes.Add(cliente2);
